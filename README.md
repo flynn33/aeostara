@@ -15,8 +15,8 @@ This repository uses a specification-first branch strategy:
 |--------|---------|
 | `main` | Platform-agnostic specifications: JSON contract schemas, pseudo code algorithms, interface definitions, architecture docs, test fixtures |
 | `platform/windows` | Windows native implementation (C++20, MSVC, CMake, vcpkg) |
-| `platform/macos` | macOS native implementation (scaffold) |
-| `platform/ios` | iOS native implementation (scaffold) |
+| `platform/macos` | macOS native implementation (implemented — v0.1.0) |
+| `platform/ios` | iOS native implementation (alpha — v0.1.0) |
 
 Spec changes on `main` merge down into platform branches. Platform code never merges back to `main`.
 

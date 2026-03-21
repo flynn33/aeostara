@@ -3,8 +3,8 @@
 ## Branches
 - [ ] `main` branch contains only specifications (no compilable source)
 - [ ] `platform/windows` branch contains full Windows implementation
-- [ ] `platform/macos` branch contains macOS scaffold
-- [ ] `platform/ios` branch contains iOS scaffold
+- [x] `platform/macos` branch contains macOS implementation
+- [x] `platform/ios` branch contains iOS implementation
 - [ ] Branch responsibilities documented
 - [ ] Merge policy documented
 
@@ -25,15 +25,18 @@
 - [ ] No YAML in product source
 
 ## Platform: macOS (platform/macos)
-- [ ] Scaffold files present
-- [ ] Platform manifest present
-- [ ] README documents build approach
+- [x] Full C++20 implementation present (Apple Clang, CMake, Catch2)
+- [x] Platform manifest present
+- [x] README documents build approach
+- [x] CI workflow present (macos-build-test.yml)
+- [x] CLI smoke tests present
 
 ## Platform: iOS (platform/ios)
-- [ ] Scaffold files present
-- [ ] Platform manifest present
-- [ ] Bridging header stub present
-- [ ] SwiftUI app stub present
+- [x] Full implementation present (SwiftUI + C++ core + Obj-C++ bridge)
+- [x] Platform manifest present
+- [x] Xcode project committed (Aeostara.xcodeproj)
+- [x] XCTest and UI test targets present
+- [x] CI workflow present (ios-build-test.yml)
 
 ## Shared Test Fixtures
 - [ ] All 6 fixture files present on all branches
