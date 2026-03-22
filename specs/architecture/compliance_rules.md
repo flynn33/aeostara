@@ -6,8 +6,8 @@
 2. **No Python** — shipped product must not depend on Python runtime
 3. **No YAML** — shipped product must not include a YAML parser
 4. **JSON-only v0.1** — all configuration files are JSON
-5. **Host-agnostic core** — core healing logic has no platform UI dependencies
-6. **Interface-based Forsetti** — Forsetti integration via interfaces, not direct coupling
+5. **Code-agnostic specs** — shared behavior definitions on `main` remain code-agnostic; platform branches are native realization branches and may adopt platform-specific patterns
+6. **Forsetti boundary compliance** — platform branches may integrate with their platform's Forsetti framework while observing boundary rules: no framework modification, no direct module-to-module communication, no direct OS communication, no module-owned UI, framework-mediated I/O only
 
 ## Repository Automation (Exempt)
 

@@ -36,8 +36,14 @@ Forsetti is the host/runtime framework. It owns:
 
 ## Non-Negotiable Boundary Rules
 
-1. Aeostara Core stays host-agnostic
-2. ASH stays framework-agnostic
-3. Forsetti integration is explicit and interface-based
+1. `main` branch specs remain code-agnostic and behavior-authoritative
+2. Platform branches are native realization branches that may integrate with their platform's Forsetti framework
+3. ASH stays framework-agnostic at the spec level
 4. No core healing module may directly depend on UI code
-5. Platform branch separation must not contaminate shared core boundaries
+5. Platform branch separation must not contaminate shared spec boundaries
+6. Forsetti boundary rules apply to all platform branches:
+   - No framework modification
+   - No direct module-to-module communication
+   - No direct OS communication
+   - No module-owned UI
+   - Framework-mediated I/O only

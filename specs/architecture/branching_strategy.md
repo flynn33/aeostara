@@ -26,13 +26,15 @@ Must NOT contain:
 - Platform-specific build systems
 - Platform-specific UI or runtime code
 
-### platform/* branches
+### platform/* branches (native realization branches)
+Platform branches are **native realization branches**. They implement shared spec behavior using their platform's native toolchain and may integrate with their platform's Forsetti framework. Branch internals are not required to preserve `main`'s implementation-agnostic posture. Implementation patterns may diverge by platform.
+
 Each platform branch contains:
 - Native implementation of all contracts and algorithms
 - Platform-specific build configuration
 - Platform-specific test framework
 - Platform-specific shell/UI
-- Forsetti platform bridge (stub or implementation)
+- Forsetti platform integration (per platform boundary rules)
 - Platform manifest
 
 ## Merge Policy

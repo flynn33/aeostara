@@ -13,10 +13,12 @@ This repository uses a specification-first branch strategy:
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | Platform-agnostic specifications: JSON contract schemas, pseudo code algorithms, interface definitions, architecture docs, test fixtures |
-| `platform/windows` | Windows native implementation (C++20, MSVC, CMake, vcpkg) |
-| `platform/macos` | macOS native implementation (implemented — v0.1.0) |
-| `platform/ios` | iOS native implementation (alpha — v0.1.0) |
+| `main` | Code-agnostic specifications: JSON contract schemas, pseudo code algorithms, interface definitions, architecture docs, test fixtures |
+| `platform/windows` | Windows-native realization (C++20, MSVC, CMake, vcpkg) |
+| `platform/macos` | macOS-native realization (Swift, SwiftPM, XCTest) |
+| `platform/ios` | iOS-native realization (Swift, SwiftUI, SwiftPM, XCTest/XCUITest) |
+
+`main` is code-agnostic and behavior-authoritative. Platform branches are **native realization branches** — they implement shared spec behavior using their platform's native toolchain and may integrate with their platform's Forsetti framework. Branch internals are not required to preserve `main`'s implementation-agnostic posture.
 
 Spec changes on `main` merge down into platform branches. Platform code never merges back to `main`.
 
@@ -49,7 +51,7 @@ product_boundaries, branching_strategy, compliance_rules, native_target_architec
 - **Native only** — shipped product is a compiled native binary
 - **JSON-only** — all configuration files are JSON; no YAML parser
 - **No Python** — shipped product has no Python dependency
-- **Forsetti-compliant** — interface-based integration, host-agnostic core
+- **Forsetti-compliant** — spec behavior is code-agnostic; platform branches realize Aeostara natively per platform Forsetti rules
 - **ASH-inspired** — healing semantics follow the Aeostara Self-Healing pattern
 
 ## Platform Targets
