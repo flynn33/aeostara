@@ -55,8 +55,8 @@ product_boundaries, branching_strategy, compliance_rules, native_target_architec
 ## Platform Targets
 
 - **Windows** — C++20, MSVC 2022, CMake, vcpkg (`platform/windows`)
-- **macOS** — native implementation (`platform/macos`)
-- **iOS** — Swift + C++ bridging (`platform/ios`)
+- **macOS** — Swift / SwiftPM native (`platform/macos`)
+- **iOS** — Swift / SwiftUI native (`platform/ios`)
 
 ## License
 

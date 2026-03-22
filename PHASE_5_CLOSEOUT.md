@@ -14,18 +14,19 @@ Date: 2026-03-21
 - Build proven locally with MSVC 2022, CMake, /W4 /WX zero warnings
 
 ### platform/macos
-- Full native implementation at v0.1.0 parity with Windows
-- 114 files: C++20 with Apple Clang, CMake + Ninja, Catch2 tests
-- CLI: validate, diff, heal commands matching Windows behavior
-- CI workflow (macos-build-test.yml) and CLI smoke tests
-- Architecture check script (check-architecture.sh)
+- Source-complete native Swift implementation v0.1.0 (build-unverified)
+- AeostaraMacDomain + AeostaraMacServices + AeostaraMacCLI (pure Swift, no C++)
+- SwiftPM Package.swift (macOS 13.0+ target), Foundation-only dependencies
+- CLI: validate, diff, heal commands matching spec behavior
+- XCTest suite with 5 acceptance scenarios
+- CI workflow (macos-build-test.yml)
 - Phase 5 closeout documented on branch
 
 ### platform/ios
-- Alpha implementation with source-complete v0.1.0
-- 109 files: SwiftUI app + Obj-C++ bridge + C++ core
-- Xcode project committed (Aeostara.xcodeproj)
-- XCTest unit tests + UI smoke tests
+- Source-complete native Swift/SwiftUI implementation v0.1.0 (build-unverified)
+- SwiftUI app + AeostaraDomain + AeostaraServices (pure Swift, no C++/Obj-C++)
+- SwiftPM Package.swift (iOS 16.0+ target)
+- XCTest unit tests + XCUITest UI tests
 - CI workflow (ios-build-test.yml)
 - App metadata (Info.plist, Assets.xcassets)
 - Phase 5 closeout documented on branch

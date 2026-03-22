@@ -6,8 +6,8 @@
 |--------|---------|
 | `main` | Specifications, contracts, pseudo code, architecture docs, CI scripts, test fixtures |
 | `platform/windows` | Windows native implementation (C++20, MSVC, CppUnitTest) |
-| `platform/macos` | macOS native implementation (implemented — v0.1.0) |
-| `platform/ios` | iOS native implementation (alpha — v0.1.0) |
+| `platform/macos` | macOS native implementation (Swift, SwiftPM, XCTest) |
+| `platform/ios` | iOS native implementation (Swift, SwiftUI, SwiftPM, XCTest/XCUITest) |
 
 ## Branch Responsibilities
 

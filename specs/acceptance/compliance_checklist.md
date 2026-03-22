@@ -32,10 +32,10 @@
 - [x] CLI smoke tests present
 
 ## Platform: iOS (platform/ios)
-- [x] Full implementation present (SwiftUI + C++ core + Obj-C++ bridge)
+- [x] Full implementation present (Swift / SwiftUI, pure — no C++, no Obj-C++)
 - [x] Platform manifest present
-- [x] Xcode project committed (Aeostara.xcodeproj)
-- [x] XCTest and UI test targets present
+- [x] SwiftPM Package.swift present
+- [x] XCTest and XCUITest targets present
 - [x] CI workflow present (ios-build-test.yml)
 
 ## Shared Test Fixtures

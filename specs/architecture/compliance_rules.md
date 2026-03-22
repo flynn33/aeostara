@@ -26,9 +26,11 @@ These are not part of the shipped product.
 - /W4 /WX (warnings as errors)
 
 ### macOS (platform/macos)
-- Native toolchain: Clang/Xcode, CMake or Xcode native
-- Same dependency constraints adapted to Apple ecosystem
+- Native toolchain: Swift 5.9+, SwiftPM or Xcode-native
+- Foundation-only shipped path (no C++, no Obj-C++, no CMake, no vcpkg)
+- XCTest for testing
 
 ### iOS (platform/ios)
-- Native toolchain: Xcode, Swift + C++ bridging
-- Same dependency constraints adapted to iOS ecosystem
+- Native toolchain: Swift 5.9+, SwiftUI, SwiftPM or Xcode-native
+- Foundation-only shipped path (no C++, no Obj-C++, no CMake, no vcpkg)
+- XCTest + XCUITest for testing

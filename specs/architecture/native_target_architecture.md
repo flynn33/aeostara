@@ -29,8 +29,8 @@ Each `platform/*` branch independently implements:
 | Platform | Language | Build System | Test Framework |
 |----------|----------|-------------|----------------|
 | Windows | C++20 | CMake + MSVC | CppUnitTest |
-| macOS | C++/Swift/Obj-C | CMake/Xcode | TBD |
-| iOS | Swift + C++ bridging | Xcode | XCTest |
+| macOS | Swift | SwiftPM or Xcode | XCTest |
+| iOS | Swift / SwiftUI | SwiftPM or Xcode | XCTest / XCUITest |
 
 ## Shared Test Fixtures
 

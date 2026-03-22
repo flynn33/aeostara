@@ -7,32 +7,32 @@ Last updated: 2026-03-21
 | Platform | Branch | Status | Version |
 |----------|--------|--------|---------|
 | Windows | `platform/windows` | Reference implementation | v0.1.0 |
-| macOS | `platform/macos` | Implemented | v0.1.0 |
-| iOS | `platform/ios` | Alpha (source-complete) | v0.1.0 |
+| macOS | `platform/macos` | Source-complete, build-unverified | v0.1.0 |
+| iOS | `platform/ios` | Source-complete, build-unverified | v0.1.0 |
 
 ## Build Status
 
 | Platform | Builds | Toolchain | Build Command | Dependencies |
 |----------|--------|-----------|---------------|-------------|
 | Windows | YES (proven locally) | MSVC 2022, CMake 3.28+, vcpkg | `cmake --preset debug && cmake --build --preset debug` | nlohmann/json |
-| macOS | YES (documented) | Apple Clang, CMake 3.28+, Ninja | `cmake -B build -G Ninja && cmake --build build` | nlohmann/json, Catch2 |
-| iOS | YES (documented) | Xcode, Swift 5.9+, Apple Clang C++20 | `xcodebuild build -project Aeostara.xcodeproj -scheme AeostaraApp -sdk iphonesimulator` | nlohmann/json (embedded) |
+| macOS | Unverified | Swift 5.9+, SwiftPM | `swift build` | Foundation only |
+| iOS | Unverified | Swift 5.9+, SwiftPM, Xcode 15+ | `swift build` / `xcodebuild -scheme AeostaraApp -destination 'platform=iOS Simulator'` | Foundation only |
 
 ## Test Status
 
 | Platform | Tests Run | Framework | Test Command | Acceptance Scenarios |
 |----------|-----------|-----------|-------------|---------------------|
 | Windows | YES (proven locally) | CppUnitTest | `ctest --preset debug` | 5 (valid, schema fail, policy block, repair, rollback) |
-| macOS | YES (documented) | Catch2 | `ctest --test-dir build` | 5 (matching Windows) |
-| iOS | YES (documented) | XCTest + UI tests | `xcodebuild test -project Aeostara.xcodeproj -scheme AeostaraTests -sdk iphonesimulator` | Bridge tests + UI smoke |
+| macOS | Unverified | XCTest | `swift test` | 5 (matching Windows) |
+| iOS | Unverified | XCTest + XCUITest | `swift test` / `xcodebuild test -scheme AeostaraTests -destination 'platform=iOS Simulator'` | 5 + UI flow tests |
 
 ## Product Behavior Coverage
 
 | Behavior | Windows | macOS | iOS |
 |----------|---------|-------|-----|
-| validate command | YES | YES | YES (via bridge) |
-| diff command | YES | YES | YES (via bridge) |
-| heal command | YES | YES | YES (via bridge) |
+| validate command | YES | YES | YES |
+| diff command | YES | YES | YES |
+| heal command | YES | YES | YES |
 | Backup created | YES | YES | YES |
 | Verification after repair | YES | YES | YES |
 | Rollback on failure | YES | YES | YES |
@@ -73,5 +73,6 @@ Last updated: 2026-03-21
 
 - "Proven locally" = build and test commands have been executed successfully on a local machine
 - "Documented" = build and test commands are specified in platform README and manifest, implementation complete, but not yet verified on a CI runner
-- All three platforms share the same C++20 core (AeostaraCore) with platform-specific shells
-- iOS uses an Obj-C++ bridge (AeostaraKit) between the SwiftUI app layer and the C++ core
+- Windows uses C++20 (AeostaraCore) with a platform-specific CLI shell
+- macOS and iOS use native Swift implementations (no shared C++ core, no Obj-C++ bridge)
+- Apple branches are source-complete but build-unverified (remediation performed on Windows)
