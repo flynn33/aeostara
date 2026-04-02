@@ -24,6 +24,8 @@ All platform implementations must pass these scenarios to be considered complian
 **Input:** repairable config with a mock/stub file system that returns bad content on verify re-read
 **Expected:** rollback executed, audit records VerificationFailed + RollbackExecuted
 
+> **Execution method:** This scenario requires fault injection into the verify/rollback path via a mock or stub file system. It cannot be verified through black-box CLI invocation alone and must be proven in each platform's native test infrastructure. See [Acceptance Execution Model](acceptance_execution_model.md).
+
 ## Cross-Platform Acceptance
 
 1. Root specifications remain correct (schemas validate, pseudo code is consistent)

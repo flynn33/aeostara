@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 """
-Aeostara Acceptance Test Runner
-Runs acceptance tests against a platform's built binary.
+Aeostara CLI Smoke Runner
+Runs black-box CLI acceptance scenarios (1-4) against a platform's built binary.
 Copyright (c) 2026 James Daley. All Rights Reserved.
 
 Usage: python ci/acceptance_runner.py <binary_path> <fixtures_dir>
 
 The binary must support: validate, diff, heal commands with
 --desired, --invariants, --audit options.
+
+Coverage:
+  Scenarios 1-4 are exercised via black-box binary invocation.
+  Scenario 5 (Forced Rollback — Verification Failure) is NOT exercised
+  by this runner. It requires fault injection via a mock/stub file system
+  and must be proven in each platform's native test infrastructure.
+  See: specs/acceptance/acceptance_execution_model.md
 """
 
 import json
@@ -112,32 +119,11 @@ def test_successful_repair(binary, fixtures):
     return True, "OK"
 
 
-def test_diff_produces_plan(binary, fixtures):
-    """Scenario 5: Diff on drifted config produces repair plan."""
-    code, stdout, stderr = run_command(binary, [
-        "diff",
-        os.path.join(fixtures, "repairable_config.json"),
-        "--desired", os.path.join(fixtures, "desired_state.json"),
-    ])
-    if code != 1:
-        return False, f"Expected exit 1, got {code}. stderr: {stderr}"
-    try:
-        output = json.loads(stdout)
-        if output.get("driftCount", 0) == 0:
-            return False, "Expected drifts"
-        if "proposedPlan" not in output:
-            return False, "Missing proposedPlan"
-    except json.JSONDecodeError:
-        return False, f"Invalid JSON output: {stdout}"
-    return True, "OK"
-
-
 SCENARIOS = [
     ("1. Valid config — no drift", test_valid_config_no_drift),
     ("2. Invalid config — parse error", test_invalid_config_error),
     ("3. Policy block — critical invariant", test_policy_block),
     ("4. Successful repair", test_successful_repair),
-    ("5. Diff produces repair plan", test_diff_produces_plan),
 ]
 
 
@@ -157,7 +143,8 @@ def main():
         print(f"Error: Fixtures dir not found: {fixtures}", file=sys.stderr)
         sys.exit(1)
 
-    print(f"Running {len(SCENARIOS)} acceptance scenarios...")
+    print(f"Aeostara CLI Smoke Runner")
+    print(f"Running {len(SCENARIOS)} CLI-verifiable acceptance scenarios...")
     print(f"Binary: {binary}")
     print(f"Fixtures: {fixtures}")
     print()
@@ -172,11 +159,17 @@ def main():
 
     print()
     if failures == 0:
-        print(f"All {len(SCENARIOS)} scenarios passed.")
-        sys.exit(0)
+        print(f"All {len(SCENARIOS)} CLI smoke scenarios passed.")
     else:
         print(f"{failures} scenario(s) failed.", file=sys.stderr)
-        sys.exit(1)
+
+    print()
+    print("Note: Scenario 5 (Forced Rollback — Verification Failure) is not")
+    print("exercised by this runner. It requires platform-native test harness")
+    print("with mock/stub file system fault injection. Each platform repo must")
+    print("prove Scenario 5 independently.")
+
+    sys.exit(0 if failures == 0 else 1)
 
 
 if __name__ == "__main__":

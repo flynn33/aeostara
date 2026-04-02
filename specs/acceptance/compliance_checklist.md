@@ -23,6 +23,9 @@
 
 ## Shared Behavioral Requirements (all platforms)
 - [x] 5 acceptance scenarios defined (valid config, parse error, policy block, repair, rollback)
+- [x] Scenarios 1–4 verifiable via root CLI smoke runner (`ci/acceptance_runner.py`)
+- [x] Scenario 5 (forced rollback) requires platform-native test harness with mock/stub file system
+- [x] Acceptance execution model documented (see `acceptance_execution_model.md`)
 - [x] Deterministic behavior required (same input = same output)
 - [x] Backup before mutation required
 - [x] Rollback on verification failure required
