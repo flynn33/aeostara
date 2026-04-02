@@ -45,4 +45,4 @@ Status: Post-alignment correction pass
 
 ## Next Priority
 
-**Phase 7 — Windows Completion and Release Hardening** remains the active priority after this alignment pass.
+> The phase numbering model referenced above has been superseded by the repository realignment. The current priority is **repository realignment** (positioning this repo as the platform-agnostic authority). The next phase after realignment is **Agnostic Core design**. See [Roadmap Separation](roadmap_separation.md) for the current track structure.

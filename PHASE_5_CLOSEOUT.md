@@ -1,6 +1,8 @@
-# Phase 5 Closeout — Main Branch
+> **ARCHIVED** — This document reflects the Phase 5 closeout as of 2026-03-21. The repository has since been realigned as a platform-agnostic authority repo. Phase numbering from this era is superseded. See [README.md](README.md) for the current repo role and [Repo Role and Scope](specs/architecture/repo_role_and_scope.md) for full details.
 
-Date: 2026-03-21
+# Phase 5 Closeout — Main Branch (Archived)
+
+Date: 2026-03-21 (archived 2026-04-02)
 
 ## What Was Delivered
 
@@ -75,15 +77,6 @@ All three platform branches pass:
 - Created PLATFORM_STATUS_MATRIX.md with honest per-branch status
 - Created this PHASE_5_CLOSEOUT.md
 
-## Phase 6 Entry Gates
+## Phase 6 Entry Gates (Superseded)
 
-| Gate | Status |
-|------|--------|
-| All platform branches have explicit build status | MET |
-| All platform branches have explicit test status | MET |
-| Main documentation matches repo reality | MET (this closeout) |
-| Compliance status documented per platform | MET |
-| No stale scaffold wording where no longer accurate | MET |
-| Phase 5 closeout complete | MET |
-
-Phase 6 (ASH kernel implementation) may proceed.
+> The phase numbering model used below has been superseded by the repository realignment. The next phase is **Agnostic Core design**, not "Phase 6 (ASH kernel implementation)". See [Roadmap Separation](specs/architecture/roadmap_separation.md) for the current track structure.

@@ -20,17 +20,11 @@ These are not part of the shipped product.
 
 ## Per-Platform Rules
 
-### Windows (platform/windows)
-- R001: Only MSVC, CMake, vcpkg, nlohmann/json, CppUnitTest, Windows SDK, WinUI 3
-- R005: Interface-first design, all concrete types `final`, constructor DI
-- /W4 /WX (warnings as errors)
+Platform-specific compliance rules (toolchain choices, build flags, framework dependencies, test frameworks) are the responsibility of each platform implementation. They are not prescribed by this authority repository.
 
-### macOS (platform/macos)
-- Native toolchain: Swift 5.9+, SwiftPM or Xcode-native
-- Foundation-only shipped path (no C++, no Obj-C++, no CMake, no vcpkg)
-- XCTest for testing
+Each platform implementation must satisfy:
+1. The shipped product rules above
+2. The acceptance targets in `specs/acceptance/acceptance_targets.md`
+3. Forsetti boundary compliance (rule 6 above)
 
-### iOS (platform/ios)
-- Native toolchain: Swift 5.9+, SwiftUI, SwiftPM or Xcode-native
-- Foundation-only shipped path (no C++, no Obj-C++, no CMake, no vcpkg)
-- XCTest + XCUITest for testing
+Platform-specific compliance documentation will reside in future platform repositories. See [Future Repo Split Plan](future_repo_split_plan.md).

@@ -1,72 +1,93 @@
 {
-  "schemaVersion": "1.0",
-  "policyName": "Aeostara Agentic Coding Policy",
+  "schemaVersion": "2.0",
+  "policyName": "Aeostara Core Specification Policy",
+  "policyScope": "authority-repo",
+  "description": "Root governance for the Aeostara authority/specification repository. This policy is platform-agnostic and language-agnostic. It defines behavioral constraints that all platform implementations must satisfy.",
   "rules": [
     {
       "id": "R001",
-      "name": "Native Technologies Only",
-      "description": "Use only C++20 standard library, Windows SDK, and Microsoft-provided tools (vcpkg, MSVC, CppUnitTest). nlohmann/json via vcpkg is allowed. No Boost, no non-Microsoft third-party tools.",
+      "name": "Platform Agnosticism",
+      "description": "Root specifications must not prescribe platform-specific toolchains, languages, build systems, or runtime dependencies. Platform choices belong to platform implementation repositories.",
       "severity": "error"
     },
     {
       "id": "R002",
-      "name": "Sealed Core Library",
-      "description": "AeostaraCore is a sealed static library. Consumers use public headers in include/AeostaraCore/ only.",
+      "name": "Language Agnosticism",
+      "description": "Root specifications define behavior in pseudo code, JSON Schema, and natural-language contracts. They must not mandate any specific implementation language.",
       "severity": "error"
     },
     {
       "id": "R003",
-      "name": "No Forsetti Dependency",
-      "description": "AeostaraCore and AeostaraCLI must not include any ForsettiCore, ForsettiPlatform, or ForsettiHostTemplate headers. Aeostara Core remains host-agnostic.",
+      "name": "Behavior Authority",
+      "description": "Root specifications are the authoritative source for what each platform implementation must do. Contracts, algorithms, and interfaces defined here are binding on all platform implementations.",
       "severity": "error"
     },
     {
       "id": "R004",
-      "name": "Interface-First Design",
-      "description": "All major components expose abstract interfaces (pure virtual classes). Implementations use constructor dependency injection.",
+      "name": "Native-Only Shipped Product",
+      "description": "All shipped product paths must compile to native binaries. No interpreted runtime (Python, Node.js, etc.) is permitted in the shipped product. This constraint applies to all platform implementations.",
       "severity": "error"
     },
     {
       "id": "R005",
-      "name": "Strict OOP",
-      "description": "All concrete classes must be final. All classes use constructor DI. No hidden globals or singletons.",
+      "name": "No Python in Shipped Product",
+      "description": "Python is permitted only for repository automation (CI scripts, schema validation, acceptance runners). Python must never appear in a shipped product path.",
       "severity": "error"
     },
     {
       "id": "R006",
-      "name": "One-Way Dependencies",
-      "description": "AeostaraCore depends on nothing except nlohmann/json. AeostaraCLI depends on AeostaraCore. Tests depend on AeostaraCore. No reverse or lateral imports.",
+      "name": "No YAML in Shipped Product",
+      "description": "No YAML parser may exist in the shipped product. Configuration is JSON-only for v0.1. YAML is permitted only in CI/automation tooling.",
       "severity": "error"
     },
     {
       "id": "R007",
       "name": "Deterministic Behavior",
-      "description": "No random production behavior. All repair plans are deterministic. Same input must produce same output.",
+      "description": "No random production behavior. All repair plans are deterministic. Same input must produce same output across all platform implementations.",
       "severity": "error"
     },
     {
       "id": "R008",
-      "name": "Proprietary Licensing",
-      "description": "All source files carry proprietary header comment. Copyright (c) 2026 James Daley. All Rights Reserved.",
+      "name": "Core Behavior Constraints",
+      "description": "Policy gating, backup, verification, rollback, and audit are mandatory behavioral constraints. Every platform implementation must implement these behaviors as defined by the root specifications.",
       "severity": "error"
     },
     {
       "id": "R009",
       "name": "No Mutation Without Rollback",
-      "description": "Every file mutation must be preceded by a backup. Rollback must be available for every repair action.",
+      "description": "Every file mutation must be preceded by a backup. Rollback must be available for every repair action. This is a cross-platform behavioral requirement.",
+      "severity": "error"
+    },
+    {
+      "id": "R010",
+      "name": "Proprietary Licensing",
+      "description": "All files carry proprietary copyright header. Copyright (c) 2026 James Daley. All Rights Reserved.",
+      "severity": "error"
+    },
+    {
+      "id": "R011",
+      "name": "No Implementation Code in Root",
+      "description": "The root/main branch must not contain compilable source code or platform-specific build system configurations. Root contains only specifications, contracts, algorithms, interfaces, acceptance targets, compliance rules, fixtures, CI automation, and planning artifacts.",
       "severity": "error"
     }
   ],
-  "architecture_constraints": {
-    "must_not_import_rules": [
-      {
-        "source": "AeostaraCore",
-        "must_not_include": ["ForsettiCore", "ForsettiPlatform", "ForsettiHostTemplate", "AeostaraCLI"]
-      },
-      {
-        "source": "AeostaraCLI",
-        "must_not_include": ["ForsettiCore", "ForsettiPlatform", "ForsettiHostTemplate"]
-      }
+  "scope_constraints": {
+    "root_repo_contains": [
+      "specs/contracts/ — JSON Schema behavioral contracts",
+      "specs/algorithms/ — Pseudo-code algorithm definitions",
+      "specs/interfaces/ — Pseudo-code interface definitions",
+      "specs/acceptance/ — Shared acceptance targets and compliance checklists",
+      "specs/architecture/ — Architecture documentation and planning",
+      "fixtures/ — Shared deterministic test fixtures",
+      "ci/ — Repository automation (schema validation, acceptance running, compliance checking)"
+    ],
+    "root_repo_does_not_contain": [
+      "Compilable source code in any language",
+      "Platform-specific build system configurations",
+      "Platform-specific runtime dependencies",
+      "Platform-specific test framework configurations",
+      "Completed Agnostic Core design (deferred)",
+      "Direct Forsetti integration code"
     ]
   }
 }

@@ -5,9 +5,9 @@
 | Branch | Purpose |
 |--------|---------|
 | `main` | Specifications, contracts, pseudo code, architecture docs, CI scripts, test fixtures |
-| `platform/windows` | Windows native implementation (C++20, MSVC, CppUnitTest) |
-| `platform/macos` | macOS native implementation (Swift, SwiftPM, XCTest) |
-| `platform/ios` | iOS native implementation (Swift, SwiftUI, SwiftPM, XCTest/XCUITest) |
+| `platform/windows` | Windows native implementation |
+| `platform/macos` | macOS native implementation |
+| `platform/ios` | iOS native implementation |
 
 ## Branch Responsibilities
 
@@ -31,11 +31,11 @@ Platform branches are **native realization branches**. They implement shared spe
 
 Each platform branch contains:
 - Native implementation of all contracts and algorithms
-- Platform-specific build configuration
-- Platform-specific test framework
+- Platform-specific build configuration and toolchain
+- Platform-specific test framework and infrastructure
 - Platform-specific shell/UI
-- Forsetti platform integration (per platform boundary rules)
 - Platform manifest
+- Optional Forsetti integration (per platform boundary rules)
 
 ## Merge Policy
 
@@ -56,3 +56,13 @@ Each platform branch is independently releasable once it passes:
 1. Shared acceptance targets (from `specs/acceptance/`)
 2. Platform-specific build validation
 3. Shipped-product compliance validation (no Python, no YAML)
+
+## Future Repository Separation
+
+Platform branches are planned to become separate repositories:
+- `aeostara-core-spec` — evolved from `main` (specifications only)
+- `aeostara-windows` — evolved from `platform/windows`
+- `aeostara-macos` — evolved from `platform/macos`
+- `aeostara-ios` — evolved from `platform/ios`
+
+See [Future Repo Split Plan](future_repo_split_plan.md) for migration details. This separation is planned but not yet executed.

@@ -1,65 +1,82 @@
 # Aeostara
 
-**Deterministic JSON Configuration Drift Detection and Healing Platform** - v0.1
+**Deterministic JSON Configuration Drift Detection & Healing Platform v0.1**
 
-Aeostara observes live configuration, compares it against a declared desired state, detects drift, evaluates invariant policy, and executes repairs with backup, verification, rollback, and audit trail.
+*Authority / Specification Repository*
 
-Copyright (c) 2026 James Daley. All Rights Reserved.
-Proprietary and Confidential.
+---
 
-## Branch Model
+## Repository Role
 
-This repository uses a specification-first branch strategy:
+This repository is the **platform-agnostic, language-agnostic authority** for Aeostara behavioral specifications. It defines *what* Aeostara must do, not *how* any specific platform implements it.
 
-| Branch | Purpose |
-|--------|---------|
-| `main` | Code-agnostic specifications: JSON contract schemas, pseudo code algorithms, interface definitions, architecture docs, test fixtures |
-| `platform/windows` | Windows-native realization (C++20, MSVC, CMake, vcpkg) |
-| `platform/macos` | macOS-native realization (Swift, SwiftPM, XCTest) |
-| `platform/ios` | iOS-native realization (Swift, SwiftUI, SwiftPM, XCTest/XCUITest) |
+Platform implementations are planned to move to separate repositories (see [Future Repo Split Plan](specs/architecture/future_repo_split_plan.md)). Until that separation occurs, platform branches (`platform/windows`, `platform/macos`, `platform/ios`) exist within this repository as interim implementation homes.
 
-`main` is code-agnostic and behavior-authoritative. Platform branches are **native realization branches** — they implement shared spec behavior using their platform's native toolchain and may integrate with their platform's Forsetti framework. Branch internals are not required to preserve `main`'s implementation-agnostic posture.
+## What This Repository Contains
 
-Spec changes on `main` merge down into platform branches. Platform code never merges back to `main`.
+| Category | Location | Description |
+|----------|----------|-------------|
+| Contracts | `specs/contracts/` | 11 JSON Schema behavioral contracts |
+| Algorithms | `specs/algorithms/` | 9 pseudo-code algorithm definitions |
+| Interfaces | `specs/interfaces/` | 5 pseudo-code interface definitions |
+| Architecture | `specs/architecture/` | Architecture docs, branching strategy, compliance rules, planning |
+| Acceptance | `specs/acceptance/` | Shared acceptance targets and compliance checklists |
+| Fixtures | `fixtures/` | Shared deterministic test fixtures |
+| CI Automation | `ci/` | Schema validation, acceptance running, compliance checking |
 
-## Specifications
+## What This Repository Does NOT Contain
 
-### Contracts (11 types)
-JSON Schema definitions in `specs/contracts/`:
-ObservedState, DesiredState, EncodedState, Invariant, DriftEvent, RepairAction, RepairPlan, VerificationResult, RollbackPlan, AuditEvent, ModuleManifest
-
-### Algorithms (9)
-Pseudo code in `specs/algorithms/`:
-healing_flow, drift_analysis, repair_planning, policy_evaluation, json_path, verification, rollback, backup, audit
-
-### Interfaces (5)
-Pseudo code in `specs/interfaces/`:
-IHealingEngine, IConfigAdapter, IBackupProvider, IAuditSink, IFileSystem
-
-### Architecture
-Design documents in `specs/architecture/`:
-product_boundaries, branching_strategy, compliance_rules, native_target_architecture
+- Compilable source code in any language
+- Platform-specific build systems or toolchains
+- Platform-specific runtime dependencies
+- Completed Agnostic Core design (deferred to next phase)
+- Direct Forsetti integration code
 
 ## Product Stack
 
-- **Aeostara** = product (customer-facing behavior, contracts, adapters)
-- **ASH Pattern System** = healing kernel (encoded state, drift, correction semantics)
-- **Forsetti Framework** = host/runtime framework (shell, lifecycle, UI)
+Aeostara is part of a layered product architecture:
 
-## Compliance
+- **Aeostara** -- Deterministic JSON configuration drift detection, policy evaluation, repair planning, verification, rollback, and audit. The customer-facing product behavior.
+- **ASH Pattern System** -- The healing kernel that provides encoded state models, drift semantics, and correction concepts. Aeostara v0.1 is ASH-inspired; full ASH formalization is deferred.
+- **Forsetti Framework** -- The host/runtime framework providing shell, lifecycle, modules, plugins, and entitlements. Aeostara integrates with Forsetti at the platform implementation level, not at the root specification level.
 
-- **Native only** — shipped product is a compiled native binary
-- **JSON-only** — all configuration files are JSON; no YAML parser
-- **No Python** — shipped product has no Python dependency
-- **Forsetti-compliant** — spec behavior is code-agnostic; platform branches realize Aeostara natively per platform Forsetti rules
-- **ASH-inspired** — healing semantics follow the Aeostara Self-Healing pattern
+See [Product Boundaries](specs/architecture/product_boundaries.md) for detailed boundary definitions.
 
-## Platform Targets
+## Non-Negotiable Product Constraints
 
-- **Windows** — C++20, MSVC 2022, CMake, vcpkg (`platform/windows`)
-- **macOS** — Swift / SwiftPM native (`platform/macos`)
-- **iOS** — Swift / SwiftUI native (`platform/ios`)
+These constraints apply to **all** platform implementations:
+
+1. **Native-only shipped product** -- compiled native binaries, no interpreted runtimes
+2. **JSON-only configuration** -- v0.1 uses JSON exclusively for configuration data
+3. **No Python in shipped product** -- Python is permitted only for repo automation
+4. **No YAML in shipped product** -- no YAML parser in any shipped product path
+5. **Deterministic behavior** -- same input must produce same output across all platforms
+6. **Policy / Backup / Verification / Rollback / Audit** -- mandatory behavioral constraints for every platform implementation
+
+See [Compliance Rules](specs/architecture/compliance_rules.md) and [Agentic Coding Policy](agentic-coding-policy.json) for enforcement details.
+
+## Current Platform Status
+
+Platform implementations currently exist as branches within this repository:
+
+| Branch | Status | Build Verified |
+|--------|--------|----------------|
+| `platform/windows` | Reference implementation | Locally proven |
+| `platform/macos` | Source present | Build unverified |
+| `platform/ios` | Source present | Build unverified |
+
+Platform verification and release readiness will become the responsibility of future platform repositories. See [Platform Status Matrix](PLATFORM_STATUS_MATRIX.md) for details.
+
+## Deferred Work
+
+The following work is explicitly **not in scope** for the current phase:
+
+- **Agnostic Core design** -- the next major phase after repository realignment
+- **ASH/Ennea deepening** -- separate track from v0.1 product delivery (see [Roadmap Separation](specs/architecture/roadmap_separation.md))
+- **Platform build verification** -- deferred to future platform repos
+- **Direct Forsetti integration** -- deferred to platform implementation level
+- **Planned Agnostic Core files** -- registered but not yet created (see [Planned File Index](specs/algorithms/PLANNED_AGNOSTIC_CORE_FILE_INDEX.md))
 
 ## License
 
-Proprietary. All rights reserved. See [LICENSE.md](LICENSE.md).
+Copyright (c) 2026 James Daley. All Rights Reserved. Proprietary. See [LICENSE.md](LICENSE.md).

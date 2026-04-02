@@ -1,78 +1,55 @@
 # Platform Status Matrix
 
-Last updated: 2026-03-21
+Last updated: 2026-04-02
+
+> This matrix describes the current state of platform implementation branches. This repository is the **authority/specification repo** — platform verification and release readiness will become the responsibility of future platform repositories. See [Future Repo Split Plan](specs/architecture/future_repo_split_plan.md).
 
 ## Branch Status
 
-| Platform | Branch | Status | Version |
-|----------|--------|--------|---------|
-| Windows | `platform/windows` | Reference implementation | v0.1.0 |
-| macOS | `platform/macos` | Source-complete, build-unverified | v0.1.0 |
-| iOS | `platform/ios` | Source-complete, build-unverified | v0.1.0 |
+| Platform | Branch | Implementation Status | Build Verified |
+|----------|--------|-----------------------|----------------|
+| Windows | `platform/windows` | Reference implementation | Locally proven |
+| macOS | `platform/macos` | Source present | Build unverified |
+| iOS | `platform/ios` | Source present | Build unverified |
 
-## Build Status
+## Build & Test Summary
 
-| Platform | Builds | Toolchain | Build Command | Dependencies |
-|----------|--------|-----------|---------------|-------------|
-| Windows | YES (proven locally) | MSVC 2022, CMake 3.28+, vcpkg | `cmake --preset debug && cmake --build --preset debug` | nlohmann/json |
-| macOS | Unverified | Swift 5.9+, SwiftPM | `swift build` | Foundation only |
-| iOS | Unverified | Swift 5.9+, SwiftPM, Xcode 15+ | `swift build` / `xcodebuild -scheme AeostaraApp -destination 'platform=iOS Simulator'` | Foundation only |
+| Platform | Build Status | Test Status | Notes |
+|----------|-------------|-------------|-------|
+| Windows | Proven locally (MSVC 2022) | Proven locally (5/5 acceptance scenarios) | No CI workflow yet |
+| macOS | Unverified | Unverified | Source written on Windows; CI workflow exists but untriggered |
+| iOS | Unverified | Unverified | Source written on Windows; CI workflow exists but untriggered |
 
-## Test Status
-
-| Platform | Tests Run | Framework | Test Command | Acceptance Scenarios |
-|----------|-----------|-----------|-------------|---------------------|
-| Windows | YES (proven locally) | CppUnitTest | `ctest --preset debug` | 5 (valid, schema fail, policy block, repair, rollback) |
-| macOS | Unverified | XCTest | `swift test` | 5 (matching Windows) |
-| iOS | Unverified | XCTest + XCUITest | `swift test` / `xcodebuild test -scheme AeostaraTests -destination 'platform=iOS Simulator'` | 5 + UI flow tests |
+**"Proven locally"** means build and test commands have been executed successfully on a local development machine. **"Unverified"** means source code is structurally present but has not been compiled or tested on the target platform.
 
 ## Product Behavior Coverage
 
-| Behavior | Windows | macOS | iOS |
-|----------|---------|-------|-----|
-| validate command | YES | YES | YES |
-| diff command | YES | YES | YES |
-| heal command | YES | YES | YES |
-| Backup created | YES | YES | YES |
-| Verification after repair | YES | YES | YES |
-| Rollback on failure | YES | YES | YES |
-| Audit trail output | YES | YES | YES |
-| Policy gating | YES | YES | YES |
+All three platforms are structurally designed to implement the same behavioral coverage (validate, diff, heal, backup, verification, rollback, audit trail, policy gating). However:
 
-## Compliance Status
+- **Windows**: Behavioral coverage confirmed through local testing
+- **macOS / iOS**: Behavioral coverage is structurally present in source but **unverified** through actual execution
 
-| Rule | Windows | macOS | iOS |
-|------|---------|-------|-----|
-| R001: Native technologies only | PASS | PASS | PASS |
-| R005: All classes final, constructor DI | PASS | PASS | PASS |
-| R006: One-way dependencies | PASS | PASS | PASS |
-| R007: No Forsetti in core | PASS | PASS | PASS |
-| R008: Deterministic behavior | PASS | PASS | PASS |
-| R009: Proprietary license | PASS | PASS | PASS |
-| No Python in product | PASS | PASS | PASS |
-| No YAML in product | PASS | PASS | PASS |
-| Host-agnostic core | PASS | PASS | PASS |
+## Compliance
+
+Compliance with the root specification policy is:
+
+- **Windows**: Asserted based on local build and test evidence
+- **macOS / iOS**: Asserted structurally (source review) but **not verified** through build/test execution
+
+Full compliance verification for macOS and iOS is deferred to the future platform repositories where actual build proof can be obtained.
 
 ## CI Workflow Status
 
-| Platform | Workflow File | CI Proven on Runner |
-|----------|--------------|-------------------|
-| Windows | (not yet created) | NO |
-| macOS | `macos-build-test.yml` | NO (awaiting first push trigger) |
-| iOS | `ios-build-test.yml` | NO (awaiting first push trigger) |
+| Platform | Workflow File | Status |
+|----------|--------------|--------|
+| Windows | (not yet created) | Pending |
+| macOS | `macos-build-test.yml` | Exists, untriggered on runner |
+| iOS | `ios-build-test.yml` | Exists, untriggered on runner |
 
-## Blockers
+## Known Gaps
 
-| Platform | Blocker | Severity | Notes |
-|----------|---------|----------|-------|
-| Windows | No platform-specific CI workflow | LOW | Builds and tests proven locally |
-| macOS | CI unproven on actual GitHub Actions macOS runner | LOW | Workflow exists, awaiting trigger |
-| iOS | CI unproven on actual GitHub Actions iOS simulator | LOW | Workflow exists, awaiting trigger |
+1. **No Windows CI workflow** — builds and tests are proven locally but no automated CI exists
+2. **macOS/iOS build-unverified** — source was written on a Windows machine and has not been compiled on actual Apple hardware
+3. **CI runner proof missing for all platforms** — no workflow has been successfully triggered on GitHub Actions runners
 
-## Notes
-
-- "Proven locally" = build and test commands have been executed successfully on a local machine
-- "Documented" = build and test commands are specified in platform README and manifest, implementation complete, but not yet verified on a CI runner
-- Windows uses C++20 (AeostaraCore) with a platform-specific CLI shell
-- macOS and iOS use native Swift implementations (no shared C++ core, no Obj-C++ bridge)
-- Apple branches are source-complete but build-unverified (remediation performed on Windows)
+These gaps will be addressed when platform branches become independent platform repositories with dedicated CI infrastructure.

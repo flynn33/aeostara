@@ -24,13 +24,9 @@ Each `platform/*` branch independently implements:
 - Platform-specific shell (CLI, GUI, or mobile app)
 - Platform-specific build and test infrastructure
 
-## Implementation Languages
+## Platform Toolchain Independence
 
-| Platform | Language | Build System | Test Framework |
-|----------|----------|-------------|----------------|
-| Windows | C++20 | CMake + MSVC | CppUnitTest |
-| macOS | Swift | SwiftPM or Xcode | XCTest |
-| iOS | Swift / SwiftUI | SwiftPM or Xcode | XCTest / XCUITest |
+Each platform implementation chooses its own native language, build system, and test framework. The root authority repository does not prescribe these choices. Current platform branches have made their own toolchain selections, documented within those branches. Future platform repositories will own their toolchain decisions independently.
 
 ## Shared Specs vs Native Realization
 

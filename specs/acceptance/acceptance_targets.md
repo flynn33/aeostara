@@ -24,13 +24,11 @@ All platform implementations must pass these scenarios to be considered complian
 **Input:** repairable config with a mock/stub file system that returns bad content on verify re-read
 **Expected:** rollback executed, audit records VerificationFailed + RollbackExecuted
 
-## Cross-Branch Acceptance
+## Cross-Platform Acceptance
 
-1. `main` preserves specification correctness (schemas validate, pseudo code is consistent)
-2. `platform/windows` passes all 5 shared behavior scenarios
-3. `platform/macos` passes all 5 shared behavior scenarios (when implemented)
-4. `platform/ios` passes minimum behavior scenarios (when implemented)
-5. Deterministic outputs match across platforms for the same input
+1. Root specifications remain correct (schemas validate, pseudo code is consistent)
+2. Each platform implementation passes all 5 shared behavior scenarios
+3. Deterministic outputs match across platforms for the same input
 
 ## Compliance Acceptance
 

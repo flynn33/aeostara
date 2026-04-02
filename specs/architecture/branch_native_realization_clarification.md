@@ -2,6 +2,8 @@
 
 This document locks the corrected branch model baseline for the Aeostara repository. It supersedes any earlier language that implied platform branches must preserve `main`'s implementation-agnostic posture.
 
+> **Note**: These platform branches are planned to become separate repositories. See [Future Repo Split Plan](future_repo_split_plan.md) for the migration plan.
+
 ## Corrected Rule Set
 
 ### `main`
