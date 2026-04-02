@@ -1,8 +1,8 @@
-# Aeostara / ASH / Forsetti Boundaries
+# Aeostara Product Boundaries
 
 ## Aeostara (Product)
 
-Aeostara is the product. It owns:
+Aeostara is the product — a self-healing and safe-failure / fallback system that developers incorporate into their software. It owns:
 - Customer-facing behavior
 - Contracts (11 data types)
 - Config adapters (JSON for v0.1)
@@ -12,9 +12,9 @@ Aeostara is the product. It owns:
 - Audit trail
 - Packaging and distribution model
 
-## ASH Pattern System (Healing Kernel)
+## ASH Pattern System (Core Subsystem)
 
-ASH provides the healing semantics. It owns:
+The ASH Pattern System is **part of Aeostara Core**. It is not a separate peer layer. It provides the core healing semantics within Aeostara:
 - Encoded state model
 - Drift distance semantics
 - Correction concepts
@@ -22,21 +22,11 @@ ASH provides the healing semantics. It owns:
 - Pattern reasoning (future)
 - Self-modeling concepts (future)
 
-Aeostara v0.1 is ASH-inspired. Full ASH encoded-state mechanics are not yet implemented.
-
-## Forsetti Framework (Host/Runtime)
-
-Forsetti is the host/runtime framework. It owns:
-- Runtime shell and lifecycle
-- Module packaging
-- Plugin system
-- Entitlement
-- UI composition
-- Host services
+The ASH Pattern System is language-agnostic and platform-agnostic in its implementation within Aeostara Core. Aeostara v0.1 incorporates foundational ASH Pattern System concepts. Full ASH Pattern System formalization is deferred to a future phase.
 
 ## Repository Boundaries
 
-In addition to the product/framework boundaries above, the repository structure enforces a separation between specification authority and platform implementation:
+The repository structure enforces a separation between specification authority and platform implementation:
 
 ### Authority Repository (this repo)
 - Owns: contracts, algorithms, interfaces, acceptance targets, compliance rules, architecture docs, shared fixtures, planning artifacts
@@ -53,13 +43,7 @@ See [Future Repo Split Plan](future_repo_split_plan.md) for the planned separati
 ## Non-Negotiable Boundary Rules
 
 1. `main` branch specs remain code-agnostic and behavior-authoritative
-2. Platform branches are native realization branches that may integrate with their platform's Forsetti framework
-3. ASH stays framework-agnostic at the spec level
-4. No core healing module may directly depend on UI code
-5. Platform branch separation must not contaminate shared spec boundaries
-6. Forsetti boundary rules apply to all platform branches:
-   - No framework modification
-   - No direct module-to-module communication
-   - No direct OS communication
-   - No module-owned UI
-   - Framework-mediated I/O only
+2. The ASH Pattern System stays language-agnostic and platform-agnostic at the spec level
+3. No core healing module may directly depend on UI code
+4. Platform branch separation must not contaminate shared spec boundaries
+5. Platform branches are native realization branches that implement shared behavior using their platform's native toolchain

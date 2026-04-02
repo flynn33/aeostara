@@ -86,8 +86,7 @@
       "Platform-specific build system configurations",
       "Platform-specific runtime dependencies",
       "Platform-specific test framework configurations",
-      "Completed Agnostic Core design (deferred)",
-      "Direct Forsetti integration code"
+      "Completed Agnostic Core design (deferred)"
     ]
   }
 }

@@ -55,7 +55,7 @@ All three platform branches pass:
 - R001: Native technologies only (no forbidden dependencies)
 - R005: All classes final, constructor DI, no singletons
 - R006: One-way dependency layering
-- R007: No Forsetti in core
+- R007: Clean module boundaries
 - R008: Deterministic behavior
 - R009: Proprietary license with copyright headers
 - No Python in shipped product path
@@ -79,4 +79,4 @@ All three platform branches pass:
 
 ## Phase 6 Entry Gates (Superseded)
 
-> The phase numbering model used below has been superseded by the repository realignment. The next phase is **Agnostic Core design**, not "Phase 6 (ASH kernel implementation)". See [Roadmap Separation](specs/architecture/roadmap_separation.md) for the current track structure.
+> The phase numbering model used below has been superseded by the repository realignment. The next phase is **Agnostic Core design**, not "Phase 6 (ASH Pattern System implementation)". See [Roadmap Separation](specs/architecture/roadmap_separation.md) for the current track structure.

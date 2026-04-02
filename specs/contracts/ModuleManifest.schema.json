@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ModuleManifest",
-  "description": "Aeostara module metadata (NOT Forsetti's module manifest)",
+  "description": "Aeostara module metadata",
   "type": "object",
   "properties": {
     "moduleID": {

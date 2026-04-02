@@ -14,22 +14,19 @@ This document locks the corrected branch model baseline for the Aeostara reposit
 
 ### `platform/windows`
 - **Windows-native realization branch**
-- Implements shared spec behavior using C++20, MSVC, CMake, vcpkg
-- May align to the Windows Forsetti framework and Windows-native implementation model
-- Must observe Forsetti boundary rules (see below)
+- Implements shared spec behavior using the platform's native toolchain
+- May adopt platform-specific patterns and integration points
 
 ### `platform/macos`
 - **macOS-native realization branch**
-- Implements shared spec behavior using Swift, SwiftPM, XCTest
-- May align to the macOS Forsetti framework expectations
-- Must observe Forsetti boundary rules (see below)
+- Implements shared spec behavior using the platform's native toolchain
+- May adopt platform-specific patterns and integration points
 - Build/test proof deferred until work moves to a Mac
 
 ### `platform/ios`
 - **iOS-native realization branch**
-- Implements shared spec behavior using Swift, SwiftUI, SwiftPM, XCTest/XCUITest
-- May align to the iOS Forsetti framework expectations
-- Must observe Forsetti boundary rules (see below)
+- Implements shared spec behavior using the platform's native toolchain
+- May adopt platform-specific patterns and integration points
 - Build/test proof deferred until work moves to a Mac
 
 ## Key Distinction
@@ -38,21 +35,19 @@ This document locks the corrected branch model baseline for the Aeostara reposit
 
 A platform branch's internal architecture may adopt platform-specific patterns, frameworks, and integration points that would be inappropriate in `main`. This is by design.
 
-## Binding Forsetti Boundary Rules
+## Platform Integration Rules
 
-All platform branches must observe these Forsetti boundary rules:
+All platform branches must observe these integration rules:
 
-1. **No framework modification** — platform branches must not modify the Forsetti framework itself
-2. **No direct module-to-module communication** — modules communicate through framework-mediated channels
-3. **No direct OS communication** — OS access is framework-mediated
-4. **No module-owned UI** — UI is owned by the framework, not by the module
-5. **Framework-mediated I/O only** — all I/O goes through framework-provided interfaces
+1. **No direct module-to-module communication** — modules communicate through well-defined interfaces
+2. **No module-owned UI** — UI is owned by the application layer, not by core modules
+3. **Interface-mediated I/O only** — all I/O goes through interface-provided abstractions
 
-These rules constrain *how* a platform branch integrates with Forsetti, not *whether* it may integrate at all. Platform-native Forsetti integration is valid and expected.
+These rules constrain *how* a platform branch integrates its native toolchain, ensuring clean module boundaries.
 
 ## Domain Contract Independence
 
-Domain-level contracts (the 11 data types defined in `specs/contracts/`) remain Forsetti-independent. They define behavior, not hosting. A platform branch's domain module should not import Forsetti framework headers — Forsetti integration happens at the platform services or application layer.
+Domain-level contracts (the 11 data types defined in `specs/contracts/`) remain implementation-independent. They define behavior, not hosting. A platform branch's domain module should maintain clean separation between behavioral contracts and platform-specific integration.
 
 ## What This Document Prevents
 

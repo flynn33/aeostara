@@ -18,15 +18,15 @@ This index registers files planned for the future Agnostic Core design phase. It
 | `specs/core/agnostic_algorithm_orchestration.md` | Platform-independent healing flow coordination, defining the abstract execution model | Deferred | Agnostic Core design phase |
 | `specs/core/agnostic_interface_bindings.md` | How platform implementations bind to the 5 core interfaces programmatically | Deferred | Agnostic Core design phase |
 
-## Category 2: ASH Kernel Formalization
+## Category 2: ASH Pattern System Formalization
 
 | Planned File | Purpose | Status | Dependency |
 |-------------|---------|--------|------------|
-| `specs/ash/encoded_state_model.md` | Formal specification of the encoded state representation | Deferred | Agnostic Core design + ASH deepening track |
-| `specs/ash/drift_distance_metric.md` | Specification of drift distance measurement and comparison semantics | Deferred | Agnostic Core design + ASH deepening track |
-| `specs/ash/correction_semantics.md` | Formal specification of correction operations and their properties | Deferred | Agnostic Core design + ASH deepening track |
-| `specs/ash/confidence_model.md` | Specification of confidence scoring for repair decisions (future) | Deferred | ASH deepening track, later phase |
-| `specs/ash/pattern_reasoning.md` | Specification of pattern recognition and reasoning in healing decisions (future) | Deferred | ASH deepening track, later phase |
+| `specs/ash/encoded_state_model.md` | Formal specification of the encoded state representation | Deferred | Agnostic Core design + ASH Pattern System deepening track |
+| `specs/ash/drift_distance_metric.md` | Specification of drift distance measurement and comparison semantics | Deferred | Agnostic Core design + ASH Pattern System deepening track |
+| `specs/ash/correction_semantics.md` | Formal specification of correction operations and their properties | Deferred | Agnostic Core design + ASH Pattern System deepening track |
+| `specs/ash/confidence_model.md` | Specification of confidence scoring for repair decisions (future) | Deferred | ASH Pattern System deepening track, later phase |
+| `specs/ash/pattern_reasoning.md` | Specification of pattern recognition and reasoning in healing decisions (future) | Deferred | ASH Pattern System deepening track, later phase |
 
 ## Category 3: Platform Consumption Protocol
 

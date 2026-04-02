@@ -37,4 +37,3 @@ All platform implementations must pass these scenarios to be considered complian
 1. Shipped product does not require Python
 2. Shipped product does not require YAML
 3. Core implementation remains host-agnostic
-4. Forsetti bridges are isolated from core healing modules

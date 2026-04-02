@@ -1,6 +1,6 @@
 # IHealingEngine Interface
 
-Top-level abstract interface for the healing engine. Designed to parallel the Forsetti module interface shape for future hosting.
+Top-level abstract interface for the healing engine. Designed for clean module boundaries and platform-agnostic integration.
 
 ## Methods
 

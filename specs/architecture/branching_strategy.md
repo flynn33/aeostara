@@ -27,7 +27,7 @@ Must NOT contain:
 - Platform-specific UI or runtime code
 
 ### platform/* branches (native realization branches)
-Platform branches are **native realization branches**. They implement shared spec behavior using their platform's native toolchain and may integrate with their platform's Forsetti framework. Branch internals are not required to preserve `main`'s implementation-agnostic posture. Implementation patterns may diverge by platform.
+Platform branches are **native realization branches**. They implement shared spec behavior using their platform's native toolchain. Branch internals are not required to preserve `main`'s implementation-agnostic posture. Implementation patterns may diverge by platform.
 
 Each platform branch contains:
 - Native implementation of all contracts and algorithms
@@ -35,7 +35,6 @@ Each platform branch contains:
 - Platform-specific test framework and infrastructure
 - Platform-specific shell/UI
 - Platform manifest
-- Optional Forsetti integration (per platform boundary rules)
 
 ## Merge Policy
 

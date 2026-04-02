@@ -30,7 +30,7 @@ Each platform implementation chooses its own native language, build system, and 
 
 ## Shared Specs vs Native Realization
 
-Shared behavior lives in `main` specs — code-agnostic, defining *what* the platform must do, not *how*. Native implementation lives in platform branches — each branch realizes the spec using its platform's native toolchain and patterns. Platform branches may integrate with their platform's Forsetti framework while observing Forsetti boundary rules. Branch internals are not required to preserve `main`'s implementation-agnostic posture.
+Shared behavior lives in `main` specs — code-agnostic, defining *what* the platform must do, not *how*. Native implementation lives in platform branches — each branch realizes the spec using its platform's native toolchain and patterns. Branch internals are not required to preserve `main`'s implementation-agnostic posture.
 
 ## Shared Test Fixtures
 

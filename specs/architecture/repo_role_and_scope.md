@@ -28,7 +28,6 @@ This repository is:
 - **Not a macOS implementation repo** — macOS implementation lives on `platform/macos` (planned: `aeostara-macos`)
 - **Not an iOS implementation repo** — iOS implementation lives on `platform/ios` (planned: `aeostara-ios`)
 - **Not the completed Agnostic Core design** — that is the next phase of work, deferred
-- **Not the site of direct Forsetti integration work** — Forsetti integration happens at the platform implementation level
 
 ## Current State
 
@@ -50,7 +49,6 @@ The following work is explicitly deferred from the current phase:
 | Item | Dependency | Target Phase |
 |------|-----------|-------------|
 | Agnostic Core design | Repository realignment complete | Next phase |
-| ASH/Ennea deepening | Agnostic Core design complete | Separate track (see [Roadmap Separation](roadmap_separation.md)) |
+| ASH Pattern System deepening | Agnostic Core design complete | Separate track (see [Roadmap Separation](roadmap_separation.md)) |
 | Platform build verification | Platform repos established | Platform repo responsibility |
-| Direct Forsetti integration | Platform repos established | Platform repo responsibility |
 | Planned Agnostic Core files | Agnostic Core design phase | See [Planned File Index](../algorithms/PLANNED_AGNOSTIC_CORE_FILE_INDEX.md) |

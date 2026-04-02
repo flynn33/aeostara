@@ -9,7 +9,7 @@ All notable changes to Aeostara will be documented in this file.
 - **Repositioned root as authority/specification repo** — README rewritten to define this repository as the platform-agnostic, language-agnostic behavioral authority
 - **Replaced root governance policy** — `agentic-coding-policy.json` replaced from Windows-specific implementation policy to platform-agnostic core-spec policy (schemaVersion 2.0)
 - **Resolved contradictory status language** — archived Phase 5 closeout, rewrote Platform Status Matrix with honest build verification states
-- **Separated roadmaps** — created `roadmap_separation.md` splitting v0.1 product track from ASH/Ennea deepening track
+- **Separated roadmaps** — created `roadmap_separation.md` splitting v0.1 product track from ASH Pattern System deepening track
 - **Aligned acceptance and compliance docs** — removed platform-specific toolchain prescriptions from root architecture docs
 - **Added future repo split preparation** — created `repo_role_and_scope.md` and `future_repo_split_plan.md` documenting planned separation into `aeostara-core-spec`, `aeostara-windows`, `aeostara-macos`, `aeostara-ios`
 - **Registered deferred planning files** — created `PLANNED_AGNOSTIC_CORE_FILE_INDEX.md` for future Agnostic Core design phase
@@ -57,7 +57,7 @@ This release does not add new specifications, algorithms, or interfaces. It norm
 - **CLI**: `aeostara validate|diff|heal` commands with `--desired`, `--invariants`, `--audit` options
 - **Module-ready interfaces**: IHealingEngine, IConfigAdapter, IBackupProvider, IAuditSink, IFileSystem
 - **CppUnitTest suite**: 14 test files covering all core components and 5 acceptance scenarios
-- **Architecture enforcement tests**: Verify no Forsetti includes, all classes final, correct namespace, copyright headers
+- **Architecture enforcement tests**: Verify clean module boundaries, all classes final, correct namespace, copyright headers
 - **PowerShell verification scripts**: verify-aeostara-guardrails.ps1, check-architecture.ps1
 
 ### Technical Details (Windows Platform Branch)
@@ -68,4 +68,4 @@ This release does not add new specifications, algorithms, or interfaces. It norm
 - Single dependency: nlohmann/json
 - /W4 /WX (warnings as errors)
 - JSON-only configuration scope
-- Namespace: `Aeostara` (standalone, no Forsetti dependency)
+- Namespace: `Aeostara` (standalone, no external framework dependencies)
