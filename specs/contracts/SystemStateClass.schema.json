@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SystemStateClass",
+  "description": "ASH-aligned system state classification outcome.",
+  "type": "object",
+  "properties": {
+    "classificationID": {
+      "type": "string"
+    },
+    "class": {
+      "type": "string",
+      "enum": ["STABLE", "UNSTABLE", "CORRECTABLE", "DEGRADED", "CONTAINED", "FAILED", "SAFE_HALT"]
+    },
+    "derivedFromDiagnosticID": {
+      "type": "string"
+    },
+    "classifiedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "explanation": {
+      "type": "string"
+    }
+  },
+  "required": ["classificationID", "class", "derivedFromDiagnosticID", "classifiedAt", "explanation"],
+  "additionalProperties": false
+}

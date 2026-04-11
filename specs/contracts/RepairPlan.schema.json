@@ -1,27 +1,30 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "RepairPlan",
-  "description": "Complete repair sequence with a deterministic plan ID",
+  "title": "RepairPlanLegacy",
+  "description": "Deprecated diff-first planning artifact. Retained for compatibility only. Semantic authority moved to RecoveryPlan.",
+  "x-status": "legacy-non-authoritative",
+  "x-replacement": "RecoveryPlan.schema.json",
   "type": "object",
   "properties": {
     "planID": {
-      "type": "string",
-      "description": "Deterministic identifier generated via FNV-1a hash of the plan contents"
+      "type": "string"
     },
     "actions": {
       "type": "array",
-      "items": { "$ref": "RepairAction.schema.json" },
-      "description": "Ordered list of repair actions"
+      "items": {
+        "$ref": "RepairAction.schema.json"
+      }
     },
     "timestamp": {
       "type": "string",
-      "format": "date-time",
-      "description": "ISO 8601 timestamp of plan creation"
+      "format": "date-time"
     },
     "requiresBackup": {
-      "type": "boolean",
-      "default": true,
-      "description": "Whether a backup must be created before executing this plan"
+      "type": "boolean"
+    },
+    "deprecatedSince": {
+      "type": "string",
+      "format": "date"
     }
   },
   "required": ["planID", "actions", "timestamp", "requiresBackup"],

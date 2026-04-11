@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DesiredSystemIntent",
+  "description": "Declared desired intent used for ASH-aligned semantic evaluation and policy-constrained recovery.",
+  "type": "object",
+  "properties": {
+    "intentID": {
+      "type": "string"
+    },
+    "declaredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "intentSource": {
+      "type": "string"
+    },
+    "intentState": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["intentID", "declaredAt", "intentSource", "intentState"],
+  "additionalProperties": false
+}

@@ -1,0 +1,11 @@
+{
+  "scenario": "S4",
+  "description": "Fallback unavailable and containment entered",
+  "fallback_registry": {
+    "available": true,
+    "candidates": []
+  },
+  "expected": {
+    "containment": true
+  }
+}

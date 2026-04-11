@@ -1,27 +1,26 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "DriftEvent",
-  "description": "A single detected drift between observed and desired state",
+  "title": "DriftEventLegacy",
+  "description": "Deprecated drift-only evidence artifact. May be used as subordinate execution evidence but not as semantic authority.",
+  "x-status": "legacy-non-authoritative",
+  "x-replacement": "StateValidityDiagnostic.schema.json",
   "type": "object",
   "properties": {
     "keyPath": {
-      "type": "string",
-      "description": "Dot-path to the drifted key"
+      "type": "string"
     },
     "type": {
       "type": "string",
-      "enum": ["ValueChanged", "KeyAdded", "KeyRemoved"],
-      "description": "The kind of drift detected"
+      "enum": ["ValueChanged", "KeyAdded", "KeyRemoved"]
     },
-    "observedValue": {
-      "description": "Current value in observed state (null if KeyAdded)"
-    },
-    "desiredValue": {
-      "description": "Expected value in desired state (null if KeyRemoved)"
-    },
+    "observedValue": {},
+    "desiredValue": {},
     "description": {
+      "type": "string"
+    },
+    "deprecatedSince": {
       "type": "string",
-      "description": "Human-readable description of the drift"
+      "format": "date"
     }
   },
   "required": ["keyPath", "type", "description"],

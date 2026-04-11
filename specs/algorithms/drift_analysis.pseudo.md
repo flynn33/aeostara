@@ -1,47 +1,21 @@
-# Drift Analysis
+# Drift Analysis (Legacy Helper)
 
-Compares encoded observed and desired states to produce a list of DriftEvents.
+Status: legacy helper only.
 
-## analyzeDrift(encoded) → List[DriftEvent]
+This file may be used to extract superficial observed-vs-intent differences as execution evidence. It is explicitly non-authoritative for semantic decisions.
 
-```
-drifts ← empty list
+All semantic decisions must flow through:
 
-// Check for ValueChanged and KeyRemoved
-FOR EACH (key, observedValue) IN encoded.observed:
-  IF key NOT IN encoded.desired:
-    drifts.add(DriftEvent(
-      keyPath = key,
-      type = KeyRemoved,
-      observedValue = observedValue,
-      desiredValue = null,
-      description = "Key exists in observed but not in desired"
-    ))
-  ELSE IF observedValue != encoded.desired[key]:
-    drifts.add(DriftEvent(
-      keyPath = key,
-      type = ValueChanged,
-      observedValue = observedValue,
-      desiredValue = encoded.desired[key],
-      description = "Value differs between observed and desired"
-    ))
+- `state_normalization.pseudo.md`
+- `state_to_ash_mapping.pseudo.md`
+- `ash_diagnostic_evaluation.pseudo.md`
+- `state_classification.pseudo.md`
+- `recovery_category_selection.pseudo.md`
 
-// Check for KeyAdded
-FOR EACH (key, desiredValue) IN encoded.desired:
-  IF key NOT IN encoded.observed:
-    drifts.add(DriftEvent(
-      keyPath = key,
-      type = KeyAdded,
-      observedValue = null,
-      desiredValue = desiredValue,
-      description = "Key exists in desired but not in observed"
-    ))
+## produce_drift_evidence(observed_state, desired_intent) -> list
 
-RETURN drifts
-```
-
-## hasDrift(encoded) → Boolean
-
-```
-RETURN analyzeDrift(encoded) is NOT empty
+```text
+FUNCTION produce_drift_evidence(observed_state, desired_intent):
+  RETURN shallow_or_deep_diff(observed_state, desired_intent)
+END FUNCTION
 ```

@@ -1,22 +1,33 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "RollbackPlan",
-  "description": "Recovery procedure to restore a config file from backup",
+  "description": "Deterministic rollback plan used when execution verification fails or policy requires rollback.",
   "type": "object",
   "properties": {
-    "planID": {
-      "type": "string",
-      "description": "ID of the repair plan that triggered this rollback"
+    "rollbackPlanID": {
+      "type": "string"
     },
-    "backupFilePath": {
-      "type": "string",
-      "description": "Path to the backup file"
+    "recoveryPlanID": {
+      "type": "string"
     },
-    "originalFilePath": {
+    "backupReference": {
+      "type": "string"
+    },
+    "restoreTargets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "rollbackReason": {
+      "type": "string"
+    },
+    "createdAt": {
       "type": "string",
-      "description": "Path to the original config file to restore"
+      "format": "date-time"
     }
   },
-  "required": ["planID", "backupFilePath", "originalFilePath"],
+  "required": ["rollbackPlanID", "recoveryPlanID", "backupReference", "restoreTargets", "rollbackReason", "createdAt"],
   "additionalProperties": false
 }

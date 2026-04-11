@@ -1,0 +1,11 @@
+{
+  "scenario": "S3",
+  "description": "Correction blocked and fallback selected",
+  "policy": {
+    "block_correction": true
+  },
+  "expected": {
+    "recovery_category": "FALLBACK_REQUIRED",
+    "fallback_outcome": "SELECTED"
+  }
+}

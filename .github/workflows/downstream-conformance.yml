@@ -1,0 +1,45 @@
+# Aeostara Downstream Conformance Audit
+
+name: Downstream Conformance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'README.md'
+      - 'REMEDIATION_STATUS.md'
+      - 'specs/**'
+      - 'ci/**'
+      - 'branch_profiles/**'
+      - 'agentic-coding-policy.json'
+  pull_request:
+    paths:
+      - 'README.md'
+      - 'REMEDIATION_STATUS.md'
+      - 'specs/**'
+      - 'ci/**'
+      - 'branch_profiles/**'
+      - 'agentic-coding-policy.json'
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate schemas
+        run: python ci/validate_schemas.py
+
+      - name: Validate downstream conformance
+        run: python ci/compliance_checker.py . --mode downstream-conformance
+
+      - name: Validate acceptance artifacts
+        run: python ci/acceptance_runner.py .
+
+      - name: Validate main branch alignment profile
+        run: python ci/branch_alignment_checker.py . --profile main

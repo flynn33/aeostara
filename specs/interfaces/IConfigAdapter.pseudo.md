@@ -1,34 +1,25 @@
 # IConfigAdapter Interface
 
-Bridges file-specific I/O concerns with the core healing engine. Each config format (JSON, future YAML, etc.) has its own adapter implementation.
+Adapter boundary for collecting observed system state and applying execution steps. This interface does not define semantic truth.
 
 ## Methods
 
-### observe(filePath) → ObservedState
+### observeSystemState(source) -> ObservedSystemState
 
-Read and parse a config file, returning the observed state.
+Collect runtime/product state from adapter-specific sources.
 
-**Parameters:**
-- `filePath` (string) — path to the configuration file
+### normalizeInput(observed) -> object
 
-**Returns:** ObservedState with parsed data, source file path, and timestamp
+Produce deterministic normalized input for state-to-ASH mapping.
 
-### encode(observed, desired) → EncodedState
+### applyActuatorSteps(target, steps) -> Boolean
 
-Flatten and encode observed and desired states into canonical dot-path form for drift comparison.
+Apply execution-level actuator steps produced by `RecoveryPlan`.
 
-**Parameters:**
-- `observed` (ObservedState) — the observed state
-- `desired` (DesiredState) — the desired state
+### snapshotTarget(target) -> string
 
-**Returns:** EncodedState with flattened maps for both states
+Create adapter-level snapshot reference used by backup/rollback flow.
 
-### applyRepair(filePath, plan) → Boolean
+### restoreSnapshot(snapshotRef, target) -> Boolean
 
-Apply a repair plan to the config file by executing each RepairAction.
-
-**Parameters:**
-- `filePath` (string) — path to the configuration file
-- `plan` (RepairPlan) — the repair plan to apply
-
-**Returns:** true if repair was applied successfully
+Restore a target from a snapshot reference.

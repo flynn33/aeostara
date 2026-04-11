@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ObservedSystemState",
+  "description": "Captured observed runtime/system state before semantic normalization.",
+  "type": "object",
+  "properties": {
+    "observationID": {
+      "type": "string"
+    },
+    "observedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sourceContext": {
+      "type": "object",
+      "properties": {
+        "targetRealm": {
+          "type": "string"
+        },
+        "adapterID": {
+          "type": "string"
+        },
+        "artifactReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["targetRealm", "adapterID"],
+      "additionalProperties": false
+    },
+    "rawState": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "integrity": {
+      "type": "object",
+      "properties": {
+        "sourceHash": {
+          "type": "string"
+        },
+        "integrityMethod": {
+          "type": "string"
+        }
+      },
+      "required": ["sourceHash", "integrityMethod"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["observationID", "observedAt", "sourceContext", "rawState"],
+  "additionalProperties": false
+}

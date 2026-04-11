@@ -1,0 +1,13 @@
+{
+  "scenario": "S2",
+  "description": "No superficial diff, semantic instability detected",
+  "observed": {
+    "state_vector": [1, 1, 1, 1, 1, 1, 1, 1, 1],
+    "surface_config": {
+      "same_as_intent": true
+    }
+  },
+  "intent": {
+    "state_vector": [1, 1, 1, 1, 1, 1, 1, 1, 1]
+  }
+}

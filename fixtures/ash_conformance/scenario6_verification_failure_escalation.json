@@ -1,0 +1,11 @@
+{
+  "scenario": "S6",
+  "description": "Verification failure after execution triggers escalation",
+  "execution": {
+    "performed": true,
+    "verification_success": false
+  },
+  "expected": {
+    "rollback_or_escalation": true
+  }
+}

@@ -2,6 +2,36 @@
 
 All notable changes to Aeostara will be documented in this file.
 
+## [0.4.1] - 2026-04-11
+
+### Changed — Branch Alignment Enforcement
+
+- Added branch alignment contract and targets (`specs/architecture/branch_alignment_contract.md`, `specs/acceptance/branch_alignment_targets.md`)
+- Added branch profile contracts for `main`, `platform_windows`, `platform_macos`, and `platform_ios` (`branch_profiles/*.profile.json`)
+- Added `ci/branch_alignment_checker.py` to validate branch-level invariant alignment
+- Updated `ci/compliance_checker.py` to support both downstream-conformance and source-safety modes
+- Added `downstream-conformance.yml` workflow for main-branch conformance gates
+- Updated platform `compliance-audit.yml` workflow to run source-safety and branch-alignment profile checks
+- Updated remediation and README docs to include branch alignment scope and commands
+
+## [0.4.0] - 2026-04-11
+
+### Changed — ASH Downstream Conformance Remediation
+
+- Added `REMEDIATION_STATUS.md` as repository-local remediation control document
+- Rewrote root and architecture documents to establish ASH upstream authority and Aeostara downstream conformance scope
+- Replaced drift-first semantic contract authority with an ASH-aligned contract surface (`ObservedSystemState`, `DesiredSystemIntent`, `AshSemanticState`, `StateValidityDiagnostic`, `SystemStateClass`, `RecoveryCategory`, `RecoveryPlan`, `FallbackDecision`, `ContainmentDecision`, `SafeHaltDecision`)
+- Marked legacy drift-first contract files as non-authoritative (`x-status: legacy-non-authoritative`)
+- Rebuilt algorithm layer around diagnosis-first flow (normalization, mapping, diagnostics, classification, recoverability, fallback/containment/safe-halt, execution+verification)
+- Repositioned legacy drift and CRUD repair files as helper-only artifacts
+- Rebuilt acceptance layer with ASH conformance targets, remediation scenarios, and traceability matrix
+- Updated CI automation to validate conformance artifacts, required contracts, legacy demotion markers, and acceptance/traceability coverage
+- Updated governance policy (`agentic-coding-policy.json`) to downstream ASH conformance posture
+
+### Note
+
+This release is a semantic architecture remediation of the specification repository. Platform build verification remains outside this repo scope.
+
 ## [0.3.0] - 2026-04-02
 
 ### Changed — Repository Realignment

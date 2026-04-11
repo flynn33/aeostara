@@ -1,46 +1,38 @@
-# Root Specification Compliance Checklist
+# Downstream ASH Conformance Checklist
 
-> This checklist tracks root-level specification compliance. Platform-specific build, test, and toolchain verification is the responsibility of each platform implementation (currently branches, planned as separate repos).
+## Authority and Architecture
 
-## Root Specifications (main branch)
-- [x] 11 contract JSON schemas present and valid
-- [x] 9 algorithm pseudo code files present
-- [x] 5 interface pseudo code files present
-- [x] Architecture documents present
-- [x] Acceptance targets documented
-- [x] Compliance rules documented
-- [x] Root governance policy is platform-agnostic and language-agnostic
-- [x] No compilable source code on main branch
+- [x] `REMEDIATION_STATUS.md` exists and declares ASH upstream authority.
+- [x] `specs/architecture/ash_authority_and_aeostara_conformance.md` exists.
+- [x] Root and architecture docs describe Aeostara as downstream conformance layer.
+- [x] Legacy semantic authority language removed or marked historical.
 
-## Branch / Repo Structure
-- [x] `main` branch contains only specifications
-- [x] `platform/windows` branch contains Windows implementation
-- [x] `platform/macos` branch contains macOS implementation
-- [x] `platform/ios` branch contains iOS implementation
-- [x] Branch responsibilities documented (see branching_strategy.md)
-- [x] Merge policy documented (main -> platform, one-way)
-- [x] Future repo split plan documented (see future_repo_split_plan.md)
+## Contracts
 
-## Shared Behavioral Requirements (all platforms)
-- [x] 5 acceptance scenarios defined (valid config, parse error, policy block, repair, rollback)
-- [x] Scenarios 1–4 verifiable via root CLI smoke runner (`ci/acceptance_runner.py`)
-- [x] Scenario 5 (forced rollback) requires platform-native test harness with mock/stub file system
-- [x] Acceptance execution model documented (see `acceptance_execution_model.md`)
-- [x] Deterministic behavior required (same input = same output)
-- [x] Backup before mutation required
-- [x] Rollback on verification failure required
-- [x] Audit trail required
-- [x] Policy gating required
-- [x] No Python in shipped product
-- [x] No YAML in shipped product
-- [x] Native-only shipped binary
+- [x] ASH-aligned contract set exists for observed state, intent, semantic state, diagnostics, classification, recoverability, recovery plan, fallback, containment, safe halt.
+- [x] Legacy drift-first contracts are marked `x-status: legacy-non-authoritative`.
+- [x] Helper contracts (backup/rollback/verification/audit/module manifest) align to downstream flow.
 
-## Platform Verification Status
-- [x] Windows: Reference implementation, locally proven (build + test)
-- [ ] macOS: Source present, build unverified (deferred to platform repo)
-- [ ] iOS: Source present, build unverified (deferred to platform repo)
-- [ ] CI runner proof obtained for any platform
+## Algorithms
 
-## Shared Test Fixtures
-- [x] All 6 fixture files present on main branch
-- [ ] Fixture identity verified across all platform branches
+- [x] Normalization and mapping algorithms present.
+- [x] Diagnosis/classification/recoverability algorithms present.
+- [x] Recovery planning is recoverability-driven.
+- [x] Fallback/containment/safe-halt algorithms present.
+- [x] Execution/verification algorithm present.
+- [x] Legacy drift/repair algorithms are non-authoritative helpers.
+
+## Acceptance and Traceability
+
+- [x] `ash_conformance_targets.md` exists.
+- [x] `traceability_matrix.md` exists.
+- [x] `remediation_acceptance_targets.md` exists.
+- [x] Acceptance scenarios cover semantic-vs-diff mismatch and escalation behavior.
+- [x] `branch_alignment_targets.md` exists.
+
+## CI Enforcement
+
+- [x] Schema validator checks required ASH-aligned contracts.
+- [x] Compliance checker validates conformance artifacts and legacy markings.
+- [x] Acceptance runner validates acceptance/traceability artifact completeness.
+- [x] Branch alignment checker validates active branch profile invariants.

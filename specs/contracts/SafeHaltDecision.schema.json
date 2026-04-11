@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SafeHaltDecision",
+  "description": "Decision record for terminal safe-halt transition with preserved diagnostic chain.",
+  "type": "object",
+  "properties": {
+    "decisionID": {
+      "type": "string"
+    },
+    "enterSafeHalt": {
+      "type": "boolean"
+    },
+    "trigger": {
+      "type": "string",
+      "enum": [
+        "ESCALATION_FROM_FAILED",
+        "CONTAINMENT_BREACH",
+        "OPERATOR_HALT_REQUEST",
+        "POLICY_HALT_REQUEST",
+        "UNRESOLVABLE_BLOCKED_RECOVERY",
+        "NONE"
+      ]
+    },
+    "isTerminal": {
+      "type": "boolean"
+    },
+    "diagnosticChainReference": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "decidedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["decisionID", "enterSafeHalt", "trigger", "isTerminal", "diagnosticChainReference", "reason", "decidedAt"],
+  "additionalProperties": false
+}

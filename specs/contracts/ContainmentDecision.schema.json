@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContainmentDecision",
+  "description": "Decision record for containment entry and restricted-operations posture.",
+  "type": "object",
+  "properties": {
+    "decisionID": {
+      "type": "string"
+    },
+    "enterContainment": {
+      "type": "boolean"
+    },
+    "trigger": {
+      "type": "string",
+      "enum": ["FALLBACK_FAILURE", "PROPAGATION_RISK", "OPERATOR_REQUEST", "RECOVERY_VALIDATION_FAILURE", "NONE"]
+    },
+    "restrictedOperations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "awaitingResolution": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "decidedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["decisionID", "enterContainment", "trigger", "restrictedOperations", "awaitingResolution", "reason", "decidedAt"],
+  "additionalProperties": false
+}

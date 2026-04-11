@@ -1,28 +1,16 @@
 # Backup
 
-Creates timestamped backup copies of configuration files before repair.
+Creates deterministic backup artifacts before execution of mutation-capable steps.
 
-## createBackup(filePath) → backupPath
+## create_backup(execution_context) -> backup_reference
 
-```
-FUNCTION createBackup(filePath) → string:
-  timestamp ← currentTimestamp("YYYYMMDD_HHmmss")
-  backupPath ← filePath + ".backup." + timestamp
-  success ← fileSystem.copyFile(filePath, backupPath)
-
+```text
+FUNCTION create_backup(execution_context):
+  timestamp = current_timestamp("YYYYMMDD_HHmmss")
+  backup_reference = execution_context.target + ".backup." + timestamp
+  success = file_copy(execution_context.target, backup_reference)
   IF NOT success:
-    ERROR "Failed to create backup of " + filePath
-
-  RETURN backupPath
-```
-
-## restoreBackup(backupPath, originalPath) → Boolean
-
-```
-FUNCTION restoreBackup(backupPath, originalPath) → Boolean:
-  IF NOT fileSystem.fileExists(backupPath):
-    RETURN false
-
-  success ← fileSystem.copyFile(backupPath, originalPath)
-  RETURN success
+    ERROR "backup creation failed"
+  RETURN backup_reference
+END FUNCTION
 ```

@@ -1,45 +1,33 @@
-# Planned Agnostic Core File Index
+# Planned Algorithm Index (Post-Remediation)
 
-> **ALL ENTRIES IN THIS DOCUMENT ARE DEFERRED.** None of these files exist yet. Their content will be created during the Agnostic Core design phase, which follows the current repository realignment phase. Do not create these files until the Agnostic Core design phase begins.
+This index records the active downstream ASH-aligned algorithm surface in Aeostara.
 
----
+## Active authoritative algorithms
 
-## Purpose
+- `state_normalization.pseudo.md`
+- `state_to_ash_mapping.pseudo.md`
+- `ash_diagnostic_evaluation.pseudo.md`
+- `state_classification.pseudo.md`
+- `recovery_category_selection.pseudo.md`
+- `recovery_plan_generation.pseudo.md`
+- `fallback_selection.pseudo.md`
+- `containment_mode.pseudo.md`
+- `safe_halt_semantics.pseudo.md`
+- `execution_and_verification.pseudo.md`
+- `healing_flow.pseudo.md`
 
-This index registers files planned for the future Agnostic Core design phase. It ensures the project has a clear record of what needs to be designed without inventing content prematurely.
+## Subordinate helper algorithms
 
----
+- `json_path.pseudo.md`
+- `backup.pseudo.md`
+- `rollback.pseudo.md`
+- `verification.pseudo.md`
+- `audit.pseudo.md`
+- `policy_evaluation.pseudo.md`
 
-## Category 1: Core Abstraction Layer
+## Legacy helper-only files
 
-| Planned File | Purpose | Status | Dependency |
-|-------------|---------|--------|------------|
-| `specs/core/agnostic_type_definitions.md` | Language-neutral representations of the 11 contract types, defining how platforms consume them abstractly | Deferred | Agnostic Core design phase |
-| `specs/core/agnostic_algorithm_orchestration.md` | Platform-independent healing flow coordination, defining the abstract execution model | Deferred | Agnostic Core design phase |
-| `specs/core/agnostic_interface_bindings.md` | How platform implementations bind to the 5 core interfaces programmatically | Deferred | Agnostic Core design phase |
+- `drift_analysis.pseudo.md`
+- `repair_planning.pseudo.md`
 
-## Category 2: ASH Pattern System Formalization
-
-| Planned File | Purpose | Status | Dependency |
-|-------------|---------|--------|------------|
-| `specs/ash/encoded_state_model.md` | Formal specification of the encoded state representation | Deferred | Agnostic Core design + ASH Pattern System deepening track |
-| `specs/ash/drift_distance_metric.md` | Specification of drift distance measurement and comparison semantics | Deferred | Agnostic Core design + ASH Pattern System deepening track |
-| `specs/ash/correction_semantics.md` | Formal specification of correction operations and their properties | Deferred | Agnostic Core design + ASH Pattern System deepening track |
-| `specs/ash/confidence_model.md` | Specification of confidence scoring for repair decisions (future) | Deferred | ASH Pattern System deepening track, later phase |
-| `specs/ash/pattern_reasoning.md` | Specification of pattern recognition and reasoning in healing decisions (future) | Deferred | ASH Pattern System deepening track, later phase |
-
-## Category 3: Platform Consumption Protocol
-
-| Planned File | Purpose | Status | Dependency |
-|-------------|---------|--------|------------|
-| `specs/core/platform_compliance_protocol.md` | How a platform repo validates its implementation against the core spec | Deferred | Agnostic Core design phase + repo split |
-| `specs/core/cross_platform_determinism_verification.md` | Protocol for verifying deterministic behavior across platforms using shared fixtures | Deferred | Agnostic Core design phase |
-| `specs/core/fixture_based_acceptance_automation.md` | Automation framework for running acceptance scenarios in platform repos against core fixtures | Deferred | Agnostic Core design phase + repo split |
-
----
-
-## Notes
-
-- The directory paths above (`specs/core/`, `specs/ash/`) are tentative and may change during the Agnostic Core design phase
-- No content should be invented for these files until the design phase produces formal decisions
-- This index may be updated as planning progresses, but files should not be created until their dependencies are met
+Legacy helper files are non-authoritative and must not drive semantic decisions.

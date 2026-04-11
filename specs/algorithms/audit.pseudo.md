@@ -1,48 +1,26 @@
-# Audit Trail
+# Audit
 
-Append-only JSON Lines (.jsonl) audit logging. Each line is a self-contained AuditEvent serialized as JSON.
+Append-only JSON Lines audit logging for diagnosis, planning, execution, and escalation lifecycle events.
 
-## record(event)
+## record_audit_event(event)
 
+```text
+FUNCTION record_audit_event(event):
+  line = serialize_json(event)
+  append_file(audit_path(), line + "\n")
+END FUNCTION
 ```
-FUNCTION record(event):
-  line ← serializeJSON(event)
-  fileSystem.appendFile(auditPath, line + "\n")
-```
 
-## createEvent(type, configFile, details) → AuditEvent
+## make_event(event_type, subject_reference, details) -> AuditEvent
 
-```
-FUNCTION createEvent(type, configFile, details) → AuditEvent:
+```text
+FUNCTION make_event(event_type, subject_reference, details):
   RETURN AuditEvent(
-    eventID = generateUUID(),
-    type = type,
-    timestamp = currentISO8601(),
-    configFile = configFile,
+    eventID = generate_uuid(),
+    eventType = event_type,
+    timestamp = current_iso8601(),
+    subjectReference = subject_reference,
     details = details
   )
+END FUNCTION
 ```
-
-## getEvents() → List[AuditEvent]
-
-```
-FUNCTION getEvents() → List[AuditEvent]:
-  content ← fileSystem.readFile(auditPath)
-  lines ← split(content, "\n")
-  events ← empty list
-
-  FOR EACH line IN lines:
-    IF line is NOT empty:
-      event ← deserializeJSON(line) as AuditEvent
-      events.add(event)
-
-  RETURN events
-```
-
-## File Format
-
-The audit trail is stored as JSON Lines (`.jsonl`):
-- One JSON object per line
-- Each line is a complete, self-contained AuditEvent
-- Append-only — events are never modified or deleted
-- Streamable — can be read line-by-line without parsing the entire file

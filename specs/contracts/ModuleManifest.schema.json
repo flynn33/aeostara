@@ -1,31 +1,46 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ModuleManifest",
-  "description": "Aeostara module metadata",
+  "description": "Module metadata for Aeostara downstream conformance and execution modules.",
   "type": "object",
   "properties": {
     "moduleID": {
-      "type": "string",
-      "description": "Unique module identifier"
+      "type": "string"
     },
     "displayName": {
-      "type": "string",
-      "description": "Human-readable module name"
+      "type": "string"
     },
     "version": {
-      "type": "string",
-      "description": "Module version string"
+      "type": "string"
     },
-    "description": {
+    "semanticRole": {
       "type": "string",
-      "description": "What this module does"
+      "enum": [
+        "STATE_NORMALIZATION",
+        "STATE_MAPPING",
+        "DIAGNOSTICS",
+        "CLASSIFICATION",
+        "RECOVERY_PLANNING",
+        "EXECUTION",
+        "FALLBACK",
+        "CONTAINMENT",
+        "SAFE_HALT",
+        "AUDIT"
+      ]
     },
-    "supportedConfigTypes": {
+    "supportedTargets": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "Config file types this module can handle (e.g., 'json')"
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
-  "required": ["moduleID", "displayName", "version", "supportedConfigTypes"],
+  "required": ["moduleID", "displayName", "version", "semanticRole", "supportedTargets"],
   "additionalProperties": false
 }

@@ -1,87 +1,44 @@
-# Healing Flow
+# Healing Flow (ASH-Aligned)
 
-The complete 15-step deterministic healing flow orchestrated by HealingEngine.
+End-to-end diagnosis-first orchestration for downstream Aeostara execution.
 
-## heal(configPath, desiredPath, invariantsPath, auditPath)
+## heal(observation_source, intent_source, policy_source) -> HealResult
 
-```
-1.  observed ← adapter.observe(configPath)
-    // Parse the config file into an ObservedState
-    // On failure: RETURN failure("Cannot load config")
+```text
+FUNCTION heal(observation_source, intent_source, policy_source):
+  observed = observe_system_state(observation_source)
+  intent = load_desired_intent(intent_source)
 
-2.  desired ← loadJSON(desiredPath)
-    // Parse the desired state file into a DesiredState
-    // On failure: RETURN failure("Cannot load desired state")
+  normalized = normalize_state(observed)
+  mapped = map_to_ash_state(normalized, intent)
 
-3.  invariants ← parseInvariants(invariantsPath)
-    // Load invariant rules from file (optional — empty list if not provided)
+  diagnostic = evaluate_diagnostic(mapped, ash_authority_bindings)
+  state_class = classify_state(diagnostic, runtime_context())
+  recovery_category = select_recovery_category(state_class)
+  plan = generate_recovery_plan(diagnostic, state_class, recovery_category)
 
-4.  encoded ← adapter.encode(observed, desired)
-    // Flatten both states into dot-path maps for comparison
+  policy_decision = evaluate_policy(plan, policy_source, diagnostic)
+  IF NOT policy_decision.allowed:
+    RETURN blocked_result(policy_decision)
 
-5.  drifts ← analyzeDrift(encoded)
-    // Compare encoded.observed vs encoded.desired key by key
+  verification = execute_recovery_plan(plan, execution_context())
 
-6.  IF drifts is empty:
-      audit("NoDrift", configPath)
-      RETURN success("No drift detected")
+  IF verification.success:
+    RETURN success_result(plan, verification)
 
-7.  plan ← generateRepairPlan(drifts)
-    // Convert each drift into a RepairAction, assign FNV-1a plan ID
+  fallback = select_fallback(diagnostic, fallback_registry())
+  IF fallback.selectionOutcome == SELECTED:
+    fallback_verification = execute_fallback(fallback)
+    IF fallback_verification.success:
+      RETURN success_via_fallback_result(plan, fallback, fallback_verification)
 
-8.  violations ← evaluatePolicy(plan, invariants, encoded.desired)
-    // Check if any non-auto-remediatable invariants would be violated
+  containment = decide_containment(recovery_outcome_from(verification, fallback), policy_context())
+  IF containment.enterContainment:
+    safe_halt = decide_safe_halt(containment_state(), escalation_state())
+    IF safe_halt.enterSafeHalt:
+      RETURN terminal_result(plan, containment, safe_halt)
+    RETURN contained_result(plan, containment)
 
-9.  IF violations exist:
-      audit("PolicyBlocked", configPath, violations)
-      RETURN blocked("Policy blocked: " + reason)
-
-10. audit("HealStarted", configPath, planID)
-
-11. backupPath ← backup.createBackup(configPath)
-    audit("BackupCreated", configPath, backupPath)
-
-12. applied ← adapter.applyRepair(configPath, plan)
-    IF NOT applied:
-      rollback(backupPath, configPath)
-      audit("RollbackExecuted", configPath, "Repair apply failed")
-      RETURN failure("Repair apply failed, rolled back")
-    audit("RepairApplied", configPath, planID)
-
-13. verification ← verify(configPath, desired, invariants)
-    // Re-read the repaired file and check against desired + invariants
-
-14. IF verification.success:
-      audit("VerificationSucceeded", configPath, planID)
-      RETURN success(plan, verification)
-
-15. ELSE:
-      audit("VerificationFailed", configPath, failedChecks)
-      rollback(backupPath, configPath)
-      audit("RollbackExecuted", configPath, "Verification failed")
-      RETURN failure("Verification failed, rolled back to backup")
-```
-
-## validate(configPath, desiredPath, invariantsPath)
-
-```
-1. observed ← adapter.observe(configPath)
-2. desired ← loadJSON(desiredPath)
-3. invariants ← parseInvariants(invariantsPath)
-4. encoded ← adapter.encode(observed, desired)
-5. drifts ← analyzeDrift(encoded)
-6. violations ← checkInvariants(invariants, encoded.observed)
-7. valid ← (drifts is empty)
-8. RETURN ValidationResult(valid, errors, drifts, violations)
-```
-
-## diff(configPath, desiredPath, invariantsPath)
-
-```
-1. observed ← adapter.observe(configPath)
-2. desired ← loadJSON(desiredPath)
-3. encoded ← adapter.encode(observed, desired)
-4. drifts ← analyzeDrift(encoded)
-5. plan ← generateRepairPlan(drifts)
-6. RETURN DiffResult(drifts, plan)
+  RETURN failure_result(plan, verification)
+END FUNCTION
 ```

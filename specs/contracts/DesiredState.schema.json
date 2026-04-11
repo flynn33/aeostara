@@ -1,16 +1,20 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "DesiredState",
-  "description": "Declared desired configuration state",
+  "title": "DesiredStateLegacy",
+  "description": "Deprecated legacy artifact retained for transition support only. Non-authoritative for ASH semantic decisions.",
+  "x-status": "legacy-non-authoritative",
+  "x-replacement": "DesiredSystemIntent.schema.json",
   "type": "object",
   "properties": {
     "data": {
-      "type": "object",
-      "description": "The desired configuration data"
+      "type": "object"
     },
     "source": {
+      "type": "string"
+    },
+    "deprecatedSince": {
       "type": "string",
-      "description": "Origin of this desired state (file path or identifier)"
+      "format": "date"
     }
   },
   "required": ["data", "source"],

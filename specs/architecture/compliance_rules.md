@@ -1,28 +1,30 @@
 # Compliance Rules
 
-## Shipped Product Rules
+## Meaning of Compliance
 
-1. **Native only** — shipped product must be a native compiled binary
-2. **No Python** — shipped product must not depend on Python runtime
-3. **No YAML** — shipped product must not include a YAML parser
-4. **JSON-only v0.1** — all configuration files are JSON
-5. **Code-agnostic specs** — shared behavior definitions on `main` remain code-agnostic; platform branches are native realization branches and may adopt platform-specific patterns
+In this repository, compliance means downstream conformance to ASH semantic authority plus Aeostara execution-safety mechanics.
 
-## Repository Automation (Exempt)
+## Semantic Compliance Rules
 
-Python and YAML are permitted in:
-- GitHub Actions workflows (`.github/workflows/`)
-- CI scripts (`ci/`)
-- Repository automation scripts (`.github/scripts/`)
+1. ASH is upstream semantic authority.
+2. Aeostara must consume ASH-derived diagnostics, classification, and recoverability semantics.
+3. Legacy drift-first artifacts cannot be semantic authority.
+4. Fallback, containment, and safe-halt decisions must be explicitly represented.
+5. Diagnostic artifacts must use schema/taxonomy-compatible fields.
 
-These are not part of the shipped product.
+## Execution-Safety Rules
 
-## Per-Platform Rules
+1. Policy gates must run before mutation.
+2. Backup is required before mutation execution.
+3. Post-execution verification is required.
+4. Rollback/escalation paths must be deterministic and auditable.
+5. Audit eventing is mandatory for decision-critical actions.
 
-Platform-specific compliance rules (toolchain choices, build flags, framework dependencies, test frameworks) are the responsibility of each platform implementation. They are not prescribed by this authority repository.
+## Repository Automation Rules
 
-Each platform implementation must satisfy:
-1. The shipped product rules above
-2. The acceptance targets in `specs/acceptance/acceptance_targets.md`
+CI must validate:
 
-Platform-specific compliance documentation will reside in future platform repositories. See [Future Repo Split Plan](future_repo_split_plan.md).
+- Presence of required conformance artifacts
+- Schema validity of contract layer
+- Legacy semantic contracts marked non-authoritative
+- Acceptance and traceability artifacts present and coherent

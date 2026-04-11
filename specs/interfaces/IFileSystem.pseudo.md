@@ -1,43 +1,25 @@
 # IFileSystem Interface
 
-Abstract file system interface. All file I/O in Aeostara goes through this interface, enabling platform-specific implementations and test mocking.
+Abstract filesystem operations used by adapters, backup, verification, and audit mechanics.
 
 ## Methods
 
-### readFile(path) → string
+### readFile(path) -> string
 
-Read the entire contents of a file as a string.
-
-**Parameters:**
-- `path` (string) — file path
-
-**Returns:** string — the file contents
-
-**Errors:** throws if the file does not exist or cannot be read
+Read file content.
 
 ### writeFile(path, content)
 
-Write a string to a file, creating or overwriting it.
+Write file content.
 
-**Parameters:**
-- `path` (string) — file path
-- `content` (string) — the content to write
+### fileExists(path) -> Boolean
 
-### fileExists(path) → Boolean
+Check file presence.
 
-Check if a file exists at the given path.
+### copyFile(fromPath, toPath) -> Boolean
 
-**Parameters:**
-- `path` (string) — file path
+Copy file content.
 
-**Returns:** true if the file exists
+### appendFile(path, content)
 
-### copyFile(from, to) → Boolean
-
-Copy a file from one path to another.
-
-**Parameters:**
-- `from` (string) — source file path
-- `to` (string) — destination file path
-
-**Returns:** true if the copy was successful
+Append content to file.

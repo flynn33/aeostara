@@ -1,0 +1,11 @@
+{
+  "scenario": "S7",
+  "description": "Policy gate blocks unsafe action before mutation",
+  "policy": {
+    "allow_execution": false
+  },
+  "expected": {
+    "mutation_attempted": false,
+    "blocked": true
+  }
+}

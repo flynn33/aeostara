@@ -1,44 +1,56 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "AuditEvent",
-  "description": "Audit trail record for a healing operation",
+  "description": "Audit trail event for ASH-aligned diagnosis, recovery, fallback, containment, safe-halt, and execution mechanics.",
   "type": "object",
   "properties": {
     "eventID": {
-      "type": "string",
-      "description": "Unique event identifier"
+      "type": "string"
     },
-    "type": {
+    "eventType": {
       "type": "string",
       "enum": [
-        "ValidationPerformed",
-        "DiffGenerated",
-        "HealStarted",
+        "ObservationCaptured",
+        "StateNormalized",
+        "StateMappedToAsh",
+        "DiagnosticEvaluated",
+        "StateClassified",
+        "RecoverabilityClassified",
+        "RecoveryPlanGenerated",
+        "PolicyGateBlocked",
         "BackupCreated",
-        "RepairApplied",
+        "ExecutionApplied",
         "VerificationSucceeded",
         "VerificationFailed",
         "RollbackExecuted",
-        "PolicyBlocked",
-        "NoDrift"
-      ],
-      "description": "The type of audit event"
+        "FallbackSelected",
+        "ContainmentEntered",
+        "SafeHaltEntered",
+        "EscalationRaised"
+      ]
     },
     "timestamp": {
       "type": "string",
-      "format": "date-time",
-      "description": "ISO 8601 timestamp of the event"
+      "format": "date-time"
     },
-    "configFile": {
+    "subjectReference": {
+      "type": "string"
+    },
+    "diagnosticKind": {
       "type": "string",
-      "description": "Path to the config file this event relates to"
+      "enum": ["STATE_VALIDITY", "RECOVERY", "FALLBACK", "CONTAINMENT", "SAFE_HALT"]
+    },
+    "ruleIDs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "details": {
       "type": "object",
-      "description": "Additional event-specific details",
       "additionalProperties": true
     }
   },
-  "required": ["eventID", "type", "timestamp", "configFile"],
+  "required": ["eventID", "eventType", "timestamp", "subjectReference", "details"],
   "additionalProperties": false
 }

@@ -1,0 +1,12 @@
+{
+  "scenario": "S5",
+  "description": "Containment exhausted and safe halt selected",
+  "containment": {
+    "entered": true,
+    "breach_detected": true
+  },
+  "expected": {
+    "safe_halt": true,
+    "terminal": true
+  }
+}

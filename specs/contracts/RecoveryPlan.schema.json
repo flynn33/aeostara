@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RecoveryPlan",
+  "description": "Recoverability-driven plan containing deterministic execution steps and escalation branches.",
+  "type": "object",
+  "properties": {
+    "recoveryPlanID": {
+      "type": "string"
+    },
+    "diagnosticID": {
+      "type": "string"
+    },
+    "stateClass": {
+      "type": "string",
+      "enum": ["STABLE", "UNSTABLE", "CORRECTABLE", "DEGRADED", "CONTAINED", "FAILED", "SAFE_HALT"]
+    },
+    "recoveryCategory": {
+      "$ref": "RecoveryCategory.schema.json"
+    },
+    "requiresPolicyGate": {
+      "type": "boolean"
+    },
+    "requiresBackup": {
+      "type": "boolean"
+    },
+    "actuatorSteps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stepID": {
+            "type": "string"
+          },
+          "stepType": {
+            "type": "string",
+            "enum": [
+              "NORMALIZE",
+              "APPLY_CODEWORD_CORRECTION",
+              "APPLY_ACTUATOR_MUTATION",
+              "VERIFY",
+              "ROLLBACK",
+              "FALLBACK_SELECT",
+              "ENTER_CONTAINMENT",
+              "ENTER_SAFE_HALT",
+              "ESCALATE"
+            ]
+          },
+          "description": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": ["stepID", "stepType", "description", "parameters"],
+        "additionalProperties": false
+      }
+    },
+    "fallbackOnFailure": {
+      "$ref": "FallbackDecision.schema.json"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "recoveryPlanID",
+    "diagnosticID",
+    "stateClass",
+    "recoveryCategory",
+    "requiresPolicyGate",
+    "requiresBackup",
+    "actuatorSteps",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}

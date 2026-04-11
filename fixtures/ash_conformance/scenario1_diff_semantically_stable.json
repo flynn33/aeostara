@@ -1,0 +1,13 @@
+{
+  "scenario": "S1",
+  "description": "Superficial drift present, semantic state remains stable",
+  "observed": {
+    "metadata": {
+      "last_checked_by": "operator-a"
+    },
+    "state_vector": [0, 0, 0, 0, 0, 0, 0, 0, 0]
+  },
+  "intent": {
+    "state_vector": [0, 0, 0, 0, 0, 0, 0, 0, 0]
+  }
+}

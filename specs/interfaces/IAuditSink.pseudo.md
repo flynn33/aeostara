@@ -1,18 +1,13 @@
 # IAuditSink Interface
 
-Abstract audit trail interface for recording and retrieving healing events.
+Append-only audit sink for diagnosis/recovery/escalation lifecycle records.
 
 ## Methods
 
 ### record(event)
 
-Persist an audit event to the trail.
+Persist a single `AuditEvent`.
 
-**Parameters:**
-- `event` (AuditEvent) — the event to record
+### getEvents(chainRootReference) -> List[AuditEvent]
 
-### getEvents() → List[AuditEvent]
-
-Retrieve all recorded audit events.
-
-**Returns:** list of AuditEvent — all events in the trail, in chronological order
+Return audit events linked to a specific diagnostic chain root.

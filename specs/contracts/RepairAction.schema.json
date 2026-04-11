@@ -1,27 +1,26 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "RepairAction",
-  "description": "A single remediation step to correct a drift",
+  "title": "RepairActionLegacy",
+  "description": "Deprecated CRUD-style action artifact retained as optional low-level actuator helper. Not top-level recovery authority.",
+  "x-status": "legacy-non-authoritative",
+  "x-replacement": "RecoveryPlan.schema.json",
   "type": "object",
   "properties": {
     "keyPath": {
-      "type": "string",
-      "description": "Dot-path to the key being repaired"
+      "type": "string"
     },
     "actionType": {
       "type": "string",
-      "enum": ["Set", "Add", "Remove"],
-      "description": "The type of repair action"
+      "enum": ["Set", "Add", "Remove"]
     },
-    "fromValue": {
-      "description": "The current value (before repair)"
-    },
-    "toValue": {
-      "description": "The target value (after repair)"
-    },
+    "fromValue": {},
+    "toValue": {},
     "rationale": {
+      "type": "string"
+    },
+    "deprecatedSince": {
       "type": "string",
-      "description": "Why this repair is needed"
+      "format": "date"
     }
   },
   "required": ["keyPath", "actionType", "rationale"],

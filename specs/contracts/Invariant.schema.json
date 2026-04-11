@@ -1,40 +1,41 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Invariant",
-  "description": "A constraint rule that must hold for a configuration to be valid",
+  "title": "InvariantLegacy",
+  "description": "Legacy policy expression artifact retained for execution policy gates only. Not a substitute for ASH validity semantics.",
+  "x-status": "legacy-non-authoritative",
+  "x-replacement": "StateValidityDiagnostic.schema.json",
   "type": "object",
   "properties": {
     "invariantID": {
-      "type": "string",
-      "description": "Unique identifier for this invariant"
+      "type": "string"
     },
     "name": {
-      "type": "string",
-      "description": "Human-readable name"
+      "type": "string"
     },
     "description": {
-      "type": "string",
-      "description": "What this invariant enforces"
+      "type": "string"
     },
     "severity": {
       "type": "string",
       "enum": ["Low", "Medium", "High", "Critical"],
-      "default": "Medium",
-      "description": "How severe a violation of this invariant is"
+      "default": "Medium"
     },
     "expression": {
-      "type": "string",
-      "description": "Evaluation expression in the format 'key.path operator value' (operators: ==, !=, >, <, >=, <=)"
+      "type": "string"
     },
     "appliesTo": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "List of config types or paths this invariant applies to"
+      "items": {
+        "type": "string"
+      }
     },
     "autoRemediate": {
       "type": "boolean",
-      "default": false,
-      "description": "Whether violations of this invariant can be auto-repaired"
+      "default": false
+    },
+    "deprecatedSince": {
+      "type": "string",
+      "format": "date"
     }
   },
   "required": ["invariantID", "name", "expression"],

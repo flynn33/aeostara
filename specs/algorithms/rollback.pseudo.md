@@ -1,21 +1,26 @@
 # Rollback
 
-Restores a configuration file from backup when verification fails.
+Restores execution targets from backup when verification or policy escalation requires rollback.
 
-## createRollbackPlan(planID, backupPath, originalPath) → RollbackPlan
+## build_rollback_plan(recovery_plan, backup_ref, verification) -> RollbackPlan
 
+```text
+FUNCTION build_rollback_plan(recovery_plan, backup_ref, verification):
+  RETURN RollbackPlan(
+    rollbackPlanID = deterministic_hash(recovery_plan.recoveryPlanID + "rollback"),
+    recoveryPlanID = recovery_plan.recoveryPlanID,
+    backupReference = backup_ref,
+    restoreTargets = resolve_restore_targets(recovery_plan),
+    rollbackReason = join_failures(verification.failedChecks),
+    createdAt = current_iso8601()
+  )
+END FUNCTION
 ```
-RETURN RollbackPlan(
-  planID = planID,
-  backupFilePath = backupPath,
-  originalFilePath = originalPath
-)
-```
 
-## executeRollback(rollbackPlan) → Boolean
+## execute_rollback(rollback_plan) -> Boolean
 
-```
-FUNCTION executeRollback(plan) → Boolean:
-  success ← backup.restoreBackup(plan.backupFilePath, plan.originalFilePath)
-  RETURN success
+```text
+FUNCTION execute_rollback(rollback_plan):
+  RETURN restore_from_backup(rollback_plan.backupReference, rollback_plan.restoreTargets)
+END FUNCTION
 ```

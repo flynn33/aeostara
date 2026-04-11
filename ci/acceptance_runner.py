@@ -1,176 +1,90 @@
 #!/usr/bin/env python3
 """
-Aeostara CLI Smoke Runner
-Runs black-box CLI acceptance scenarios (1-4) against a platform's built binary.
-Copyright (c) 2026 James Daley. All Rights Reserved.
-
-Usage: python ci/acceptance_runner.py <binary_path> <fixtures_dir>
-
-The binary must support: validate, diff, heal commands with
---desired, --invariants, --audit options.
-
-Coverage:
-  Scenarios 1-4 are exercised via black-box binary invocation.
-  Scenario 5 (Forced Rollback — Verification Failure) is NOT exercised
-  by this runner. It requires fault injection via a mock/stub file system
-  and must be proven in each platform's native test infrastructure.
-  See: specs/acceptance/acceptance_execution_model.md
+Aeostara Acceptance Artifact Runner
+Validates acceptance-scenario coverage and traceability artifacts.
 """
 
-import json
 import os
-import subprocess
 import sys
-import tempfile
-import shutil
+from typing import List
 
 
-def run_command(binary, args, timeout=30):
-    """Run a command and return (exit_code, stdout, stderr)."""
-    cmd = [binary] + args
-    try:
-        result = subprocess.run(
-            cmd, capture_output=True, text=True, timeout=timeout
-        )
-        return result.returncode, result.stdout, result.stderr
-    except subprocess.TimeoutExpired:
-        return -1, "", "Timeout"
-    except FileNotFoundError:
-        return -1, "", f"Binary not found: {binary}"
+SCENARIO_KEYWORDS = [
+    "semantically stable despite superficial drift",
+    "semantically unstable despite minimal/no superficial drift",
+    "correction blocked; fallback selected",
+    "fallback unavailable; containment entered",
+    "containment breach; safe halt entered",
+    "verification failure triggers rollback/escalation",
+    "policy gate blocks unsafe action before mutation",
+]
 
+REQUIRED_ACCEPTANCE_FILES = [
+    "specs/acceptance/acceptance_targets.md",
+    "specs/acceptance/remediation_acceptance_targets.md",
+    "specs/acceptance/traceability_matrix.md",
+    "specs/acceptance/ash_conformance_targets.md",
+]
 
-def test_valid_config_no_drift(binary, fixtures):
-    """Scenario 1: Valid config validates successfully."""
-    code, stdout, stderr = run_command(binary, [
-        "validate",
-        os.path.join(fixtures, "valid_config.json"),
-        "--desired", os.path.join(fixtures, "desired_state.json"),
-    ])
-    if code != 0:
-        return False, f"Expected exit 0, got {code}. stderr: {stderr}"
-    try:
-        output = json.loads(stdout)
-        if not output.get("valid", False):
-            return False, f"Expected valid=true, got {output}"
-    except json.JSONDecodeError:
-        return False, f"Invalid JSON output: {stdout}"
-    return True, "OK"
-
-
-def test_invalid_config_error(binary, fixtures):
-    """Scenario 2: Invalid config produces error."""
-    code, stdout, stderr = run_command(binary, [
-        "validate",
-        os.path.join(fixtures, "invalid_config.json"),
-        "--desired", os.path.join(fixtures, "desired_state.json"),
-    ])
-    if code != 2:
-        return False, f"Expected exit 2, got {code}. stderr: {stderr}"
-    return True, "OK"
-
-
-def test_policy_block(binary, fixtures):
-    """Scenario 3: Policy-violating config blocks repair."""
-    with tempfile.TemporaryDirectory() as tmpdir:
-        audit_path = os.path.join(tmpdir, "audit.jsonl")
-        config_copy = os.path.join(tmpdir, "policy_blocked_config.json")
-        shutil.copy(os.path.join(fixtures, "policy_blocked_config.json"), config_copy)
-
-        code, stdout, stderr = run_command(binary, [
-            "heal",
-            config_copy,
-            "--desired", os.path.join(fixtures, "desired_state.json"),
-            "--invariants", os.path.join(fixtures, "invariants.json"),
-            "--audit", audit_path,
-        ])
-        if code != 1:
-            return False, f"Expected exit 1, got {code}. stderr: {stderr}"
-        try:
-            output = json.loads(stdout)
-            if output.get("success", True):
-                return False, "Expected success=false"
-        except json.JSONDecodeError:
-            return False, f"Invalid JSON output: {stdout}"
-    return True, "OK"
-
-
-def test_successful_repair(binary, fixtures):
-    """Scenario 4: Repairable config heals successfully."""
-    with tempfile.TemporaryDirectory() as tmpdir:
-        audit_path = os.path.join(tmpdir, "audit.jsonl")
-        config_copy = os.path.join(tmpdir, "repairable_config.json")
-        shutil.copy(os.path.join(fixtures, "repairable_config.json"), config_copy)
-
-        code, stdout, stderr = run_command(binary, [
-            "heal",
-            config_copy,
-            "--desired", os.path.join(fixtures, "desired_state.json"),
-            "--invariants", os.path.join(fixtures, "invariants.json"),
-            "--audit", audit_path,
-        ])
-        if code != 0:
-            return False, f"Expected exit 0, got {code}. stderr: {stderr}"
-        try:
-            output = json.loads(stdout)
-            if not output.get("success", False):
-                return False, f"Expected success=true, got {output}"
-        except json.JSONDecodeError:
-            return False, f"Invalid JSON output: {stdout}"
-    return True, "OK"
-
-
-SCENARIOS = [
-    ("1. Valid config — no drift", test_valid_config_no_drift),
-    ("2. Invalid config — parse error", test_invalid_config_error),
-    ("3. Policy block — critical invariant", test_policy_block),
-    ("4. Successful repair", test_successful_repair),
+TRACEABILITY_KEYWORDS = [
+    "StateValidityDiagnostic",
+    "SystemStateClass",
+    "RecoveryCategory",
+    "RecoveryPlan",
+    "FallbackDecision",
+    "ContainmentDecision",
+    "SafeHaltDecision",
 ]
 
 
-def main():
-    if len(sys.argv) != 3:
-        print(f"Usage: {sys.argv[0]} <binary_path> <fixtures_dir>", file=sys.stderr)
-        sys.exit(1)
+def read_text(path: str) -> str:
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read().lower()
 
-    binary = os.path.abspath(sys.argv[1])
-    fixtures = os.path.abspath(sys.argv[2])
 
-    if not os.path.isfile(binary):
-        print(f"Error: Binary not found: {binary}", file=sys.stderr)
-        sys.exit(1)
+def main() -> int:
+    repo_root = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-    if not os.path.isdir(fixtures):
-        print(f"Error: Fixtures dir not found: {fixtures}", file=sys.stderr)
-        sys.exit(1)
+    failures: List[str] = []
 
-    print(f"Aeostara CLI Smoke Runner")
-    print(f"Running {len(SCENARIOS)} CLI-verifiable acceptance scenarios...")
-    print(f"Binary: {binary}")
-    print(f"Fixtures: {fixtures}")
-    print()
+    loaded = {}
+    for rel in REQUIRED_ACCEPTANCE_FILES:
+        full = os.path.join(repo_root, rel)
+        if not os.path.isfile(full):
+            failures.append(f"Missing required acceptance artifact: {rel}")
+            continue
+        loaded[rel] = read_text(full)
 
-    failures = 0
-    for name, test_fn in SCENARIOS:
-        passed, message = test_fn(binary, fixtures)
-        status = "PASS" if passed else "FAIL"
-        print(f"  [{status}] {name}: {message}")
-        if not passed:
-            failures += 1
+    if failures:
+        print("FAIL: acceptance artifact pre-check failed:")
+        for issue in failures:
+            print(f"  - {issue}")
+        return 1
 
-    print()
-    if failures == 0:
-        print(f"All {len(SCENARIOS)} CLI smoke scenarios passed.")
-    else:
-        print(f"{failures} scenario(s) failed.", file=sys.stderr)
+    targets = loaded["specs/acceptance/acceptance_targets.md"]
+    for keyword in SCENARIO_KEYWORDS:
+        if keyword not in targets:
+            failures.append(f"Acceptance target missing scenario keyword: {keyword}")
 
-    print()
-    print("Note: Scenario 5 (Forced Rollback — Verification Failure) is not")
-    print("exercised by this runner. It requires platform-native test harness")
-    print("with mock/stub file system fault injection. Each platform repo must")
-    print("prove Scenario 5 independently.")
+    remediation = loaded["specs/acceptance/remediation_acceptance_targets.md"]
+    for marker in ["Scenario 1", "Scenario 2", "Scenario 3", "Scenario 4", "Scenario 5", "Scenario 6", "Scenario 7"]:
+        if marker.lower() not in remediation:
+            failures.append(f"Remediation targets missing marker: {marker}")
 
-    sys.exit(0 if failures == 0 else 1)
+    traceability = loaded["specs/acceptance/traceability_matrix.md"]
+    for keyword in TRACEABILITY_KEYWORDS:
+        if keyword.lower() not in traceability:
+            failures.append(f"Traceability matrix missing contract reference: {keyword}")
+
+    if failures:
+        print("FAIL: acceptance artifact validation failed:")
+        for issue in failures:
+            print(f"  - {issue}")
+        return 1
+
+    print("PASS: acceptance artifact validation passed.")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
