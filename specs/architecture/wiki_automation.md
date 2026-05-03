@@ -4,9 +4,9 @@
 
 Define how Aeostara wiki content is generated, maintained, and refreshed across branches.
 
-## Wiki Agent
+## Wiki Refresh
 
-Primary maintenance agent:
+Primary maintenance path:
 
 - Workflow: `.github/workflows/wiki-sync.yml`
 - Trigger: push to any branch + manual dispatch
@@ -19,9 +19,9 @@ Responsibilities:
 3. Maintain branch index and wiki `Home.md`.
 4. Keep links and metadata deterministic.
 
-## Maintenance Sweep Agent
+## Maintenance Sweep
 
-Periodic cross-branch refresh agent:
+Periodic refresh path:
 
 - Workflow: `.github/workflows/wiki-maintenance-sweep.yml`
 - Trigger: daily schedule + manual dispatch
@@ -29,9 +29,9 @@ Periodic cross-branch refresh agent:
 
 Responsibilities:
 
-1. Regenerate all primary branch wiki pages even if branch push cadence differs.
-2. Keep branch dashboards synchronized to latest branch heads.
-3. Prevent stale branch pages in the wiki knowledge base.
+1. Regenerate base-design wiki pages on schedule.
+2. Keep dashboards synchronized to the latest base-design branch head.
+3. Prevent stale pages in the wiki knowledge base.
 
 ## Visual Structure Requirements
 

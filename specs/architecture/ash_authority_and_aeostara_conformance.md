@@ -9,7 +9,7 @@ Aeostara must not modify ASH, propose ASH changes, invent ASH alternatives, exte
 
 ## ASH Baseline
 
-- Upstream repository: `/Users/jim/AI/Codex/ASH-Pattern-System`
+- Upstream repository: `https://github.com/flynn33/ASH-Pattern-System`
 - Commit: `e123f5d7fdbb381179971f721a3292c31eb1cbc2`
 - Baseline document: `ASH_BASELINE_REFERENCE.md`
 

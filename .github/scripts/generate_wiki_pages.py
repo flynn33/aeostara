@@ -59,6 +59,118 @@ def cleanup_branch_pages(wiki_dir: Path, prefix: str) -> None:
         file.unlink(missing_ok=True)
 
 
+def visual_context_for_source(source_rel: str, title: str) -> Tuple[str, str, List[Tuple[str, str]]]:
+    """Return a compact visual frame for a wiki page based on its repo section."""
+    if source_rel.startswith("specs/contracts/"):
+        return (
+            "Contract pages define the machine-checkable object shape that crosses a lifecycle boundary.",
+            "\n".join(
+                [
+                    "flowchart LR",
+                    '  Producer["Lifecycle producer"] --> Contract["Contract schema"]',
+                    '  Contract --> Example["Schema example"]',
+                    '  Example --> Validator["Schema validator"]',
+                    '  Contract --> Fixture["Conformance fixture output"]',
+                    '  Fixture --> Gate["Base-design gate"]',
+                ]
+            ),
+            [
+                ("Which lifecycle boundary uses it?", "Read `description`, required fields, and linked references."),
+                ("What diagnostics are mandatory?", "Inspect diagnostic reference fields and rule-reference links."),
+                ("How is it validated?", "Compare this schema with `fixtures/schema_examples/` and conformance vectors."),
+            ],
+        )
+    if source_rel.startswith("specs/algorithms/"):
+        return (
+            "Algorithm pages define deterministic platform-neutral behavior that downstream repos implement behind native adapters.",
+            "\n".join(
+                [
+                    "flowchart LR",
+                    '  Input["Input contract"] --> Preconditions["Preconditions"]',
+                    '  Preconditions --> Decision["Deterministic decision"]',
+                    '  Decision --> Output["Output contract"]',
+                    '  Decision --> Diagnostic["Diagnostic envelope"]',
+                    '  Diagnostic --> Audit["Audit chain"]',
+                ]
+            ),
+            [
+                ("What is deterministic?", "Read the pseudocode branch table and preconditions."),
+                ("What blocks unsafe behavior?", "Look for blocked, ambiguous, policy, or precondition paths."),
+                ("How is the decision reconstructable?", "Trace diagnostic and audit requirements."),
+            ],
+        )
+    if source_rel.startswith("specs/architecture/"):
+        return (
+            "Architecture pages define ownership, authority, and dependency direction for the base design.",
+            "\n".join(
+                [
+                    "flowchart TB",
+                    '  ASH["ASH fixed authority"] --> Aeostara["Aeostara base design"]',
+                    '  Aeostara --> Contracts["Contracts and algorithms"]',
+                    '  Aeostara --> Handoff["Downstream handoff"]',
+                    '  Handoff --> Platforms["Windows / Mac / iOS repos"]',
+                ]
+            ),
+            [
+                ("Who owns the semantic decision?", "Check the authority and boundary language."),
+                ("What is platform-neutral?", "Find Aeostara-owned obligations."),
+                ("What moves downstream?", "Find adapter, implementation, and deviation rules."),
+            ],
+        )
+    if source_rel.startswith("specs/acceptance/"):
+        return (
+            "Acceptance pages define the evidence needed before Aeostara or a downstream repo may claim conformance.",
+            "\n".join(
+                [
+                    "flowchart LR",
+                    '  Artifact["Spec artifact"] --> Fixture["Expected-output fixture"]',
+                    '  Fixture --> Validator["CI checker"]',
+                    '  Validator --> Report["Audit report"]',
+                    '  Report --> Judgment["Acceptance judgment"]',
+                ]
+            ),
+            [
+                ("What evidence is required?", "Read the gate table or scenario list."),
+                ("What must fail when broken?", "Check negative fixture and diagnostic-chain requirements."),
+                ("What judgment is allowed?", "Use only the documented final judgment values."),
+            ],
+        )
+    if source_rel.startswith("specs/interfaces/"):
+        return (
+            "Interface pages describe adapter boundaries that platform repos implement without changing base semantics.",
+            "\n".join(
+                [
+                    "flowchart LR",
+                    '  Base["Aeostara contract"] --> Interface["Interface boundary"]',
+                    '  Interface --> Native["Platform-native module"]',
+                    '  Native --> Result["Contract result"]',
+                    '  Result --> Diagnostics["Diagnostics and audit"]',
+                ]
+            ),
+            [
+                ("What must the adapter provide?", "Read purpose and boundary rules."),
+                ("Which contracts flow through it?", "Look for named input/output schemas."),
+                ("Where can platform behavior vary?", "Only behind the boundary, never in base semantics."),
+            ],
+        )
+    return (
+        "This page is part of the base-design evidence set and should be read in authority-stack order.",
+        "\n".join(
+            [
+                "flowchart TB",
+                '  ASH["ASH authority"] --> Aeostara["Aeostara base design"]',
+                '  Aeostara --> Evidence["Contracts, algorithms, fixtures, CI"]',
+                '  Evidence --> Handoff["Downstream implementation handoff"]',
+            ]
+        ),
+        [
+            ("What role does this page play?", "Read the summary and source content."),
+            ("What does it constrain?", "Trace named contracts, algorithms, fixtures, or handoff docs."),
+            ("How is it checked?", "Use the linked CI and conformance artifacts."),
+        ],
+    )
+
+
 def render_source_markdown_page(
     title: str,
     source_rel: str,
@@ -82,6 +194,23 @@ def render_source_markdown_page(
     ]
     if summary:
         lines += ["", f"> {summary}"]
+    context_summary, diagram, checklist = visual_context_for_source(source_rel, title)
+    lines += [
+        "",
+        "## Visual Context",
+        "",
+        f"> {context_summary}",
+        "",
+        "```mermaid",
+        diagram,
+        "```",
+        "",
+        "## Reading Checklist",
+        "",
+        "| Question | Where to look |",
+        "|---|---|",
+    ]
+    lines.extend(f"| {question} | {target} |" for question, target in checklist)
     lines += ["", "---", "", "## Source Content", "", content.strip()]
     return "\n".join(lines)
 
@@ -94,6 +223,7 @@ def render_json_page(
     overview_page: str,
     json_text: str,
 ) -> str:
+    context_summary, diagram, checklist = visual_context_for_source(source_rel, title)
     lines = [
         f"# {title}",
         "",
@@ -105,6 +235,22 @@ def render_json_page(
         f"| Source | `{source_rel}` |",
         f"| Commit | `{commit_sha[:12]}` |",
         f"| Synced (UTC) | {now_utc_iso()} |",
+        "",
+        "## Visual Context",
+        "",
+        f"> {context_summary}",
+        "",
+        "```mermaid",
+        diagram,
+        "```",
+        "",
+        "## Reading Checklist",
+        "",
+        "| Question | Where to look |",
+        "|---|---|",
+    ]
+    lines.extend(f"| {question} | {target} |" for question, target in checklist)
+    lines += [
         "",
         "---",
         "",
@@ -125,21 +271,37 @@ def render_stub_page(
     overview_page: str,
     reason: str,
 ) -> str:
+    context_summary, diagram, checklist = visual_context_for_source(source_rel, title)
+    lines = [
+        f"# {title}",
+        "",
+        f"[Back to Branch Overview]({overview_page})",
+        "",
+        "| Field | Value |",
+        "|---|---|",
+        f"| Branch | `{branch_name}` |",
+        f"| Source | `{source_rel}` |",
+        f"| Commit | `{commit_sha[:12]}` |",
+        f"| Synced (UTC) | {now_utc_iso()} |",
+        "",
+        f"> {reason}",
+        "",
+        "## Visual Context",
+        "",
+        f"> {context_summary}",
+        "",
+        "```mermaid",
+        diagram,
+        "```",
+        "",
+        "## Reading Checklist",
+        "",
+        "| Question | Where to look |",
+        "|---|---|",
+    ]
+    lines.extend(f"| {question} | {target} |" for question, target in checklist)
     return "\n".join(
-        [
-            f"# {title}",
-            "",
-            f"[Back to Branch Overview]({overview_page})",
-            "",
-            "| Field | Value |",
-            "|---|---|",
-            f"| Branch | `{branch_name}` |",
-            f"| Source | `{source_rel}` |",
-            f"| Commit | `{commit_sha[:12]}` |",
-            f"| Synced (UTC) | {now_utc_iso()} |",
-            "",
-            f"> {reason}",
-        ]
+        lines
     )
 
 
@@ -253,13 +415,13 @@ def maybe_generate_api_reference(src_dir: Path, temp_dir: Path, branch_name: str
 
 def branch_profile_description(branch_name: str) -> str:
     if branch_name == "main":
-        return "Downstream conformance/specification authority branch"
+        return "Platform-agnostic Aeostara base-design authority"
     if branch_name == "platform/windows":
-        return "Windows native realization branch"
+        return "Windows downstream implementation repository"
     if branch_name == "platform/macos":
-        return "macOS native realization branch"
+        return "Mac downstream implementation repository"
     if branch_name == "platform/ios":
-        return "iOS native realization branch"
+        return "iOS downstream implementation repository"
     return "Feature/custom branch"
 
 
@@ -355,6 +517,54 @@ def write_branch_overview(
         "",
         f"> {branch_profile_description(branch_name)}",
         "",
+        "## Base-Design Navigation",
+        "",
+        "```mermaid",
+        "flowchart TB",
+        '  ASH["ASH Pattern System<br/>fixed upstream authority"] --> Base["Aeostara<br/>platform-agnostic base design"]',
+        '  Base --> Contracts["Contract schemas"]',
+        '  Base --> Algorithms["Deterministic algorithms"]',
+        '  Base --> Fixtures["Expected-output fixtures"]',
+        '  Base --> Handoff["Platform repo handoff"]',
+        '  Contracts --> CI["Base conformance CI"]',
+        '  Algorithms --> CI',
+        '  Fixtures --> CI',
+        '  Handoff --> Platforms["Windows / Mac / iOS repos"]',
+        "```",
+        "",
+        "## Healing Lifecycle",
+        "",
+        "```mermaid",
+        "flowchart LR",
+        '  Observe["Observe JSON config"] --> Normalize["Normalize"]',
+        '  Normalize --> Project["Project semantic dimensions"]',
+        '  Project --> Bind["Bind to ASH state"]',
+        '  Bind --> Diagnose["Diagnose"]',
+        '  Diagnose --> Classify["Classify"]',
+        '  Classify --> Recover["Recoverability"]',
+        '  Recover --> Plan["Recovery plan"]',
+        '  Plan --> Policy["Policy gate"]',
+        '  Policy --> Backup["Backup"]',
+        '  Backup --> Execute["Execute"]',
+        '  Execute --> Verify["Verify"]',
+        '  Verify --> Outcome["Rollback / fallback / containment / safe halt"]',
+        '  Outcome --> Audit["Diagnostic + audit chain"]',
+        "```",
+        "",
+        "## Conformance Gate Logic",
+        "",
+        "```mermaid",
+        "flowchart LR",
+        '  Schemas["Schemas + examples"] --> Runner["conformance_runner.py"]',
+        '  Fixtures["Fixture vectors"] --> Runner',
+        '  Trace["ASH traceability"] --> Runner',
+        '  Json["JSON semantics"] --> Runner',
+        '  Diag["Diagnostic chain"] --> Runner',
+        '  Recovery["Recovery consistency"] --> Runner',
+        '  Handoff["Downstream handoff"] --> Runner',
+        '  Runner --> Judgment["CONFORMANT / CAVEATS / NON-CONFORMANT"]',
+        "```",
+        "",
         "## Snapshot",
         "",
         "| Property | Value |",
@@ -364,11 +574,11 @@ def write_branch_overview(
         f"| Synced (UTC) | {now_utc_iso()} |",
         f"| Profile | {branch_profile_description(branch_name)} |",
         "",
-        "## Branch Map",
+        "## Authority Map",
         "",
         "```mermaid",
         "flowchart LR",
-        '  ASH["ASH Upstream Authority"] --> MAIN["aeostara main (conformance)"]',
+        '  ASH["ASH Upstream Authority"] --> MAIN["Aeostara base design"]',
         f'  MAIN --> BRANCH["{branch_name}"]',
         "```",
         "",
@@ -429,13 +639,54 @@ def write_home_page(wiki_dir: Path, rows: Dict[str, Tuple[str, str, str]]) -> No
     lines: List[str] = [
         "# Aeostara Knowledge Base",
         "",
-        "> Comprehensive branch-scoped documentation synchronized from the repository.",
+        "> Visual operating map for the Aeostara platform-agnostic base design.",
+        "",
+        "## System Map",
+        "",
+        "```mermaid",
+        "flowchart TB",
+        '  ASH["ASH Pattern System"] --> Base["Aeostara base design"]',
+        '  Base --> Json["JSON semantics"]',
+        '  Base --> AshBind["ASH bindings"]',
+        '  Base --> Lifecycle["Healing lifecycle"]',
+        '  Base --> Contracts["Contracts"]',
+        '  Base --> CI["Conformance CI"]',
+        '  Base --> Handoff["Downstream handoff"]',
+        '  Handoff --> Win["Windows repo"]',
+        '  Handoff --> Mac["Mac repo"]',
+        '  Handoff --> Ios["iOS repo"]',
+        "```",
+        "",
+        "## Core Logic",
+        "",
+        "```mermaid",
+        "flowchart LR",
+        '  Observe["Observe"] --> Normalize["Normalize"] --> Project["Project"] --> Diagnose["Diagnose"]',
+        '  Diagnose --> Classify["Classify"] --> Plan["Plan recovery"] --> Gate["Policy gate"]',
+        '  Gate --> Backup["Backup"] --> Execute["Execute"] --> Verify["Verify"]',
+        '  Verify --> Safety["Rollback / fallback / containment / safe halt"] --> Audit["Audit chain"]',
+        "```",
         "",
         "## Quick Start",
         "",
-        "1. Open the branch overview for the branch you are working in.",
-        "2. Use Architecture/Specifications pages for semantic source tracing.",
-        "3. Use API Reference pages for implementation-facing module details.",
+        "1. Open [Branch main Overview](Branch-main-Overview) for the full visual map.",
+        "2. Use [Repository Overview](Repository-Overview) for the authority model and artifact taxonomy.",
+        "3. Use [Runtime Logic and Workflows](Runtime-Logic-and-Workflows) for the observe-to-safe-halt operating logic.",
+        "4. Use [ASH Conformance](ASH-Conformance) to trace ASH bindings, invariants, and fixture evidence.",
+        "5. Use [Acceptance and CI](Acceptance-and-CI) to understand validation gates and command outputs.",
+        "6. Use [Artifact Index](Artifact-Index) to jump directly to contracts, algorithms, interfaces, and acceptance pages.",
+        "",
+        "## Documentation Lanes",
+        "",
+        "| Lane | Purpose | Primary pages |",
+        "|---|---|---|",
+        "| Authority | Shows dependency direction and ownership boundaries | [Repository Overview](Repository-Overview), [Branch main Overview](Branch-main-Overview) |",
+        "| ASH binding | Maps ASH source authority into Aeostara obligations | [ASH Conformance](ASH-Conformance), [Branch main Specs Index](Branch-main-Specs-Index) |",
+        "| Runtime logic | Explains observe-to-safe-halt lifecycle | [Runtime Logic and Workflows](Runtime-Logic-and-Workflows), [Diagnostic Recovery Safety Logic](Diagnostic-Recovery-Safety-Logic) |",
+        "| JSON and projection | Shows JSON Pointer, canonicalization, missing/null, and ASH coordinate projection | [JSON Semantics and Projection](JSON-Semantics-and-Projection) |",
+        "| Contracts | Groups lifecycle schemas by responsibility | [Contract and Schema Atlas](Contract-and-Schema-Atlas), contract pages |",
+        "| Evidence | Shows fixture, schema, and CI proof points | [Acceptance and CI](Acceptance-and-CI), conformance pages |",
+        "| Handoff | Explains downstream Windows/Mac/iOS implementation obligations | [Downstream Handoff Guide](Downstream-Handoff-Guide), platform handoff templates |",
         "",
         "## Branch Dashboards",
         "",
@@ -450,10 +701,9 @@ def write_home_page(wiki_dir: Path, rows: Dict[str, Tuple[str, str, str]]) -> No
 
     lines += [
         "",
-        "## Automated Maintenance",
+        "## Maintenance",
         "",
-        "Wiki content is maintained by the **Wiki Agent** workflow (`.github/workflows/wiki-sync.yml`).",
-        "For branch-wide periodic refreshes, use the **Wiki Maintenance Sweep** workflow.",
+        "Wiki content is refreshed by repository workflows and the branch overview generator. Generated pages include visual context, checklist tables, source references, and direct artifact links.",
     ]
 
     write_text(target, "\n".join(lines))
@@ -513,20 +763,6 @@ def generate_for_branch(src_dir: Path, wiki_dir: Path, branch_name: str, commit_
             overview_page=overview_page,
         )
         category_pages["Status"].append(ref)
-
-    # Governance policy
-    policy_ref = write_wrapped_json(
-        src_dir=src_dir,
-        wiki_dir=wiki_dir,
-        prefix=prefix,
-        section="Policy",
-        source_rel="agentic-coding-policy.json",
-        title="Governance Policy",
-        branch_name=branch_name,
-        commit_sha=commit_sha,
-        overview_page=overview_page,
-    )
-    category_pages["Platform"].append(policy_ref)
 
     # Platform docs
     for rel, title in [
