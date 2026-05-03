@@ -16,8 +16,8 @@ See [REMEDIATION_STATUS.md](REMEDIATION_STATUS.md) and [ASH Authority and Aeosta
 
 | Category | Location | Purpose |
 |---|---|---|
-| Contracts | `specs/contracts/` | Downstream ASH-aligned semantic contracts + helper contracts |
-| Algorithms | `specs/algorithms/` | Diagnosis-first recovery orchestration and helper mechanics |
+| Contracts | `specs/contracts/` | ASH-aligned semantic contracts and authoritative downstream adapter/actuator/policy contracts |
+| Algorithms | `specs/algorithms/` | Diagnosis-first recovery orchestration and authoritative downstream execution algorithms |
 | Interfaces | `specs/interfaces/` | Execution and orchestration boundaries for platform adapters |
 | Architecture | `specs/architecture/` | Authority hierarchy and downstream conformance posture |
 | Acceptance | `specs/acceptance/` | ASH conformance targets, traceability, and execution model |
@@ -25,7 +25,7 @@ See [REMEDIATION_STATUS.md](REMEDIATION_STATUS.md) and [ASH Authority and Aeosta
 | Fixtures | `fixtures/` | Deterministic input scenarios for acceptance references |
 | CI | `ci/` | Conformance, schema, acceptance, and branch alignment validation |
 
-The repository now retains only current ASH-conformance artifacts and acceptance fixtures. Superseded transition contracts, configuration fixtures, and diff/repair helper files have been removed from the active tree.
+The repository contains current ASH-built contracts, algorithms, fixtures, acceptance targets, and validation gates.
 
 ## Required Decision Path
 
@@ -33,7 +33,7 @@ Aeostara follows this mandatory downstream flow:
 
 `observe -> normalize -> map -> diagnose -> classify -> recoverability -> recovery-plan -> gate -> backup -> execute -> verify -> rollback/fallback/containment/safe-halt`
 
-Diff utilities may exist, but only as subordinate evidence helpers.
+Surface-difference evidence and actuator projections are authoritative downstream artifacts when generated through the ASH-aligned flow.
 
 ## Branch Alignment
 
@@ -46,7 +46,7 @@ Branch alignment is enforced through profile contracts and CI validation:
 ## Boundaries
 
 - Aeostara does not redefine ASH semantics.
-- Aeostara may preserve and extend execution mechanics (backup, rollback, verification, policy, audit, adapters).
+- Aeostara may define and extend execution mechanics (backup, rollback, verification, policy, audit, adapters).
 - Aeostara must not treat flattened observed-vs-desired drift as semantic truth.
 
 ## Compliance Meaning

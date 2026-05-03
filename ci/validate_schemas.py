@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Aeostara Contract Validator
-Validates required ASH-aligned contract schemas and removed-artifact cleanup.
+Validates required ASH-built authoritative downstream contract schemas.
 """
 
 import json
@@ -10,7 +10,7 @@ import sys
 from typing import Dict, List, Tuple
 
 
-REQUIRED_AUTHORITATIVE_SCHEMAS = [
+REQUIRED_ASH_SEMANTIC_SCHEMAS = [
     "ObservedSystemState.schema.json",
     "DesiredSystemIntent.schema.json",
     "AshSemanticState.schema.json",
@@ -27,7 +27,7 @@ REQUIRED_AUTHORITATIVE_SCHEMAS = [
     "ModuleManifest.schema.json",
 ]
 
-FORBIDDEN_REMOVED_SCHEMAS = [
+REQUIRED_DOWNSTREAM_SCHEMAS = [
     "EncodedState.schema.json",
     "ObservedState.schema.json",
     "DesiredState.schema.json",
@@ -58,9 +58,21 @@ def validate_base_schema_fields(schema: Dict) -> Tuple[bool, str]:
 
 def validate_authoritative_schema(filename: str, schema: Dict) -> Tuple[bool, str]:
     if "x-status" in schema:
-        return False, "Authoritative schema incorrectly carries cleanup status metadata"
+        return False, "Authoritative schema must not carry status metadata"
     if "x-replacement" in schema:
-        return False, "Authoritative schema incorrectly carries replacement metadata"
+        return False, "Authoritative schema must not carry replacement metadata"
+    return True, "OK"
+
+
+def validate_downstream_schema(filename: str, schema: Dict) -> Tuple[bool, str]:
+    ok, message = validate_authoritative_schema(filename, schema)
+    if not ok:
+        return ok, message
+    role = schema.get("x-ash-role", "")
+    if not role.startswith("authoritative-downstream-"):
+        return False, "Downstream schema must declare authoritative ASH-built role"
+    if not schema.get("x-upstream-contract"):
+        return False, "Downstream schema missing x-upstream-contract"
     return True, "OK"
 
 
@@ -70,14 +82,6 @@ def ensure_presence(contracts_dir: str, filenames: List[str]) -> List[str]:
         if not os.path.isfile(os.path.join(contracts_dir, name)):
             missing.append(name)
     return missing
-
-
-def ensure_absence(contracts_dir: str, filenames: List[str]) -> List[str]:
-    present = []
-    for name in filenames:
-        if os.path.isfile(os.path.join(contracts_dir, name)):
-            present.append(name)
-    return present
 
 
 def main() -> int:
@@ -90,22 +94,22 @@ def main() -> int:
 
     failures = 0
 
-    missing_authoritative = ensure_presence(contracts_dir, REQUIRED_AUTHORITATIVE_SCHEMAS)
-    removed_schemas_present = ensure_absence(contracts_dir, FORBIDDEN_REMOVED_SCHEMAS)
+    missing_semantic = ensure_presence(contracts_dir, REQUIRED_ASH_SEMANTIC_SCHEMAS)
+    missing_downstream = ensure_presence(contracts_dir, REQUIRED_DOWNSTREAM_SCHEMAS)
 
-    if missing_authoritative:
-        print("FAIL: missing required authoritative schemas:")
-        for name in missing_authoritative:
+    if missing_semantic:
+        print("FAIL: missing required ASH semantic schemas:")
+        for name in missing_semantic:
             print(f"  - {name}")
-        failures += len(missing_authoritative)
+        failures += len(missing_semantic)
 
-    if removed_schemas_present:
-        print("FAIL: removed transition schemas are still present:")
-        for name in removed_schemas_present:
+    if missing_downstream:
+        print("FAIL: missing required authoritative downstream schemas:")
+        for name in missing_downstream:
             print(f"  - {name}")
-        failures += len(removed_schemas_present)
+        failures += len(missing_downstream)
 
-    all_targets = REQUIRED_AUTHORITATIVE_SCHEMAS
+    all_targets = REQUIRED_ASH_SEMANTIC_SCHEMAS + REQUIRED_DOWNSTREAM_SCHEMAS
 
     print(f"Validating {len(all_targets)} targeted schemas...")
 
@@ -126,7 +130,10 @@ def main() -> int:
             failures += 1
             continue
 
-        ok, message = validate_authoritative_schema(filename, schema)
+        if filename in REQUIRED_DOWNSTREAM_SCHEMAS:
+            ok, message = validate_downstream_schema(filename, schema)
+        else:
+            ok, message = validate_authoritative_schema(filename, schema)
 
         if ok:
             print(f"  [PASS] {filename}: {message}")
@@ -138,7 +145,7 @@ def main() -> int:
         print(f"\nFAIL: {failures} schema validation issue(s) detected.")
         return 1
 
-    print("\nPASS: contract schemas satisfy completed remediation validation gates.")
+    print("\nPASS: contract schemas satisfy ASH-built authoritative downstream validation gates.")
     return 0
 
 

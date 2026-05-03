@@ -1,6 +1,6 @@
 # JSON Path Operations (Execution Helper)
 
-Dot-path operations used only by execution helpers and adapters. This module is not a semantic authority.
+Dot-path operations used by downstream execution algorithms and adapters inside the ASH-aligned flow.
 
 ## get(obj, dotPath) -> value
 

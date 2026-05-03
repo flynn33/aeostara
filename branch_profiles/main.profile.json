@@ -34,7 +34,7 @@
   "required_globs": [
     {
       "pattern": "specs/contracts/*.schema.json",
-      "min_count": 14
+      "min_count": 21
     },
     {
       "pattern": "specs/algorithms/*.pseudo.md",
@@ -47,51 +47,6 @@
     },
     {
       "pattern": "specs/architecture/repo_branch_drift_matrix.md"
-    },
-    {
-      "pattern": "specs/contracts/EncodedState.schema.json"
-    },
-    {
-      "pattern": "specs/contracts/ObservedState.schema.json"
-    },
-    {
-      "pattern": "specs/contracts/DesiredState.schema.json"
-    },
-    {
-      "pattern": "specs/contracts/DriftEvent.schema.json"
-    },
-    {
-      "pattern": "specs/contracts/RepairAction.schema.json"
-    },
-    {
-      "pattern": "specs/contracts/RepairPlan.schema.json"
-    },
-    {
-      "pattern": "specs/contracts/Invariant.schema.json"
-    },
-    {
-      "pattern": "specs/algorithms/drift_analysis.pseudo.md"
-    },
-    {
-      "pattern": "specs/algorithms/repair_planning.pseudo.md"
-    },
-    {
-      "pattern": "fixtures/desired_state.json"
-    },
-    {
-      "pattern": "fixtures/invalid_config.json"
-    },
-    {
-      "pattern": "fixtures/invariants.json"
-    },
-    {
-      "pattern": "fixtures/policy_blocked_config.json"
-    },
-    {
-      "pattern": "fixtures/repairable_config.json"
-    },
-    {
-      "pattern": "fixtures/valid_config.json"
     },
     {
       "pattern": "**/*.swift"

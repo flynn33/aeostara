@@ -1,0 +1,23 @@
+{
+  "fixtureID": "execution-valid-config",
+  "fixtureRole": "adapter-execution-evidence",
+  "ashScenario": "semantically stable despite superficial drift",
+  "observedSystemState": {
+    "observationID": "obs-valid-config",
+    "observedAt": "2026-05-03T00:00:00Z",
+    "sourceContext": {
+      "targetRealm": "config",
+      "adapterID": "json-config-adapter",
+      "artifactReferences": ["fixtures/valid_config.json"]
+    },
+    "rawState": {
+      "server": {"host": "localhost", "port": 8080, "ssl_enabled": true},
+      "database": {"host": "db.example.com", "port": 5432, "name": "aeostara_prod"},
+      "logging": {"level": "INFO", "file": "/var/log/aeostara.log"}
+    }
+  },
+  "expected": {
+    "systemStateClass": "STABLE",
+    "recoveryCategory": "NO_ACTION"
+  }
+}

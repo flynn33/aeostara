@@ -32,5 +32,5 @@ Aeostara governs:
 
 1. Aeostara must not redefine ASH semantic classes.
 2. Aeostara must not elevate diff artifacts above ASH diagnostics.
-3. Aeostara may preserve execution helpers only as subordinate mechanics.
+3. Aeostara may define execution mechanics only inside the ASH-aligned flow.
 4. Any ambiguity is resolved in favor of ASH definitions.

@@ -1,0 +1,23 @@
+{
+  "fixtureID": "execution-repairable-config",
+  "fixtureRole": "adapter-execution-evidence",
+  "ashScenario": "semantically unstable but correctable",
+  "observedSystemState": {
+    "observationID": "obs-repairable-config",
+    "observedAt": "2026-05-03T00:00:00Z",
+    "sourceContext": {
+      "targetRealm": "config",
+      "adapterID": "json-config-adapter",
+      "artifactReferences": ["fixtures/repairable_config.json"]
+    },
+    "rawState": {
+      "server": {"host": "localhost", "port": 9090, "ssl_enabled": true},
+      "database": {"host": "db.example.com", "port": 3306, "name": "aeostara_dev"},
+      "logging": {"level": "DEBUG", "file": "/var/log/aeostara.log"}
+    }
+  },
+  "expected": {
+    "systemStateClass": "CORRECTABLE",
+    "recoveryCategory": "APPLY_CORRECTION"
+  }
+}

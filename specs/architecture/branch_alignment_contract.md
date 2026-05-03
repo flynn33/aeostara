@@ -16,7 +16,7 @@ Define invariant alignment requirements between the downstream conformance branc
 1. Semantic authority language remains ASH-upstream/Aeostara-downstream on every branch.
 2. Platform branches implement native mechanics without redefining semantic classes.
 3. Acceptance targets remain common reference artifacts.
-4. Platform branches preserve deterministic escalation semantics (fallback/containment/safe-halt).
+4. Platform branches maintain deterministic escalation semantics (fallback/containment/safe-halt).
 5. Branches pass profile-aligned CI checks via `ci/branch_alignment_checker.py`.
 
 ## Validation

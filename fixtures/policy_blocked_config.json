@@ -1,0 +1,23 @@
+{
+  "fixtureID": "execution-policy-blocked-config",
+  "fixtureRole": "policy-gate-evidence",
+  "ashScenario": "policy gate blocks unsafe action before mutation",
+  "observedSystemState": {
+    "observationID": "obs-policy-blocked-config",
+    "observedAt": "2026-05-03T00:00:00Z",
+    "sourceContext": {
+      "targetRealm": "config",
+      "adapterID": "json-config-adapter",
+      "artifactReferences": ["fixtures/policy_blocked_config.json"]
+    },
+    "rawState": {
+      "server": {"host": "localhost", "port": 8080, "ssl_enabled": false},
+      "database": {"host": "db.example.com", "port": 3306, "name": "aeostara_prod"},
+      "logging": {"level": "DEBUG", "file": "/var/log/aeostara.log"}
+    }
+  },
+  "expected": {
+    "blockedBeforeMutation": true,
+    "auditRequired": true
+  }
+}

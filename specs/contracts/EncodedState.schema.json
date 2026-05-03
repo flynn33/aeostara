@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EncodedStateProjection",
+  "description": "Authoritative downstream state encoding projection built under the ASH Pattern System. Surface maps are projected into mappedSemanticState for ASH semantic handling.",
+  "x-ash-role": "authoritative-downstream-mapping",
+  "x-upstream-contract": "AshSemanticState.schema.json",
+  "type": "object",
+  "properties": {
+    "surfaceObserved": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "surfaceDesired": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "mappedSemanticState": {
+      "$ref": "AshSemanticState.schema.json"
+    },
+    "mappingEvidenceID": {
+      "type": "string"
+    }
+  },
+  "required": ["surfaceObserved", "surfaceDesired", "mappedSemanticState", "mappingEvidenceID"],
+  "additionalProperties": false
+}

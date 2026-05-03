@@ -1,0 +1,45 @@
+{
+  "constraintSetID": "execution-policy-constraints",
+  "fixtureRole": "policy-gate-constraints",
+  "constraints": [
+    {
+      "invariantID": "policy-database-port",
+      "name": "Database Port Standard",
+      "description": "Database port must be 5432 before mutation is allowed.",
+      "severity": "high",
+      "expression": "database.port == 5432",
+      "appliesTo": ["database"],
+      "autoRemediate": true,
+      "ashBinding": {
+        "policyGateID": "policy-gate-config-baseline",
+        "diagnosticDimension": "RECOVERY"
+      }
+    },
+    {
+      "invariantID": "policy-ssl-required",
+      "name": "SSL Required",
+      "description": "SSL must remain enabled for recovery execution.",
+      "severity": "critical",
+      "expression": "server.ssl_enabled == true",
+      "appliesTo": ["server"],
+      "autoRemediate": true,
+      "ashBinding": {
+        "policyGateID": "policy-gate-config-baseline",
+        "diagnosticDimension": "STATE_VALIDITY"
+      }
+    },
+    {
+      "invariantID": "policy-log-level",
+      "name": "Log Level Valid",
+      "description": "Log level must be INFO for the baseline configuration intent.",
+      "severity": "medium",
+      "expression": "logging.level == \"INFO\"",
+      "appliesTo": ["logging"],
+      "autoRemediate": true,
+      "ashBinding": {
+        "policyGateID": "policy-gate-config-baseline",
+        "diagnosticDimension": "RECOVERY"
+      }
+    }
+  ]
+}

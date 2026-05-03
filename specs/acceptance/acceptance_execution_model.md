@@ -9,7 +9,7 @@ Repository automation validates:
 1. Required conformance docs exist.
 2. Required ASH-aligned contracts exist and validate.
 3. Required algorithm specs exist.
-4. Superseded drift/diff artifacts are absent.
+4. Required ASH-built downstream adapter, evidence, actuator, policy, and fixture artifacts exist.
 5. Traceability and remediation acceptance artifacts exist.
 
 ## Implementation-Level Validation

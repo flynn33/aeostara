@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DriftEventEvidence",
+  "description": "Authoritative downstream surface-difference evidence contract built under the ASH Pattern System. Drift events feed the ASH-aligned diagnostic pipeline and actuator planning.",
+  "x-ash-role": "authoritative-downstream-diagnostic-evidence",
+  "x-upstream-contract": "StateValidityDiagnostic.schema.json",
+  "type": "object",
+  "properties": {
+    "evidenceID": {
+      "type": "string"
+    },
+    "keyPath": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["ValueChanged", "KeyAdded", "KeyRemoved"]
+    },
+    "observedValue": {},
+    "desiredValue": {},
+    "description": {
+      "type": "string"
+    },
+    "diagnosticReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["evidenceID", "keyPath", "type", "description"],
+  "additionalProperties": false
+}

@@ -13,7 +13,7 @@ Status: planning only.
 
 ## Migration Principle
 
-The split must preserve the authority hierarchy:
+The split must maintain the authority hierarchy:
 
 - ASH upstream semantic source of truth
 - Aeostara conformance specs downstream
@@ -22,5 +22,5 @@ The split must preserve the authority hierarchy:
 ## Pre-Split Requirements
 
 1. Conformance artifacts and traceability matrix finalized.
-2. CI checks detect reintroduction of removed drift/diff authority.
+2. CI checks detect semantic-authority regressions.
 3. Platform repos consume conformance artifacts without local semantic forks.

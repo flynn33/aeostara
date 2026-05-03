@@ -1,0 +1,11 @@
+{
+  "fixtureID": "execution-invalid-config",
+  "fixtureRole": "adapter-error-evidence",
+  "ashScenario": "observation cannot be normalized",
+  "sourcePayload": "{ this is not valid JSON }",
+  "expected": {
+    "systemStateClass": "FAILED",
+    "recoveryCategory": "ESCALATION_REQUIRED",
+    "safeHaltCandidate": true
+  }
+}

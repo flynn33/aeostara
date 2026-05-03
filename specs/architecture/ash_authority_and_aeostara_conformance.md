@@ -26,9 +26,9 @@ Aeostara owns downstream adaptation and execution mechanics:
 
 These mechanics must consume ASH-derived diagnostics and classification outputs; they must not redefine semantic truth.
 
-## What Aeostara Does Not Own
+## What ASH Owns
 
-Aeostara is not authoritative for:
+ASH owns:
 
 - Base state validity semantics
 - System-state class semantics
@@ -69,11 +69,11 @@ Aeostara must maintain deterministic algorithms for:
 
 ## Prohibited Patterns
 
-- Generic drift map as semantic authority
-- Diff-to-CRUD planning as top-level recovery model
+- Surface-difference evidence outside the ASH-aligned diagnostic flow
+- Actuator projection planning outside an ASH-aligned recovery plan
 - Rule-expression engine as substitute for ASH validity/admissibility
 - Semantic claims that position ASH as a subsystem of Aeostara
 
 ## Acceptance Requirement
 
-Conformance is complete only when acceptance artifacts demonstrate ASH authority, downstream execution boundaries, and absence of drift/diff semantic authority.
+Conformance is complete only when acceptance artifacts demonstrate ASH authority, downstream execution boundaries, and current ASH-built artifact authority.

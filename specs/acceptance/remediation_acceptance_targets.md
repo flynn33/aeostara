@@ -1,6 +1,6 @@
 # Remediation Acceptance Targets
 
-These targets validate that the remediation replaced prior semantic authority with downstream ASH conformance.
+These targets validate downstream ASH conformance across diagnostics, classification, recoverability, recovery planning, policy gates, fallback, containment, and safe halt.
 
 ## Required Scenarios
 

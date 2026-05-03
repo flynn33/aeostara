@@ -1,6 +1,6 @@
 # Recovery Plan Generation
 
-Generates recoverability-driven plans; low-level mutations are execution steps, not semantic authority.
+Generates recoverability-driven plans; low-level mutations are execution steps selected by the plan.
 
 ## generate_recovery_plan(diagnostic, state_class, recovery_category) -> RecoveryPlan
 

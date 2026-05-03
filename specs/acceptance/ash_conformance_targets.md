@@ -10,12 +10,12 @@ Define minimum downstream conformance targets required for Aeostara to be consid
 2. Diagnosis-first semantic flow is documented and authoritative.
 3. State classification uses ASH-aligned classes.
 4. Recoverability mapping is deterministic.
-5. Recovery planning is recoverability-driven, not diff-first.
+5. Recovery planning is recoverability-driven and actuator projections derive from ASH-aligned recovery plans.
 6. Fallback decisions are registry-driven.
-7. Containment and safe-halt behaviors are explicit and terminal semantics are preserved.
+7. Containment and safe-halt behaviors are explicit and terminal semantics are maintained.
 8. Diagnostic artifacts are schema/taxonomy compatible.
-9. Superseded drift/diff contracts, helper algorithms, and config fixtures are absent.
-10. CI gates reject missing conformance artifacts and cleanup regressions.
+9. Observation, intent, encoding, evidence, actuator, repair, policy, and fixture artifacts are current ASH-built downstream specifications.
+10. CI gates reject missing conformance artifacts and semantic-authority regressions.
 
 ## Minimum Evidence
 

@@ -1,0 +1,15 @@
+{
+  "fixtureID": "execution-desired-intent",
+  "fixtureRole": "adapter-intent-evidence",
+  "desiredSystemIntent": {
+    "intentID": "intent-config-baseline",
+    "declaredAt": "2026-05-03T00:00:00Z",
+    "intentSource": "fixtures/desired_state.json",
+    "intentState": {
+      "server": {"host": "localhost", "port": 8080, "ssl_enabled": true},
+      "database": {"host": "db.example.com", "port": 5432, "name": "aeostara_prod"},
+      "logging": {"level": "INFO", "file": "/var/log/aeostara.log"}
+    },
+    "constraints": ["policy-ssl-required", "policy-database-port", "policy-log-level"]
+  }
+}

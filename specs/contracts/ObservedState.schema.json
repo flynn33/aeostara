@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ObservedStateAdapter",
+  "description": "Authoritative downstream observation adapter contract built under the ASH Pattern System. It captures file/config observation mechanics and projects into ObservedSystemState before ASH semantic evaluation.",
+  "x-ash-role": "authoritative-downstream-observation",
+  "x-upstream-contract": "ObservedSystemState.schema.json",
+  "type": "object",
+  "properties": {
+    "sourceFile": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ashProjection": {
+      "type": "object",
+      "properties": {
+        "observationID": {
+          "type": "string"
+        },
+        "targetRealm": {
+          "type": "string"
+        },
+        "adapterID": {
+          "type": "string"
+        },
+        "sourceHash": {
+          "type": "string"
+        }
+      },
+      "required": ["observationID", "targetRealm", "adapterID"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["sourceFile", "data", "timestamp", "ashProjection"],
+  "additionalProperties": false
+}

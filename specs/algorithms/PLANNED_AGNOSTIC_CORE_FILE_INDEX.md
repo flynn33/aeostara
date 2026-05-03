@@ -16,8 +16,10 @@ This index records the active downstream ASH-aligned algorithm surface in Aeosta
 - `execution_and_verification.pseudo.md`
 - `healing_flow.pseudo.md`
 
-## Execution Helper Algorithms
+## Active Authoritative Downstream Execution Algorithms
 
+- `drift_analysis.pseudo.md`
+- `repair_planning.pseudo.md`
 - `json_path.pseudo.md`
 - `backup.pseudo.md`
 - `rollback.pseudo.md`

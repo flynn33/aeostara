@@ -22,4 +22,4 @@ Aeostara is a downstream conformance and execution-spec repository for ASH-based
 - Deterministic
 - Traceable to ASH sources
 - Modular and execution-oriented
-- Limited to current authority and execution artifacts
+- Limited to current ASH-built authority and execution artifacts

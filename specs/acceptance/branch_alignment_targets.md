@@ -8,7 +8,7 @@ Ensure all active branches remain semantically aligned after remediation.
 
 1. Each branch satisfies its declared profile in `branch_profiles/`.
 2. Branch README language stays downstream ASH-conformance consistent.
-3. Platform branch native technology posture is preserved (Windows C++ profile, Apple Swift profile).
+3. Platform branch native technology posture is maintained (Windows C++ profile, Apple Swift profile).
 4. Acceptance and conformance references are present on each branch.
 5. Disallowed authority language is absent.
 

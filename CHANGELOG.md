@@ -2,14 +2,20 @@
 
 All notable changes to Aeostara will be documented in this file.
 
+## [0.5.1] - 2026-05-03
+
+### Changed - ASH Pattern System Rebuild
+
+- Rebuilt observation, intent, encoding, evidence, actuator, repair, policy, and fixture artifacts as current ASH Pattern System downstream specifications.
+- Updated schema validation to require both ASH semantic contracts and authoritative downstream contracts.
+- Updated conformance policy, acceptance targets, and branch profile checks for the rebuilt artifact surface.
+
 ## [0.5.0] - 2026-05-03
 
-### Changed - Remediation Cleanup Complete
+### Changed - Remediation Status
 
 - Marked downstream ASH conformance remediation complete.
-- Removed superseded transition contracts, helper algorithms, configuration fixtures, and superseded remediation notes from the active tree.
-- Updated schema validation and branch alignment checks so removed artifacts are forbidden cleanup regressions.
-- Updated conformance docs, acceptance targets, and governance policy to describe the completed cleanup posture.
+- Updated repository docs, acceptance targets, and governance policy for the completed ASH rebuild posture.
 
 ## [0.4.1] - 2026-04-11
 
