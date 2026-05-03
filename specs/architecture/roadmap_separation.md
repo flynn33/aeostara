@@ -9,12 +9,12 @@ Scope:
 - Reset architecture authority language
 - Replace drift-first contracts/algorithms with ASH-aligned artifacts
 - Rebuild acceptance and traceability around ASH conformance
-- Update CI gates to prevent regression to legacy authority
+- Update CI gates to prevent regression to removed drift/diff authority
 
 Exit criteria:
 
 - ASH is explicit upstream semantic authority
-- Legacy drift-first artifacts are non-authoritative
+- Superseded drift-first artifacts are absent
 - Conformance artifacts and CI checks are in place
 
 ## Track B: Platform Realization and Release Verification

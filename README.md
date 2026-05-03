@@ -25,6 +25,8 @@ See [REMEDIATION_STATUS.md](REMEDIATION_STATUS.md) and [ASH Authority and Aeosta
 | Fixtures | `fixtures/` | Deterministic input scenarios for acceptance references |
 | CI | `ci/` | Conformance, schema, acceptance, and branch alignment validation |
 
+The repository now retains only current ASH-conformance artifacts and acceptance fixtures. Superseded transition contracts, configuration fixtures, and diff/repair helper files have been removed from the active tree.
+
 ## Required Decision Path
 
 Aeostara follows this mandatory downstream flow:

@@ -1,8 +1,8 @@
-# Planned Algorithm Index (Post-Remediation)
+# Algorithm Index
 
 This index records the active downstream ASH-aligned algorithm surface in Aeostara.
 
-## Active authoritative algorithms
+## Active Authoritative Algorithms
 
 - `state_normalization.pseudo.md`
 - `state_to_ash_mapping.pseudo.md`
@@ -16,7 +16,7 @@ This index records the active downstream ASH-aligned algorithm surface in Aeosta
 - `execution_and_verification.pseudo.md`
 - `healing_flow.pseudo.md`
 
-## Subordinate helper algorithms
+## Execution Helper Algorithms
 
 - `json_path.pseudo.md`
 - `backup.pseudo.md`
@@ -24,10 +24,3 @@ This index records the active downstream ASH-aligned algorithm surface in Aeosta
 - `verification.pseudo.md`
 - `audit.pseudo.md`
 - `policy_evaluation.pseudo.md`
-
-## Legacy helper-only files
-
-- `drift_analysis.pseudo.md`
-- `repair_planning.pseudo.md`
-
-Legacy helper files are non-authoritative and must not drive semantic decisions.

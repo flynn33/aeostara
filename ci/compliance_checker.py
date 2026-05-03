@@ -2,7 +2,7 @@
 """
 Aeostara Compliance Checker
 Modes:
-  - downstream-conformance: validate required remediation/conformance docs/language
+  - downstream-conformance: validate required conformance docs and cleanup gates
   - source-safety: scan product source for Python/YAML references
   - all (default): run both checks
 """
@@ -31,10 +31,35 @@ REQUIRED_PHRASES = [
     ("README.md", "downstream ASH-based"),
 ]
 
+FORBIDDEN_REMOVED_ARTIFACTS = [
+    "PHASE_5_CLOSEOUT.md",
+    "specs/architecture/repo_branch_drift_matrix.md",
+    "specs/contracts/EncodedState.schema.json",
+    "specs/contracts/ObservedState.schema.json",
+    "specs/contracts/DesiredState.schema.json",
+    "specs/contracts/DriftEvent.schema.json",
+    "specs/contracts/RepairAction.schema.json",
+    "specs/contracts/RepairPlan.schema.json",
+    "specs/contracts/Invariant.schema.json",
+    "specs/algorithms/drift_analysis.pseudo.md",
+    "specs/algorithms/repair_planning.pseudo.md",
+    "fixtures/desired_state.json",
+    "fixtures/invalid_config.json",
+    "fixtures/invariants.json",
+    "fixtures/policy_blocked_config.json",
+    "fixtures/repairable_config.json",
+    "fixtures/valid_config.json",
+]
+
 DISALLOWED_PATTERNS = [
     re.compile(r"Aeostara core defines ASH semantics", re.IGNORECASE),
     re.compile(r"ASH subsystem of Aeostara", re.IGNORECASE),
     re.compile(r"generic diff engine.*ASH compliant", re.IGNORECASE),
+    re.compile(r"x-status[\"']?\s*:", re.IGNORECASE),
+    re.compile(r"helper only", re.IGNORECASE),
+    re.compile(r"retained for transition", re.IGNORECASE),
+    re.compile(r"retained.*historical", re.IGNORECASE),
+    re.compile(r"marked non-authoritative", re.IGNORECASE),
 ]
 
 SCAN_PATHS = [
@@ -92,6 +117,11 @@ def run_downstream_conformance(repo_root: str) -> Tuple[bool, List[str]]:
         content = read_text(full)
         if phrase.lower() not in content.lower():
             failures.append(f"Required phrase not found in {rel}: {phrase}")
+
+    for rel in FORBIDDEN_REMOVED_ARTIFACTS:
+        full = os.path.join(repo_root, rel)
+        if os.path.exists(full):
+            failures.append(f"Removed artifact still present: {rel}")
 
     scan_files = gather_scan_files(repo_root)
     for path in scan_files:

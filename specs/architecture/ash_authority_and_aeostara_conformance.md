@@ -71,9 +71,9 @@ Aeostara must maintain deterministic algorithms for:
 
 - Generic drift map as semantic authority
 - Diff-to-CRUD planning as top-level recovery model
-- Legacy invariant engine as substitute for ASH validity/admissibility
+- Rule-expression engine as substitute for ASH validity/admissibility
 - Semantic claims that position ASH as a subsystem of Aeostara
 
 ## Acceptance Requirement
 
-Conformance is complete only when acceptance artifacts demonstrate that Aeostara remains coherent if drift-first language is removed.
+Conformance is complete only when acceptance artifacts demonstrate ASH authority, downstream execution boundaries, and absence of drift/diff semantic authority.

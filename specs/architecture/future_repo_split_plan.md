@@ -22,5 +22,5 @@ The split must preserve the authority hierarchy:
 ## Pre-Split Requirements
 
 1. Conformance artifacts and traceability matrix finalized.
-2. CI checks detect legacy-authority regressions.
+2. CI checks detect reintroduction of removed drift/diff authority.
 3. Platform repos consume conformance artifacts without local semantic forks.

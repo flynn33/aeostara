@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Aeostara Contract Validator
-Validates required contract schemas and legacy-status semantics.
+Validates required ASH-aligned contract schemas and removed-artifact cleanup.
 """
 
 import json
@@ -27,7 +27,7 @@ REQUIRED_AUTHORITATIVE_SCHEMAS = [
     "ModuleManifest.schema.json",
 ]
 
-LEGACY_NON_AUTHORITATIVE_SCHEMAS = [
+FORBIDDEN_REMOVED_SCHEMAS = [
     "EncodedState.schema.json",
     "ObservedState.schema.json",
     "DesiredState.schema.json",
@@ -57,17 +57,10 @@ def validate_base_schema_fields(schema: Dict) -> Tuple[bool, str]:
 
 
 def validate_authoritative_schema(filename: str, schema: Dict) -> Tuple[bool, str]:
-    if schema.get("x-status") == "legacy-non-authoritative":
-        return False, "Authoritative schema incorrectly marked as legacy"
-    return True, "OK"
-
-
-def validate_legacy_schema(filename: str, schema: Dict) -> Tuple[bool, str]:
-    if schema.get("x-status") != "legacy-non-authoritative":
-        return False, "Legacy schema must set x-status=legacy-non-authoritative"
-    replacement = schema.get("x-replacement")
-    if not replacement:
-        return False, "Legacy schema missing x-replacement"
+    if "x-status" in schema:
+        return False, "Authoritative schema incorrectly carries cleanup status metadata"
+    if "x-replacement" in schema:
+        return False, "Authoritative schema incorrectly carries replacement metadata"
     return True, "OK"
 
 
@@ -77,6 +70,14 @@ def ensure_presence(contracts_dir: str, filenames: List[str]) -> List[str]:
         if not os.path.isfile(os.path.join(contracts_dir, name)):
             missing.append(name)
     return missing
+
+
+def ensure_absence(contracts_dir: str, filenames: List[str]) -> List[str]:
+    present = []
+    for name in filenames:
+        if os.path.isfile(os.path.join(contracts_dir, name)):
+            present.append(name)
+    return present
 
 
 def main() -> int:
@@ -90,7 +91,7 @@ def main() -> int:
     failures = 0
 
     missing_authoritative = ensure_presence(contracts_dir, REQUIRED_AUTHORITATIVE_SCHEMAS)
-    missing_legacy = ensure_presence(contracts_dir, LEGACY_NON_AUTHORITATIVE_SCHEMAS)
+    removed_schemas_present = ensure_absence(contracts_dir, FORBIDDEN_REMOVED_SCHEMAS)
 
     if missing_authoritative:
         print("FAIL: missing required authoritative schemas:")
@@ -98,13 +99,13 @@ def main() -> int:
             print(f"  - {name}")
         failures += len(missing_authoritative)
 
-    if missing_legacy:
-        print("FAIL: missing required legacy-marked schemas:")
-        for name in missing_legacy:
+    if removed_schemas_present:
+        print("FAIL: removed transition schemas are still present:")
+        for name in removed_schemas_present:
             print(f"  - {name}")
-        failures += len(missing_legacy)
+        failures += len(removed_schemas_present)
 
-    all_targets = REQUIRED_AUTHORITATIVE_SCHEMAS + LEGACY_NON_AUTHORITATIVE_SCHEMAS
+    all_targets = REQUIRED_AUTHORITATIVE_SCHEMAS
 
     print(f"Validating {len(all_targets)} targeted schemas...")
 
@@ -125,10 +126,7 @@ def main() -> int:
             failures += 1
             continue
 
-        if filename in REQUIRED_AUTHORITATIVE_SCHEMAS:
-            ok, message = validate_authoritative_schema(filename, schema)
-        else:
-            ok, message = validate_legacy_schema(filename, schema)
+        ok, message = validate_authoritative_schema(filename, schema)
 
         if ok:
             print(f"  [PASS] {filename}: {message}")
@@ -140,7 +138,7 @@ def main() -> int:
         print(f"\nFAIL: {failures} schema validation issue(s) detected.")
         return 1
 
-    print("\nPASS: contract schemas satisfy remediation validation gates.")
+    print("\nPASS: contract schemas satisfy completed remediation validation gates.")
     return 0
 
 

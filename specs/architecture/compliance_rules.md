@@ -8,7 +8,7 @@ In this repository, compliance means downstream conformance to ASH semantic auth
 
 1. ASH is upstream semantic authority.
 2. Aeostara must consume ASH-derived diagnostics, classification, and recoverability semantics.
-3. Legacy drift-first artifacts cannot be semantic authority.
+3. Diff-first artifacts cannot be semantic authority.
 4. Fallback, containment, and safe-halt decisions must be explicitly represented.
 5. Diagnostic artifacts must use schema/taxonomy-compatible fields.
 
@@ -26,5 +26,5 @@ CI must validate:
 
 - Presence of required conformance artifacts
 - Schema validity of contract layer
-- Legacy semantic contracts marked non-authoritative
+- Absence of superseded drift/diff artifacts
 - Acceptance and traceability artifacts present and coherent

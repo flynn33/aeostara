@@ -5,12 +5,12 @@
 - [x] `REMEDIATION_STATUS.md` exists and declares ASH upstream authority.
 - [x] `specs/architecture/ash_authority_and_aeostara_conformance.md` exists.
 - [x] Root and architecture docs describe Aeostara as downstream conformance layer.
-- [x] Legacy semantic authority language removed or marked historical.
+- [x] Superseded semantic authority language is removed from active docs.
 
 ## Contracts
 
 - [x] ASH-aligned contract set exists for observed state, intent, semantic state, diagnostics, classification, recoverability, recovery plan, fallback, containment, safe halt.
-- [x] Legacy drift-first contracts are marked `x-status: legacy-non-authoritative`.
+- [x] Superseded drift/diff contracts are absent.
 - [x] Helper contracts (backup/rollback/verification/audit/module manifest) align to downstream flow.
 
 ## Algorithms
@@ -20,7 +20,7 @@
 - [x] Recovery planning is recoverability-driven.
 - [x] Fallback/containment/safe-halt algorithms present.
 - [x] Execution/verification algorithm present.
-- [x] Legacy drift/repair algorithms are non-authoritative helpers.
+- [x] Superseded drift/repair helper algorithms are absent.
 
 ## Acceptance and Traceability
 
@@ -33,6 +33,6 @@
 ## CI Enforcement
 
 - [x] Schema validator checks required ASH-aligned contracts.
-- [x] Compliance checker validates conformance artifacts and legacy markings.
+- [x] Compliance checker validates conformance artifacts and cleanup gates.
 - [x] Acceptance runner validates acceptance/traceability artifact completeness.
 - [x] Branch alignment checker validates active branch profile invariants.

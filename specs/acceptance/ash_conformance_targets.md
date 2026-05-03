@@ -14,8 +14,8 @@ Define minimum downstream conformance targets required for Aeostara to be consid
 6. Fallback decisions are registry-driven.
 7. Containment and safe-halt behaviors are explicit and terminal semantics are preserved.
 8. Diagnostic artifacts are schema/taxonomy compatible.
-9. Legacy drift-first contracts are marked non-authoritative.
-10. CI gates reject missing conformance artifacts and legacy-authority regressions.
+9. Superseded drift/diff contracts, helper algorithms, and config fixtures are absent.
+10. CI gates reject missing conformance artifacts and cleanup regressions.
 
 ## Minimum Evidence
 

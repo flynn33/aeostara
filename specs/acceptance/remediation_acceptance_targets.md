@@ -1,6 +1,6 @@
 # Remediation Acceptance Targets
 
-These targets validate that the remediation replaced legacy semantic authority with downstream ASH conformance.
+These targets validate that the remediation replaced prior semantic authority with downstream ASH conformance.
 
 ## Required Scenarios
 

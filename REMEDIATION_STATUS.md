@@ -1,103 +1,83 @@
 # Aeostara Remediation Status
 
-Last updated: 2026-04-11
-Status: In-progress major remediation to downstream ASH conformance
+Last updated: 2026-05-03
+Status: Complete - downstream ASH conformance remediation and cleanup
 
 ## Authority Statement
 
 - ASH is the immutable upstream semantic authority.
-- Aeostara is the sole remediation target.
+- Aeostara is the downstream conformance and execution-spec repository.
 - If Aeostara conflicts with ASH, Aeostara changes.
 
-Aeostara is now positioned as a downstream ASH-based product-spec repository that preserves product execution mechanics while replacing legacy semantic authority.
+Aeostara preserves product execution mechanics while subordinating all semantic meaning to ASH.
 
-## Target Decision Model
+## Authoritative Decision Model
 
-Aeostara must implement and document this decision path:
+Aeostara implements and documents this decision path:
 
 `observe -> normalize -> map to ASH-aligned semantic state -> diagnose -> classify -> determine recoverability -> generate recovery plan -> gate -> backup -> execute -> verify -> rollback / fallback / containment / safe-halt`
 
-The legacy path is non-authoritative:
+Flattened observed-vs-intent comparison can only be used as execution evidence. It is not a semantic source of truth.
 
-`flatten state -> diff keys -> emit Set/Add/Remove -> execute`
+## Active Artifact Surface
 
-## Artifact Classes
+The active contract surface is:
 
-### Preserve (mechanics only)
+- Observed system state
+- Desired system intent
+- ASH semantic state
+- State-validity diagnostic
+- System-state class
+- Recovery category
+- Recovery plan
+- Fallback decision
+- Containment decision
+- Safe-halt decision
+- Rollback, verification, audit, and module-manifest mechanics
 
-- Backup mechanics
-- Rollback mechanics
-- Verification mechanics
-- Audit mechanics
-- Policy-gate mechanics
-- Deterministic execution discipline
-- Platform adapter framing
+The active algorithm surface is:
 
-These remain subordinate helpers and must not define semantic truth.
+- State normalization
+- State-to-ASH mapping
+- ASH diagnostic evaluation
+- State classification
+- Recovery-category selection
+- Recovery-plan generation
+- Policy evaluation
+- Backup, execution, verification, rollback, and audit
+- Fallback, containment, and safe-halt handling
 
-### Rewrite
+## Cleanup Result
 
-- Root and architecture docs that claimed Aeostara-owned healing semantics
-- Acceptance and compliance documents
-- Interface contracts that accepted generic drift-first artifacts
-- CI/compliance scripts to enforce ASH downstream conformance
+The prior transition contracts, diff/repair helper algorithms, configuration fixtures, and superseded remediation notes have been removed from the active repository tree.
 
-### Replace
+CI now treats those files as forbidden cleanup regressions rather than required marked artifacts.
 
-- Legacy drift-first semantic contracts (`ObservedState`, `DesiredState`, `EncodedState`, `DriftEvent`, `RepairAction`, `RepairPlan`, `Invariant`) with ASH-aligned contract layer
-- Drift-first algorithms (`drift_analysis`, `repair_planning`, `healing_flow`) with diagnosis/classification/recoverability-first semantics
+## Branch Alignment
 
-### Remove from authority
-
-Legacy files are retained only as historical or helper references. They are explicitly marked non-authoritative and cannot be used as the semantic source of truth.
-
-## Branch Alignment Remediation
-
-Branch alignment is now part of remediation scope.
+Branch alignment remains part of conformance scope.
 
 - Profiles define required branch invariants: `branch_profiles/*.profile.json`
 - Contract authority: `specs/architecture/branch_alignment_contract.md`
 - Acceptance target: `specs/acceptance/branch_alignment_targets.md`
 - Automation enforcement: `ci/branch_alignment_checker.py` and `.github/workflows/*`
 
-This workspace currently contains no local git branch checkouts. Direct branch code edits require branch worktrees or branch repositories to be available in workspace.
+## Completed Phases
 
-## Minimum Required Conformance Surface
-
-Aeostara must expose downstream artifacts for:
-
-- Observed system state
-- Desired system intent
-- ASH semantic state
-- State-validity diagnostics
-- System-state classification
-- Recovery-category selection
-- Recovery plan
-- Fallback decision
-- Containment decision
-- Safe-halt decision
-
-## Progress Snapshot
-
-- Phase 0 Control/Feeze: complete in documentation
-- Phase 1 Architecture authority reset: complete in documentation
-- Phase 2-6 contracts and algorithms: complete in repository specifications
-- Phase 7 acceptance rebuild: complete in repository specifications
-- Phase 8 CI hardening: complete in repository automation scripts
-- Branch alignment framework and CI profiles: complete
-- Phase 9 cleanup: active and continuous
-
-## Legacy Marking Policy
-
-Legacy files are retained only when useful for helper mechanics or historical traceability, and must include explicit deprecation markers and non-authoritative status.
+- Phase 0 Control/Freeze: complete
+- Phase 1 Architecture authority reset: complete
+- Phase 2-6 Contracts and algorithms: complete
+- Phase 7 Acceptance rebuild: complete
+- Phase 8 CI hardening: complete
+- Phase 9 Cleanup: complete
 
 ## Acceptance Gate
 
-Remediation is considered complete only when:
+Remediation is complete because:
 
 1. ASH is explicit upstream authority in repo docs.
-2. Legacy diff-first semantics are not authoritative.
+2. Diff-first semantics are not authoritative.
 3. Required ASH-aligned contracts and algorithms exist.
 4. Acceptance artifacts and traceability matrix cover ASH conformance scenarios.
-5. CI scripts enforce required downstream conformance artifacts and reject legacy-authority regressions.
-6. Branch profile checks pass for each active branch.
+5. CI scripts enforce required downstream conformance artifacts and reject cleanup regressions.
+6. Branch profile checks pass for each active branch profile represented in this repository.
