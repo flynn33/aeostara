@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AuditChain",
+  "description": "Ordered audit events tied to diagnostic chain.",
+  "type": "object",
+  "properties": {
+    "auditChainID": {
+      "type": "string"
+    },
+    "diagnosticChainReference": {
+      "type": "string"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "AuditEvent.schema.json"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "auditChainID",
+    "diagnosticChainReference",
+    "events"
+  ],
+  "additionalProperties": false
+}

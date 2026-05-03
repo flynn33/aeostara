@@ -1,0 +1,21 @@
+{
+  "encodedStateID": "example",
+  "encoding": "example",
+  "ashState": {
+    "stateID": "example",
+    "coordinates": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sourceReference": "example",
+    "canonicalHash": "example"
+  },
+  "evidenceOnly": true
+}

@@ -1,0 +1,22 @@
+{
+  "repairActionID": "example",
+  "recoveryStep": {
+    "stepID": "example",
+    "stepType": "NORMALIZE_STATE",
+    "description": "example",
+    "jsonMutationOperations": [],
+    "diagnosticReference": {
+      "diagnosticID": "example",
+      "chainRootReference": "example",
+      "diagnosticKind": "STATE_VALIDITY",
+      "ruleReferences": [
+        {
+          "ruleID": "ASH-STATE-VALIDITY-001",
+          "sourceReference": "example",
+          "ruleFamily": "example"
+        }
+      ]
+    }
+  },
+  "actuatorParameters": {}
+}

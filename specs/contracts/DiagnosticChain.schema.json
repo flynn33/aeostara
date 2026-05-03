@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DiagnosticChain",
+  "description": "Ordered diagnostic chain with root/parent integrity.",
+  "type": "object",
+  "properties": {
+    "chainID": {
+      "type": "string"
+    },
+    "rootDiagnosticID": {
+      "type": "string"
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "DiagnosticEnvelope.schema.json"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "chainID",
+    "rootDiagnosticID",
+    "diagnostics"
+  ],
+  "additionalProperties": false
+}

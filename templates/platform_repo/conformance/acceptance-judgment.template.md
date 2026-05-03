@@ -1,0 +1,3 @@
+# Acceptance Judgment
+
+Use exactly one: CONFORMANT, CONFORMANT WITH CAVEATS, NON-CONFORMANT.

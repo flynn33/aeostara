@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RecoveryOutcome",
+  "description": "Outcome of plan execution and escalation branch.",
+  "type": "object",
+  "properties": {
+    "outcomeID": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SUCCEEDED",
+        "BLOCKED",
+        "FAILED",
+        "ESCALATED",
+        "NO_ACTION"
+      ]
+    },
+    "recoveryCategory": {
+      "$ref": "RecoveryCategory.schema.json"
+    },
+    "escalationDecision": {
+      "$ref": "EscalationDecision.schema.json"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "outcomeID",
+    "status",
+    "recoveryCategory",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

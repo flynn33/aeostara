@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GenerationPlan",
+  "description": "Side-effect-free abstract generation plan.",
+  "type": "object",
+  "properties": {
+    "planID": {
+      "type": "string"
+    },
+    "planElements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "semanticInputs": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "diagnosticReferences": {
+      "type": "array",
+      "items": {
+        "$ref": "DiagnosticReference.schema.json"
+      },
+      "minItems": 1
+    },
+    "planHash": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "planID",
+    "planElements",
+    "semanticInputs",
+    "diagnosticReferences",
+    "planHash"
+  ],
+  "additionalProperties": false
+}

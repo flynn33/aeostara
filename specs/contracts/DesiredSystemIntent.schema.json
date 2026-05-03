@@ -1,30 +1,27 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "DesiredSystemIntent",
-  "description": "Declared desired intent used for ASH-aligned semantic evaluation and policy-constrained recovery.",
+  "description": "Platform-neutral desired system intent.",
   "type": "object",
   "properties": {
-    "intentID": {
+    "desiredSystemIntentID": {
       "type": "string"
     },
-    "declaredAt": {
-      "type": "string",
-      "format": "date-time"
+    "documentReference": {
+      "$ref": "JsonDocumentReference.schema.json"
     },
-    "intentSource": {
-      "type": "string"
+    "partialIntent": {
+      "type": "boolean"
     },
-    "intentState": {
-      "type": "object",
-      "additionalProperties": true
-    },
-    "constraints": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     }
   },
-  "required": ["intentID", "declaredAt", "intentSource", "intentState"],
+  "required": [
+    "desiredSystemIntentID",
+    "documentReference",
+    "partialIntent",
+    "diagnosticReference"
+  ],
   "additionalProperties": false
 }

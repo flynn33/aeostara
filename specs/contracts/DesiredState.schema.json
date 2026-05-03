@@ -1,42 +1,23 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "DesiredStateAdapter",
-  "description": "Authoritative downstream desired-state adapter contract built under the ASH Pattern System. It captures intent-loading mechanics and projects into DesiredSystemIntent before ASH semantic evaluation.",
-  "x-ash-role": "authoritative-downstream-intent",
-  "x-upstream-contract": "DesiredSystemIntent.schema.json",
+  "title": "DesiredState",
+  "description": "Legacy desired-state helper demoted to input evidence.",
   "type": "object",
   "properties": {
-    "data": {
-      "type": "object",
-      "additionalProperties": true
-    },
-    "source": {
+    "desiredStateID": {
       "type": "string"
     },
-    "declaredAt": {
-      "type": "string",
-      "format": "date-time"
+    "desiredSystemIntent": {
+      "$ref": "DesiredSystemIntent.schema.json"
     },
-    "ashIntentProjection": {
-      "type": "object",
-      "properties": {
-        "intentID": {
-          "type": "string"
-        },
-        "intentSource": {
-          "type": "string"
-        },
-        "constraints": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": ["intentID", "intentSource"],
-      "additionalProperties": false
+    "evidenceOnly": {
+      "type": "boolean"
     }
   },
-  "required": ["data", "source", "declaredAt", "ashIntentProjection"],
+  "required": [
+    "desiredStateID",
+    "desiredSystemIntent",
+    "evidenceOnly"
+  ],
   "additionalProperties": false
 }

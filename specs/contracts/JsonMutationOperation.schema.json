@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JsonMutationOperation",
+  "description": "Guarded JSON mutation operation.",
+  "type": "object",
+  "properties": {
+    "operationID": {
+      "type": "string"
+    },
+    "op": {
+      "type": "string",
+      "enum": [
+        "test",
+        "add",
+        "replace",
+        "remove"
+      ]
+    },
+    "path": {
+      "$ref": "JsonPointer.schema.json"
+    },
+    "value": {},
+    "preconditionHash": {
+      "type": "string"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "operationID",
+    "op",
+    "path",
+    "preconditionHash",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

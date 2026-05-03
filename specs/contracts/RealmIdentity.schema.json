@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RealmIdentity",
+  "description": "Deterministic realm identity.",
+  "type": "object",
+  "properties": {
+    "realmID": {
+      "type": "string"
+    },
+    "stateReference": {
+      "type": "string"
+    },
+    "encoding": {
+      "type": "string"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "realmID",
+    "stateReference",
+    "encoding",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

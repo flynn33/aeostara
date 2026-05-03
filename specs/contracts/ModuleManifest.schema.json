@@ -1,46 +1,32 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ModuleManifest",
-  "description": "Module metadata for Aeostara downstream conformance and execution modules.",
+  "description": "Downstream module mapping manifest.",
   "type": "object",
   "properties": {
-    "moduleID": {
+    "moduleManifestID": {
       "type": "string"
     },
-    "displayName": {
+    "aeostaraVersion": {
       "type": "string"
     },
-    "version": {
-      "type": "string"
-    },
-    "semanticRole": {
-      "type": "string",
-      "enum": [
-        "STATE_NORMALIZATION",
-        "STATE_MAPPING",
-        "DIAGNOSTICS",
-        "CLASSIFICATION",
-        "RECOVERY_PLANNING",
-        "EXECUTION",
-        "FALLBACK",
-        "CONTAINMENT",
-        "SAFE_HALT",
-        "AUDIT"
-      ]
-    },
-    "supportedTargets": {
+    "modules": {
       "type": "array",
       "items": {
-        "type": "string"
-      }
+        "type": "object",
+        "additionalProperties": true
+      },
+      "minItems": 1
     },
-    "notes": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     }
   },
-  "required": ["moduleID", "displayName", "version", "semanticRole", "supportedTargets"],
+  "required": [
+    "moduleManifestID",
+    "aeostaraVersion",
+    "modules",
+    "diagnosticReference"
+  ],
   "additionalProperties": false
 }

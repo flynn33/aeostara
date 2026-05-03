@@ -1,44 +1,31 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "AshSemanticState",
-  "description": "ASH-aligned semantic state record produced from normalized observed state and desired intent mapping.",
+  "description": "Aeostara semantic state bound to ASH.",
   "type": "object",
   "properties": {
-    "semanticStateID": {
+    "ashSemanticStateID": {
       "type": "string"
     },
-    "ashStateVector": {
-      "type": "array",
-      "minItems": 9,
-      "maxItems": 9,
-      "items": {
-        "type": "integer",
-        "enum": [0, 1]
-      }
+    "ashState": {
+      "$ref": "AshState.schema.json"
     },
-    "admissibilityStatus": {
-      "type": "string",
-      "enum": ["VALID", "TRANSFORMATION_COMPATIBLE", "TRANSFORMATION_INCOMPATIBLE", "UNCLASSIFIED"]
+    "admissibilityResult": {
+      "$ref": "AdmissibilityResult.schema.json"
     },
-    "transformationCompatibility": {
-      "type": "string",
-      "enum": ["COMPATIBLE", "INCOMPATIBLE", "UNKNOWN"]
+    "realmIdentity": {
+      "$ref": "RealmIdentity.schema.json"
     },
-    "normalizationStatus": {
-      "type": "string",
-      "enum": ["ALREADY_VALID", "NORMALIZABLE", "NOT_NORMALIZABLE", "BLOCKED"]
-    },
-    "orbitInfo": {
-      "type": ["object", "null"],
-      "additionalProperties": true
-    },
-    "sourceObservationID": {
-      "type": "string"
-    },
-    "sourceIntentID": {
-      "type": "string"
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     }
   },
-  "required": ["semanticStateID", "ashStateVector", "admissibilityStatus", "transformationCompatibility", "normalizationStatus", "sourceObservationID", "sourceIntentID"],
+  "required": [
+    "ashSemanticStateID",
+    "ashState",
+    "admissibilityResult",
+    "realmIdentity",
+    "diagnosticReference"
+  ],
   "additionalProperties": false
 }

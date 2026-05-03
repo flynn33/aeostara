@@ -1,0 +1,17 @@
+{
+  "realmID": "example",
+  "stateReference": "example",
+  "encoding": "example",
+  "diagnosticReference": {
+    "diagnosticID": "example",
+    "chainRootReference": "example",
+    "diagnosticKind": "STATE_VALIDITY",
+    "ruleReferences": [
+      {
+        "ruleID": "ASH-STATE-VALIDITY-001",
+        "sourceReference": "example",
+        "ruleFamily": "example"
+      }
+    ]
+  }
+}

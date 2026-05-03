@@ -1,18 +1,26 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "RecoveryPlan",
-  "description": "Recoverability-driven plan containing deterministic execution steps and escalation branches.",
+  "description": "Recoverability-driven plan with no executable NO_OP step.",
   "type": "object",
   "properties": {
     "recoveryPlanID": {
       "type": "string"
     },
-    "diagnosticID": {
-      "type": "string"
+    "planDisposition": {
+      "type": "string",
+      "enum": [
+        "NO_ACTION",
+        "MUTATION_REQUIRED",
+        "ESCALATION_REQUIRED",
+        "TERMINAL"
+      ]
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     },
     "stateClass": {
-      "type": "string",
-      "enum": ["STABLE", "UNSTABLE", "CORRECTABLE", "DEGRADED", "CONTAINED", "FAILED", "SAFE_HALT"]
+      "$ref": "SystemStateClass.schema.json"
     },
     "recoveryCategory": {
       "$ref": "RecoveryCategory.schema.json"
@@ -23,56 +31,30 @@
     "requiresBackup": {
       "type": "boolean"
     },
-    "actuatorSteps": {
+    "recoverySteps": {
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "stepID": {
-            "type": "string"
-          },
-          "stepType": {
-            "type": "string",
-            "enum": [
-              "NORMALIZE",
-              "APPLY_CODEWORD_CORRECTION",
-              "APPLY_ACTUATOR_MUTATION",
-              "VERIFY",
-              "ROLLBACK",
-              "FALLBACK_SELECT",
-              "ENTER_CONTAINMENT",
-              "ENTER_SAFE_HALT",
-              "ESCALATE"
-            ]
-          },
-          "description": {
-            "type": "string"
-          },
-          "parameters": {
-            "type": "object",
-            "additionalProperties": true
-          }
-        },
-        "required": ["stepID", "stepType", "description", "parameters"],
-        "additionalProperties": false
-      }
+        "$ref": "RecoveryStep.schema.json"
+      },
+      "minItems": 0
     },
-    "fallbackOnFailure": {
-      "$ref": "FallbackDecision.schema.json"
+    "planHash": {
+      "type": "string"
     },
     "createdAt": {
-      "type": "string",
-      "format": "date-time"
+      "type": "string"
     }
   },
   "required": [
     "recoveryPlanID",
-    "diagnosticID",
+    "planDisposition",
+    "diagnosticReference",
     "stateClass",
     "recoveryCategory",
     "requiresPolicyGate",
     "requiresBackup",
-    "actuatorSteps",
+    "recoverySteps",
+    "planHash",
     "createdAt"
   ],
   "additionalProperties": false

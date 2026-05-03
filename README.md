@@ -1,57 +1,76 @@
+
 # Aeostara
 
-Aeostara is a downstream ASH-based product specification repository.
+Aeostara is a platform-agnostic base-design specification package for a self-healing JSON configuration engine. It conforms to the ASH Pattern System and instructs downstream Windows, Mac, and iOS implementation repositories.
 
 ## Repository Role
 
-This repository defines Aeostara's downstream conformance layer and product execution mechanics. Semantic authority for state validity, classification, recoverability, fallback, containment, and safe-halt behavior is inherited from the ASH Pattern System.
+Aeostara is platform-agnostic. ASH is the fixed upstream semantic authority. Platform repos consume Aeostara; Aeostara does not depend on platform repositories or native platform source code to be base-design complete.
 
-- Upstream semantic authority: ASH Pattern System specifications
-- Downstream adaptation and execution mechanics: Aeostara
-- Conflict rule: ASH wins, Aeostara changes
+```text
+ASH Pattern System
+        ↓
+Aeostara platform-agnostic base design
+        ↓
+Windows implementation repo
+Mac implementation repo
+iOS implementation repo
+```
 
-See [REMEDIATION_STATUS.md](REMEDIATION_STATUS.md) and [ASH Authority and Aeostara Conformance](specs/architecture/ash_authority_and_aeostara_conformance.md).
+Conflict rule: ASH wins, Aeostara changes. This repository must not modify ASH, propose ASH changes, or add native Windows, Mac, or iOS implementation source.
+
+See [BASE_DESIGN_COMPLETION.md](BASE_DESIGN_COMPLETION.md), [ASH_BASELINE_REFERENCE.md](ASH_BASELINE_REFERENCE.md), and [Repository Role Contract](specs/architecture/repository_role_contract.md).
 
 ## What This Repository Contains
 
 | Category | Location | Purpose |
 |---|---|---|
-| Contracts | `specs/contracts/` | ASH-aligned semantic contracts and authoritative downstream adapter/actuator/policy contracts |
-| Algorithms | `specs/algorithms/` | Diagnosis-first recovery orchestration and authoritative downstream execution algorithms |
-| Interfaces | `specs/interfaces/` | Execution and orchestration boundaries for platform adapters |
-| Architecture | `specs/architecture/` | Authority hierarchy and downstream conformance posture |
-| Acceptance | `specs/acceptance/` | ASH conformance targets, traceability, and execution model |
-| Branch Profiles | `branch_profiles/` | Branch-specific alignment contracts for main/windows/macos/ios |
-| Fixtures | `fixtures/` | Deterministic input scenarios for acceptance references |
-| CI | `ci/` | Conformance, schema, acceptance, and branch alignment validation |
-
-The repository contains current ASH-built contracts, algorithms, fixtures, acceptance targets, and validation gates.
+| ASH baseline bindings | `specs/ash_baseline/` | Aeostara bindings to the fixed ASH source areas and invariant categories |
+| Contracts | `specs/contracts/` | Platform-neutral JSON schemas for every lifecycle boundary object |
+| Algorithms | `specs/algorithms/` | Diagnosis-first, JSON Pointer based, ASH-aligned pseudocode |
+| Interfaces | `specs/interfaces/` | Platform-neutral adapter and orchestration boundaries |
+| Architecture | `specs/architecture/` | Authority hierarchy, base/platform boundary, and versioning rules |
+| Acceptance | `specs/acceptance/` | Base-design completion gates, ASH traceability, and downstream handoff acceptance |
+| Conformance | `conformance/` | Module mapping, invariant coverage, diagnostics, materialization boundary, deviations, and judgment artifacts |
+| Fixtures | `fixtures/conformance/` and `fixtures/schema_examples/` | Expected-output vectors and valid schema instances |
+| CI | `ci/` | Schema, fixture, traceability, JSON semantics, diagnostic-chain, recovery, and handoff validators |
+| Downstream handoff | `implementation_handoff/` and `templates/platform_repo/` | Requirements and templates for Windows, Mac, and iOS repos |
 
 ## Required Decision Path
 
-Aeostara follows this mandatory downstream flow:
+Aeostara defines this mandatory platform-neutral lifecycle:
 
-`observe -> normalize -> map -> diagnose -> classify -> recoverability -> recovery-plan -> gate -> backup -> execute -> verify -> rollback/fallback/containment/safe-halt`
+`observe -> normalize -> project JSON/configuration state -> bind to ASH -> diagnose -> classify -> determine recoverability -> generate recovery plan -> evaluate policy gate -> prepare backup -> execute approved plan -> verify -> rollback/fallback/containment/safe-halt -> emit diagnostic and audit chain`
 
-Surface-difference evidence and actuator projections are authoritative downstream artifacts when generated through the ASH-aligned flow.
+Surface differences are evidence only. Generic JSON diffing is not semantic truth. Recovery is derived from diagnosis, classification, and recoverability, not from CRUD repair operations.
 
-## Branch Alignment
+## Completion Meaning
 
-Branch alignment is enforced through profile contracts and CI validation:
+Aeostara base design is complete only when a Windows, Mac, or iOS implementation team can implement Aeostara faithfully from this repository without inventing base semantics, recovery logic, JSON semantics, diagnostics, audit requirements, or conformance expectations.
 
-- Branch profiles: `branch_profiles/*.profile.json`
-- Contract doc: `specs/architecture/branch_alignment_contract.md`
-- Validation: `python3 ci/branch_alignment_checker.py --profile <profile>`
+Base-design completion does not require platform-native source files. Platform-specific implementation work belongs in downstream repositories.
 
-## Boundaries
+## Validation
 
-- Aeostara does not redefine ASH semantics.
-- Aeostara may define and extend execution mechanics (backup, rollback, verification, policy, audit, adapters).
-- Aeostara must not treat flattened observed-vs-desired drift as semantic truth.
+Run the full base-design gate locally:
 
-## Compliance Meaning
+```text
+python3 ci/conformance_runner.py .
+```
 
-In this repository, "compliance" means downstream ASH conformance, not local consistency alone.
+Key component gates are also runnable individually:
+
+```text
+python3 ci/validate_schemas.py .
+python3 ci/fixture_validator.py .
+python3 ci/traceability_checker.py .
+python3 ci/ash_invariant_checker.py .
+python3 ci/json_semantics_checker.py .
+python3 ci/diagnostic_chain_checker.py .
+python3 ci/recovery_consistency_checker.py .
+python3 ci/downstream_handoff_checker.py .
+python3 ci/base_design_completion_checker.py .
+```
 
 ## License
 

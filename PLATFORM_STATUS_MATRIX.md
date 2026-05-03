@@ -1,32 +1,14 @@
-# Platform Status Matrix
 
-Last updated: 2026-04-11
+# Downstream Platform Status Matrix
 
-This matrix tracks platform realization status as product mechanics and integration readiness only.
-It is not a semantic authority document.
+This matrix is a downstream tracking template. It is not an active Aeostara base-design completion gate.
 
-## Semantic Authority Reminder
+Aeostara completion does not require native Windows, Mac, or iOS source files. Platform repositories consume Aeostara and report their own implementation status using the handoff templates under `templates/platform_repo/`.
 
-Semantic authority for system-state meaning and recovery semantics is ASH upstream. Platform rows below should be interpreted as implementation readiness indicators only.
+| Downstream repo | Aeostara version pin | Required adapters mapped | Required contracts implemented | Fixtures passed | Deviations logged | Judgment |
+|---|---|---:|---:|---:|---:|---|
+| Windows implementation repo | TBD by downstream repo | TBD | TBD | TBD | TBD | TBD |
+| Mac implementation repo | TBD by downstream repo | TBD | TBD | TBD | TBD | TBD |
+| iOS implementation repo | TBD by downstream repo | TBD | TBD | TBD | TBD | TBD |
 
-## Branch Status
-
-| Platform | Branch | Implementation Status | Build/Test Verification |
-|---|---|---|---|
-| Windows | `platform/windows` | Reference implementation lineage | Historical local evidence only |
-| macOS | `platform/macos` | Source lineage present | Build unverified in this repo context |
-| iOS | `platform/ios` | Source lineage present | Build unverified in this repo context |
-
-## Conformance Note
-
-Platform readiness is not equivalent to ASH conformance. ASH conformance evidence is defined in:
-
-- `specs/acceptance/ash_conformance_targets.md`
-- `specs/acceptance/traceability_matrix.md`
-- `specs/acceptance/remediation_acceptance_targets.md`
-
-## Known Gaps
-
-1. Platform build verification lives outside this spec-focused repository scope.
-2. CI proof for platform binaries is not represented here.
-3. Semantic conformance must be established through acceptance and traceability artifacts, not branch status language.
+A downstream repo may record platform limitations as caveats or deviations. It may not redefine Aeostara base semantics.

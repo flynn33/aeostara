@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AdmissibilityResult",
+  "description": "ASH admissibility result.",
+  "type": "object",
+  "properties": {
+    "resultID": {
+      "type": "string"
+    },
+    "stateReference": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "VALID",
+        "TRANSFORMATION_COMPATIBLE",
+        "TRANSFORMATION_INCOMPATIBLE",
+        "UNCLASSIFIED"
+      ]
+    },
+    "orbitReference": {
+      "type": "string"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "resultID",
+    "stateReference",
+    "status",
+    "orbitReference",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

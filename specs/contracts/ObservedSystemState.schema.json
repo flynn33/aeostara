@@ -1,53 +1,31 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ObservedSystemState",
-  "description": "Captured observed runtime/system state before semantic normalization.",
+  "description": "Platform-neutral observed system state.",
   "type": "object",
   "properties": {
-    "observationID": {
+    "observedSystemStateID": {
       "type": "string"
     },
-    "observedAt": {
-      "type": "string",
-      "format": "date-time"
+    "documentReference": {
+      "$ref": "JsonDocumentReference.schema.json"
     },
-    "sourceContext": {
-      "type": "object",
-      "properties": {
-        "targetRealm": {
-          "type": "string"
-        },
-        "adapterID": {
-          "type": "string"
-        },
-        "artifactReferences": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
+    "surfaceDifferences": {
+      "type": "array",
+      "items": {
+        "$ref": "SurfaceDifference.schema.json"
       },
-      "required": ["targetRealm", "adapterID"],
-      "additionalProperties": false
+      "minItems": 0
     },
-    "rawState": {
-      "type": "object",
-      "additionalProperties": true
-    },
-    "integrity": {
-      "type": "object",
-      "properties": {
-        "sourceHash": {
-          "type": "string"
-        },
-        "integrityMethod": {
-          "type": "string"
-        }
-      },
-      "required": ["sourceHash", "integrityMethod"],
-      "additionalProperties": false
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     }
   },
-  "required": ["observationID", "observedAt", "sourceContext", "rawState"],
+  "required": [
+    "observedSystemStateID",
+    "documentReference",
+    "surfaceDifferences",
+    "diagnosticReference"
+  ],
   "additionalProperties": false
 }

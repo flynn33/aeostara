@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JsonDocumentReference",
+  "description": "Reference to observed, desired, or canonical JSON document.",
+  "type": "object",
+  "properties": {
+    "documentID": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "OBSERVED",
+        "DESIRED",
+        "CANONICALIZED",
+        "BACKUP"
+      ]
+    },
+    "canonicalHash": {
+      "type": "string"
+    },
+    "sourceReference": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "documentID",
+    "role",
+    "canonicalHash",
+    "sourceReference"
+  ],
+  "additionalProperties": false
+}

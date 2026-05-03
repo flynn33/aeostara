@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CodewordTransformation",
+  "description": "XOR-by-codeword transition.",
+  "type": "object",
+  "properties": {
+    "transformationID": {
+      "type": "string"
+    },
+    "inputState": {
+      "$ref": "AshState.schema.json"
+    },
+    "codeword": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "minItems": 9,
+      "maxItems": 9
+    },
+    "outputState": {
+      "$ref": "AshState.schema.json"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "transformationID",
+    "inputState",
+    "codeword",
+    "outputState",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

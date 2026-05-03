@@ -1,0 +1,52 @@
+{
+  "driftEventID": "example",
+  "surfaceDifferences": [
+    {
+      "differenceID": "example",
+      "path": {
+        "pointer": "/system/state",
+        "tokens": [],
+        "pointsToMissing": true,
+        "pointsToNull": true
+      },
+      "differenceKind": "MISSING",
+      "observedDocument": {
+        "documentID": "example",
+        "role": "OBSERVED",
+        "canonicalHash": "example",
+        "sourceReference": "example"
+      },
+      "desiredDocument": {
+        "documentID": "example",
+        "role": "OBSERVED",
+        "canonicalHash": "example",
+        "sourceReference": "example"
+      },
+      "diagnosticReference": {
+        "diagnosticID": "example",
+        "chainRootReference": "example",
+        "diagnosticKind": "STATE_VALIDITY",
+        "ruleReferences": [
+          {
+            "ruleID": "ASH-STATE-VALIDITY-001",
+            "sourceReference": "example",
+            "ruleFamily": "example"
+          }
+        ]
+      }
+    }
+  ],
+  "evidenceOnly": true,
+  "diagnosticReference": {
+    "diagnosticID": "example",
+    "chainRootReference": "example",
+    "diagnosticKind": "STATE_VALIDITY",
+    "ruleReferences": [
+      {
+        "ruleID": "ASH-STATE-VALIDITY-001",
+        "sourceReference": "example",
+        "ruleFamily": "example"
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MappingAmbiguity",
+  "description": "Ambiguity evidence and blocking rules.",
+  "type": "object",
+  "properties": {
+    "ambiguityID": {
+      "type": "string"
+    },
+    "dimensionID": {
+      "type": "string",
+      "enum": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8"
+      ]
+    },
+    "candidateValues": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "minItems": 2
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "blockingRule": {
+      "$ref": "RuleReference.schema.json"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "ambiguityID",
+    "dimensionID",
+    "candidateValues",
+    "evidence",
+    "blockingRule",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

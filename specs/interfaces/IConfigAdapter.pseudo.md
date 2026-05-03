@@ -1,25 +1,13 @@
-# IConfigAdapter Interface
 
-Adapter boundary for collecting observed system state and applying execution steps. This interface does not define semantic truth.
+# IConfigAdapter
 
-## Methods
+## Purpose
 
-### observeSystemState(source) -> ObservedSystemState
+Reads and writes JSON configuration documents through JSON Pointer-compatible operations and canonical hashes.
 
-Collect runtime/product state from adapter-specific sources.
+## Contract Rules
 
-### normalizeInput(observed) -> object
-
-Produce deterministic normalized input for state-to-ASH mapping.
-
-### applyActuatorSteps(target, steps) -> Boolean
-
-Apply execution-level actuator steps produced by `RecoveryPlan`.
-
-### snapshotTarget(target) -> string
-
-Create adapter-level snapshot reference used by backup/rollback flow.
-
-### restoreSnapshot(snapshotRef, target) -> Boolean
-
-Restore a target from a snapshot reference.
+- The interface is platform-neutral and specifies boundary behavior only.
+- Downstream platform repos provide native implementations.
+- All decisions, failures, blocked actions, and safety transitions must emit diagnostic references and audit events.
+- Implementations must consume the schemas in `specs/contracts/` without changing base semantics.

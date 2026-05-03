@@ -1,0 +1,143 @@
+{
+  "fixtureSetID": "policy_block_vectors",
+  "vectors": [
+    {
+      "fixtureID": "policy-allow",
+      "category": "policy-allow",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "STABLE",
+        "recoveryCategory": "NO_ACTION",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "PolicyDecision.schema.json",
+            "instance": {
+              "policyDecisionID": "example",
+              "decision": "ALLOW",
+              "policyBundleID": "example",
+              "reasons": [
+                "example"
+              ],
+              "diagnosticReference": {
+                "diagnosticID": "example",
+                "chainRootReference": "example",
+                "diagnosticKind": "STATE_VALIDITY",
+                "ruleReferences": [
+                  {
+                    "ruleID": "ASH-STATE-VALIDITY-001",
+                    "sourceReference": "example",
+                    "ruleFamily": "example"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "policy-block",
+      "category": "policy-block",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "DEGRADED",
+        "recoveryCategory": "FALLBACK_REQUIRED",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": [
+        "no mutation before allow"
+      ]
+    },
+    {
+      "fixtureID": "policy-escalate",
+      "category": "policy-escalate",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "FAILED",
+        "recoveryCategory": "ESCALATION_REQUIRED",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TopologyPlan",
+  "description": "Deterministic topology output.",
+  "type": "object",
+  "properties": {
+    "topologyID": {
+      "type": "string"
+    },
+    "rootState": {
+      "$ref": "AshState.schema.json"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "diagnosticReferences": {
+      "type": "array",
+      "items": {
+        "$ref": "DiagnosticReference.schema.json"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "topologyID",
+    "rootState",
+    "nodes",
+    "edges",
+    "lineage",
+    "diagnosticReferences"
+  ],
+  "additionalProperties": false
+}

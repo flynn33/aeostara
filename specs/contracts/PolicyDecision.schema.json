@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PolicyDecision",
+  "description": "ALLOW/BLOCK/ESCALATE decision with reasons and diagnostics.",
+  "type": "object",
+  "properties": {
+    "policyDecisionID": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "BLOCK",
+        "ESCALATE"
+      ]
+    },
+    "policyBundleID": {
+      "type": "string"
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "policyDecisionID",
+    "decision",
+    "policyBundleID",
+    "reasons",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

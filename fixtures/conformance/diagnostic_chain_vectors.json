@@ -1,0 +1,192 @@
+{
+  "fixtureSetID": "diagnostic_chain_vectors",
+  "vectors": [
+    {
+      "fixtureID": "diagnostic-chain-valid",
+      "category": "valid-chain",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "STABLE",
+        "recoveryCategory": "NO_ACTION",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "diagnostic-chain-missing-parent",
+      "category": "missing-parent-failure",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "RECOVERY",
+        "stateClass": "FAILED",
+        "recoveryCategory": "ESCALATION_REQUIRED",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": [
+        "missing parent fails",
+        "non-root diagnostic without parent fails"
+      ]
+    },
+    {
+      "fixtureID": "diagnostic-chain-orphan",
+      "category": "orphan-diagnostic-failure",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "RECOVERY",
+        "stateClass": "FAILED",
+        "recoveryCategory": "ESCALATION_REQUIRED",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": [
+        "orphan diagnostic fails"
+      ]
+    },
+    {
+      "fixtureID": "diagnostic-chain-missing-rule",
+      "category": "missing-rule-id-failure",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "RECOVERY",
+        "stateClass": "FAILED",
+        "recoveryCategory": "ESCALATION_REQUIRED",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": [
+        "rule-free diagnostic fails"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 # Aeostara Wiki Maintenance Sweep
-# Periodically regenerates wiki dashboards for all primary branches.
+# Periodically regenerates wiki dashboards for the platform-agnostic base design.
 
 name: Wiki Maintenance Sweep
 
@@ -36,11 +36,11 @@ jobs:
             git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git"
           }
 
-      - name: Generate pages for main and platform branches
+      - name: Generate pages for base design
         run: |
           set -euo pipefail
 
-          branches=("main" "platform/windows" "platform/macos" "platform/ios")
+          branches=("main")
 
           for branch in "${branches[@]}"; do
             slug="${branch//\//__slash__}"

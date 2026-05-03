@@ -1,79 +1,42 @@
+
 # ASH Authority and Aeostara Conformance
 
-## Purpose
+ASH is the fixed upstream semantic authority. Aeostara is a platform-agnostic base design that binds ASH semantics to a JSON configuration self-healing engine.
 
-This document defines the non-negotiable authority hierarchy and conformance boundaries for Aeostara.
+## Non-Modification Rule
 
-## Authority Hierarchy
+Aeostara must not modify ASH, propose ASH changes, invent ASH alternatives, extend the codeword set, redefine admissibility, or bypass ASH recovery/fallback/containment/safe-halt semantics.
 
-1. ASH semantic specifications (upstream authority)
-2. Aeostara downstream conformance artifacts
-3. Aeostara product execution mechanics
+## ASH Baseline
 
-When conflict exists, ASH semantics are authoritative and Aeostara must change.
+- Upstream repository: `/Users/jim/AI/Codex/ASH-Pattern-System`
+- Commit: `e123f5d7fdbb381179971f721a3292c31eb1cbc2`
+- Baseline document: `ASH_BASELINE_REFERENCE.md`
 
-## What Aeostara Owns
+## Binding Surface
 
-Aeostara owns downstream adaptation and execution mechanics:
+Aeostara must bind all of these ASH areas:
 
-- Runtime observation ingestion
-- State normalization adapters
-- Mapping from product/runtime state into ASH-aligned semantic inputs
-- Policy gating
-- Backup/rollback mechanics
-- Execution of approved actuator steps
-- Verification and audit orchestration
+1. `F2^9` state space.
+2. Canonical 16-codeword set.
+3. XOR-by-codeword transformation.
+4. State admissibility.
+5. State-validity diagnostics.
+6. System-state classification.
+7. Recoverability categories.
+8. Fallback policy registry.
+9. Containment and safe-halt behavior.
+10. Realm identity.
+11. Transition registry.
+12. Topology generator.
+13. Axiom evaluator.
+14. Generation planning and artifact-emission materialization boundary.
+15. All 5 ASH conformance categories.
 
-These mechanics must consume ASH-derived diagnostics and classification outputs; they must not redefine semantic truth.
+## Aeostara Adaptation Layer
 
-## What ASH Owns
+Aeostara may define platform-neutral JSON configuration semantics, adapter boundaries, policy gates, backup/rollback mechanics, audit contracts, and fixture outputs. Those definitions must remain subordinate to ASH whenever ASH owns the semantic question.
 
-ASH owns:
+## Audit Requirement
 
-- Base state validity semantics
-- System-state class semantics
-- Recoverability category semantics
-- Fallback policy semantics
-- Containment and safe-halt semantics
-- Rule taxonomy or diagnostic envelope semantics
-
-## Mandatory Downstream Contract Layer
-
-Aeostara must maintain contracts that adapt product mechanics to ASH semantics:
-
-- Observed system state
-- Desired system intent
-- ASH semantic state
-- State-validity diagnostic
-- System-state class
-- Recovery category
-- Recovery plan
-- Fallback decision
-- Containment decision
-- Safe-halt decision
-
-## Mandatory Downstream Algorithm Layer
-
-Aeostara must maintain deterministic algorithms for:
-
-- State normalization
-- State-to-ASH mapping
-- ASH diagnostic evaluation
-- State classification
-- Recovery-category selection
-- Recovery-plan generation
-- Fallback selection
-- Containment decisioning
-- Safe-halt decisioning
-- Execution-and-verification orchestration
-
-## Prohibited Patterns
-
-- Surface-difference evidence outside the ASH-aligned diagnostic flow
-- Actuator projection planning outside an ASH-aligned recovery plan
-- Rule-expression engine as substitute for ASH validity/admissibility
-- Semantic claims that position ASH as a subsystem of Aeostara
-
-## Acceptance Requirement
-
-Conformance is complete only when acceptance artifacts demonstrate ASH authority, downstream execution boundaries, and current ASH-built artifact authority.
+Every decision, recovery step, fallback, containment, safe halt, rollback, and audit event must link to a diagnostic chain that includes ASH taxonomy-compliant rule references where ASH semantics are involved.

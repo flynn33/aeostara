@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VerificationPlan",
+  "description": "Checks generated before mutation.",
+  "type": "object",
+  "properties": {
+    "verificationPlanID": {
+      "type": "string"
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "expectedSemanticState": {
+      "$ref": "AshState.schema.json"
+    },
+    "generatedBeforeMutation": {
+      "type": "boolean"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "verificationPlanID",
+    "checks",
+    "expectedSemanticState",
+    "generatedBeforeMutation",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

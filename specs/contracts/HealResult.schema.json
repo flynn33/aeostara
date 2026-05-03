@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HealResult",
+  "description": "Top-level healing result.",
+  "type": "object",
+  "properties": {
+    "healResultID": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "NO_ACTION",
+        "HEALED",
+        "BLOCKED",
+        "ESCALATED",
+        "SAFE_HALT"
+      ]
+    },
+    "recoveryPlan": {
+      "$ref": "RecoveryPlan.schema.json"
+    },
+    "auditChain": {
+      "$ref": "AuditChain.schema.json"
+    },
+    "diagnosticChain": {
+      "$ref": "DiagnosticChain.schema.json"
+    }
+  },
+  "required": [
+    "healResultID",
+    "status",
+    "recoveryPlan",
+    "auditChain",
+    "diagnosticChain"
+  ],
+  "additionalProperties": false
+}

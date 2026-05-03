@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RecoveryStep",
+  "description": "Single platform-neutral recovery step.",
+  "type": "object",
+  "properties": {
+    "stepID": {
+      "type": "string"
+    },
+    "stepType": {
+      "type": "string",
+      "enum": [
+        "NORMALIZE_STATE",
+        "APPLY_CORRECTION",
+        "SELECT_FALLBACK",
+        "ENTER_CONTAINMENT",
+        "ENTER_SAFE_HALT",
+        "ROLLBACK",
+        "VERIFY",
+        "ESCALATE"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "jsonMutationOperations": {
+      "type": "array",
+      "items": {
+        "$ref": "JsonMutationOperation.schema.json"
+      },
+      "minItems": 0
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "stepID",
+    "stepType",
+    "description",
+    "jsonMutationOperations",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

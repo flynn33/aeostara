@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TransitionResult",
+  "description": "Transition result.",
+  "type": "object",
+  "properties": {
+    "resultID": {
+      "type": "string"
+    },
+    "transitionID": {
+      "type": "string"
+    },
+    "inputState": {
+      "$ref": "AshState.schema.json"
+    },
+    "outputState": {
+      "$ref": "AshState.schema.json"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "resultID",
+    "transitionID",
+    "inputState",
+    "outputState",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

@@ -1,14 +1,35 @@
-# Aeostara Platform Compliance and Branch Alignment Audit
+# Aeostara Base Compliance Audit
 
 name: Compliance Audit
 
 on:
   push:
-    branches:
-      - 'platform/**'
+    branches: [main]
+    paths:
+      - 'README.md'
+      - 'REMEDIATION_STATUS.md'
+      - 'BASE_DESIGN_COMPLETION.md'
+      - 'ASH_BASELINE_REFERENCE.md'
+      - 'specs/**'
+      - 'conformance/**'
+      - 'fixtures/conformance/**'
+      - 'fixtures/schema_examples/**'
+      - 'implementation_handoff/**'
+      - 'templates/platform_repo/**'
+      - 'ci/**'
   pull_request:
-    branches:
-      - 'platform/**'
+    paths:
+      - 'README.md'
+      - 'REMEDIATION_STATUS.md'
+      - 'BASE_DESIGN_COMPLETION.md'
+      - 'ASH_BASELINE_REFERENCE.md'
+      - 'specs/**'
+      - 'conformance/**'
+      - 'fixtures/conformance/**'
+      - 'fixtures/schema_examples/**'
+      - 'implementation_handoff/**'
+      - 'templates/platform_repo/**'
+      - 'ci/**'
 
 jobs:
   compliance-check:
@@ -21,19 +42,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run source safety compliance checker
-        run: python ci/compliance_checker.py . --mode source-safety
+      - name: Run base-design compliance checker
+        run: python ci/compliance_checker.py . --mode all
 
-      - name: Resolve branch alignment profile
-        id: profile
-        shell: bash
-        run: |
-          case "${GITHUB_REF_NAME}" in
-            "platform/windows") echo "name=platform_windows" >> "$GITHUB_OUTPUT" ;;
-            "platform/macos") echo "name=platform_macos" >> "$GITHUB_OUTPUT" ;;
-            "platform/ios") echo "name=platform_ios" >> "$GITHUB_OUTPUT" ;;
-            *) echo "name=main" >> "$GITHUB_OUTPUT" ;;
-          esac
-
-      - name: Run branch alignment checker
-        run: python ci/branch_alignment_checker.py . --profile "${{ steps.profile.outputs.name }}"
+      - name: Run completion checker
+        run: python ci/base_design_completion_checker.py .

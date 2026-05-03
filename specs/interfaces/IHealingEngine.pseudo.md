@@ -1,34 +1,13 @@
-# IHealingEngine Interface
 
-Top-level downstream orchestration interface. Semantic authority is ASH; this interface exposes execution orchestration mechanics.
+# IHealingEngine
 
-## Methods
+## Purpose
 
-### evaluate(observationSource, intentSource) -> EvaluationResult
+Coordinates observe, normalize, project, diagnose, plan, policy, backup, execute, verify, rollback, fallback, containment, safe halt, diagnostics, and audit.
 
-Runs observe/normalize/map/diagnose/classify/recoverability selection without applying mutation.
+## Contract Rules
 
-**Returns:**
-- `diagnostic` (StateValidityDiagnostic)
-- `systemStateClass` (SystemStateClass)
-- `recoveryCategory` (RecoveryCategory)
-- `proposedRecoveryPlan` (RecoveryPlan)
-
-### heal(observationSource, intentSource, policySource, auditSink) -> HealResult
-
-Executes the full diagnosis-first flow with policy, backup, verification, rollback/fallback/containment/safe-halt handling.
-
-**Returns:**
-- `success` (boolean)
-- `terminal` (boolean)
-- `executedPlan` (RecoveryPlan)
-- `verification` (VerificationResult)
-- `fallbackDecision` (FallbackDecision, optional)
-- `containmentDecision` (ContainmentDecision, optional)
-- `safeHaltDecision` (SafeHaltDecision, optional)
-- `auditEvents` (list of AuditEvent)
-- `message` (string)
-
-### dryRunRecovery(observationSource, intentSource, policySource) -> DryRunResult
-
-Evaluates and plans recovery without mutating targets.
+- The interface is platform-neutral and specifies boundary behavior only.
+- Downstream platform repos provide native implementations.
+- All decisions, failures, blocked actions, and safety transitions must emit diagnostic references and audit events.
+- Implementations must consume the schemas in `specs/contracts/` without changing base semantics.

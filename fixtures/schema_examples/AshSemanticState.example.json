@@ -1,0 +1,66 @@
+{
+  "ashSemanticStateID": "example",
+  "ashState": {
+    "stateID": "example",
+    "coordinates": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sourceReference": "example",
+    "canonicalHash": "example"
+  },
+  "admissibilityResult": {
+    "resultID": "example",
+    "stateReference": "example",
+    "status": "VALID",
+    "orbitReference": "example",
+    "diagnosticReference": {
+      "diagnosticID": "example",
+      "chainRootReference": "example",
+      "diagnosticKind": "STATE_VALIDITY",
+      "ruleReferences": [
+        {
+          "ruleID": "ASH-STATE-VALIDITY-001",
+          "sourceReference": "example",
+          "ruleFamily": "example"
+        }
+      ]
+    }
+  },
+  "realmIdentity": {
+    "realmID": "example",
+    "stateReference": "example",
+    "encoding": "example",
+    "diagnosticReference": {
+      "diagnosticID": "example",
+      "chainRootReference": "example",
+      "diagnosticKind": "STATE_VALIDITY",
+      "ruleReferences": [
+        {
+          "ruleID": "ASH-STATE-VALIDITY-001",
+          "sourceReference": "example",
+          "ruleFamily": "example"
+        }
+      ]
+    }
+  },
+  "diagnosticReference": {
+    "diagnosticID": "example",
+    "chainRootReference": "example",
+    "diagnosticKind": "STATE_VALIDITY",
+    "ruleReferences": [
+      {
+        "ruleID": "ASH-STATE-VALIDITY-001",
+        "sourceReference": "example",
+        "ruleFamily": "example"
+      }
+    ]
+  }
+}

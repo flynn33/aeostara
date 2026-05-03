@@ -1,26 +1,21 @@
-# Future Repository Split Plan
 
-Status: planning only.
+# Multi-Repo Consumption Model
 
-## Target Structure
+This document supersedes earlier repo-split planning language. The repo split is now an active consumption model: Aeostara is the platform-agnostic base design, and platform implementations live downstream.
 
-| Repository | Purpose |
-|---|---|
-| `aeostara-conformance-spec` | Downstream ASH conformance contracts, algorithms, acceptance, CI gates |
-| `aeostara-windows` | Windows native realization |
-| `aeostara-macos` | macOS native realization |
-| `aeostara-ios` | iOS native realization |
+## Model
 
-## Migration Principle
+- ASH Pattern System remains upstream semantic authority.
+- Aeostara binds ASH into a JSON configuration healing base design.
+- Windows, Mac, and iOS repositories consume Aeostara through version pins and conformance reports.
 
-The split must maintain the authority hierarchy:
+## No Active Platform Branch Dependency
 
-- ASH upstream semantic source of truth
-- Aeostara conformance specs downstream
-- Platform repos as native realization layers
+Aeostara base-design completion does not require platform branches or native source files. Branch/profile artifacts may be kept only as downstream templates or historical references. Active base CI validates base design artifacts, not platform implementations.
 
-## Pre-Split Requirements
+## Downstream Consumption Flow
 
-1. Conformance artifacts and traceability matrix finalized.
-2. CI checks detect semantic-authority regressions.
-3. Platform repos consume conformance artifacts without local semantic forks.
+1. Platform repo pins an Aeostara version.
+2. Platform repo maps contracts and interfaces to native modules.
+3. Platform repo runs Aeostara fixture vectors.
+4. Platform repo records module mapping, verification report, diagnostics report, materialization boundary report, deviation log, and acceptance judgment.

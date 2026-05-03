@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DiagnosticReference",
+  "description": "Reference from decisions and audit events to a diagnostic chain.",
+  "type": "object",
+  "properties": {
+    "diagnosticID": {
+      "type": "string"
+    },
+    "chainRootReference": {
+      "type": "string"
+    },
+    "diagnosticKind": {
+      "type": "string",
+      "enum": [
+        "STATE_VALIDITY",
+        "RECOVERY",
+        "POLICY",
+        "BACKUP",
+        "EXECUTION",
+        "VERIFICATION",
+        "ROLLBACK",
+        "FALLBACK",
+        "CONTAINMENT",
+        "SAFE_HALT",
+        "AUDIT",
+        "MAPPING",
+        "JSON_SEMANTICS"
+      ]
+    },
+    "ruleReferences": {
+      "type": "array",
+      "items": {
+        "$ref": "RuleReference.schema.json"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "diagnosticID",
+    "chainRootReference",
+    "diagnosticKind",
+    "ruleReferences"
+  ],
+  "additionalProperties": false
+}

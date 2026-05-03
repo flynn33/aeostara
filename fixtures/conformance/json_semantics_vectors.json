@@ -1,0 +1,230 @@
+{
+  "fixtureSetID": "json_semantics_vectors",
+  "vectors": [
+    {
+      "fixtureID": "json-missing-vs-null",
+      "category": "missing-vs-null",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "missingPointer": "/a/b",
+        "nullPointer": "/a/c"
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "STABLE",
+        "recoveryCategory": "NO_ACTION",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "json-key-with-dot",
+      "category": "object-key-with-dot",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "pointer": "/feature.flag"
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "STABLE",
+        "recoveryCategory": "NO_ACTION",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "json-array-addressing",
+      "category": "arrays",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "pointer": "/items/0"
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "STABLE",
+        "recoveryCategory": "NO_ACTION",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "json-canonicalization-stability",
+      "category": "canonicalization-stability",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "STABLE",
+        "recoveryCategory": "NO_ACTION",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "json-precondition-failure",
+      "category": "precondition-failure",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "JSON_SEMANTICS",
+        "stateClass": "FAILED",
+        "recoveryCategory": "ESCALATION_REQUIRED",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": [
+        "unsafe mutation must be blocked"
+      ]
+    }
+  ]
+}

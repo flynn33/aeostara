@@ -1,40 +1,32 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "SafeHaltDecision",
-  "description": "Decision record for terminal safe-halt transition with complete diagnostic chain.",
+  "description": "Terminal safe-halt decision.",
   "type": "object",
   "properties": {
-    "decisionID": {
+    "safeHaltDecisionID": {
       "type": "string"
     },
-    "enterSafeHalt": {
-      "type": "boolean"
+    "terminal": {
+      "type": "boolean",
+      "const": true
     },
-    "trigger": {
-      "type": "string",
-      "enum": [
-        "ESCALATION_FROM_FAILED",
-        "CONTAINMENT_BREACH",
-        "OPERATOR_HALT_REQUEST",
-        "POLICY_HALT_REQUEST",
-        "UNRESOLVABLE_BLOCKED_RECOVERY",
-        "NONE"
-      ]
+    "blockedTransitions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
     },
-    "isTerminal": {
-      "type": "boolean"
-    },
-    "diagnosticChainReference": {
-      "type": "string"
-    },
-    "reason": {
-      "type": "string"
-    },
-    "decidedAt": {
-      "type": "string",
-      "format": "date-time"
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     }
   },
-  "required": ["decisionID", "enterSafeHalt", "trigger", "isTerminal", "diagnosticChainReference", "reason", "decidedAt"],
+  "required": [
+    "safeHaltDecisionID",
+    "terminal",
+    "blockedTransitions",
+    "diagnosticReference"
+  ],
   "additionalProperties": false
 }

@@ -1,13 +1,13 @@
-# IBackupProvider Interface
 
-Backup provider for deterministic pre-mutation capture and restoration.
+# IBackupProvider
 
-## Methods
+## Purpose
 
-### createBackup(targetReference) -> backupReference
+Creates and restores backups described by BackupRecord and BackupResult.
 
-Create a deterministic backup before mutation-capable recovery steps.
+## Contract Rules
 
-### restoreBackup(backupReference, restoreTargets) -> Boolean
-
-Restore one or more execution targets from the specified backup reference.
+- The interface is platform-neutral and specifies boundary behavior only.
+- Downstream platform repos provide native implementations.
+- All decisions, failures, blocked actions, and safety transitions must emit diagnostic references and audit events.
+- Implementations must consume the schemas in `specs/contracts/` without changing base semantics.

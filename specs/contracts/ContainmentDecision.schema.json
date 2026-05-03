@@ -1,36 +1,40 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ContainmentDecision",
-  "description": "Decision record for containment entry and restricted-operations posture.",
+  "description": "Containment boundary and restricted operations.",
   "type": "object",
   "properties": {
-    "decisionID": {
+    "containmentDecisionID": {
       "type": "string"
     },
-    "enterContainment": {
-      "type": "boolean"
+    "boundary": {
+      "type": "object",
+      "additionalProperties": true
     },
-    "trigger": {
-      "type": "string",
-      "enum": ["FALLBACK_FAILURE", "PROPAGATION_RISK", "OPERATOR_REQUEST", "RECOVERY_VALIDATION_FAILURE", "NONE"]
+    "allowedOperations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
     },
     "restrictedOperations": {
       "type": "array",
       "items": {
         "type": "string"
-      }
+      },
+      "minItems": 1
     },
-    "awaitingResolution": {
-      "type": "boolean"
-    },
-    "reason": {
-      "type": "string"
-    },
-    "decidedAt": {
-      "type": "string",
-      "format": "date-time"
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     }
   },
-  "required": ["decisionID", "enterContainment", "trigger", "restrictedOperations", "awaitingResolution", "reason", "decidedAt"],
+  "required": [
+    "containmentDecisionID",
+    "boundary",
+    "allowedOperations",
+    "restrictedOperations",
+    "diagnosticReference"
+  ],
   "additionalProperties": false
 }

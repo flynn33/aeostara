@@ -1,37 +1,40 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "VerificationResult",
-  "description": "Post-execution verification result for ASH-aligned recovery outcomes.",
+  "description": "Verification result paired with a verification plan.",
   "type": "object",
   "properties": {
-    "success": {
-      "type": "boolean"
+    "verificationResultID": {
+      "type": "string"
     },
-    "verifiedAt": {
+    "verificationPlanID": {
+      "type": "string"
+    },
+    "status": {
       "type": "string",
-      "format": "date-time"
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "BLOCKED"
+      ]
     },
-    "verificationStage": {
-      "type": "string",
-      "enum": ["POST_EXECUTION", "POST_FALLBACK", "POST_CONTAINMENT_CHECK"]
+    "expectedSemanticState": {
+      "$ref": "AshState.schema.json"
     },
-    "resultingSystemStateClass": {
-      "type": "string",
-      "enum": ["STABLE", "UNSTABLE", "CORRECTABLE", "DEGRADED", "CONTAINED", "FAILED", "SAFE_HALT"]
+    "actualSemanticState": {
+      "$ref": "AshState.schema.json"
     },
-    "failedChecks": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "ruleIDs": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     }
   },
-  "required": ["success", "verifiedAt", "verificationStage", "resultingSystemStateClass", "failedChecks"],
+  "required": [
+    "verificationResultID",
+    "verificationPlanID",
+    "status",
+    "expectedSemanticState",
+    "actualSemanticState",
+    "diagnosticReference"
+  ],
   "additionalProperties": false
 }

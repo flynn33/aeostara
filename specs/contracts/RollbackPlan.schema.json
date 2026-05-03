@@ -1,33 +1,27 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "RollbackPlan",
-  "description": "Deterministic rollback plan used when execution verification fails or policy requires rollback.",
+  "description": "Rollback plan linked to backup and verification failure.",
   "type": "object",
   "properties": {
     "rollbackPlanID": {
       "type": "string"
     },
-    "recoveryPlanID": {
+    "backupRecordID": {
       "type": "string"
     },
-    "backupReference": {
+    "triggerVerificationResultID": {
       "type": "string"
     },
-    "restoreTargets": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1
-    },
-    "rollbackReason": {
-      "type": "string"
-    },
-    "createdAt": {
-      "type": "string",
-      "format": "date-time"
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     }
   },
-  "required": ["rollbackPlanID", "recoveryPlanID", "backupReference", "restoreTargets", "rollbackReason", "createdAt"],
+  "required": [
+    "rollbackPlanID",
+    "backupRecordID",
+    "triggerVerificationResultID",
+    "diagnosticReference"
+  ],
   "additionalProperties": false
 }

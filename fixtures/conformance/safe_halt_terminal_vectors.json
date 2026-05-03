@@ -1,0 +1,97 @@
+{
+  "fixtureSetID": "safe_halt_terminal_vectors",
+  "vectors": [
+    {
+      "fixtureID": "safe-halt-entered",
+      "category": "safe-halt-entered",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "SAFE_HALT",
+        "stateClass": "SAFE_HALT",
+        "recoveryCategory": "TERMINAL_NO_RECOVERY",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "safe-halt-transition-rejected",
+      "category": "attempted-transition-after-safe-halt-rejected",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "SAFE_HALT",
+        "stateClass": "SAFE_HALT",
+        "recoveryCategory": "TERMINAL_NO_RECOVERY",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": [
+        "transition after safe halt rejected"
+      ]
+    }
+  ]
+}

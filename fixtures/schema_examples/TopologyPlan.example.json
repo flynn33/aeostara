@@ -1,0 +1,40 @@
+{
+  "topologyID": "example",
+  "rootState": {
+    "stateID": "example",
+    "coordinates": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sourceReference": "example",
+    "canonicalHash": "example"
+  },
+  "nodes": [
+    {}
+  ],
+  "edges": [
+    {}
+  ],
+  "lineage": {},
+  "diagnosticReferences": [
+    {
+      "diagnosticID": "example",
+      "chainRootReference": "example",
+      "diagnosticKind": "STATE_VALIDITY",
+      "ruleReferences": [
+        {
+          "ruleID": "ASH-STATE-VALIDITY-001",
+          "sourceReference": "example",
+          "ruleFamily": "example"
+        }
+      ]
+    }
+  ]
+}

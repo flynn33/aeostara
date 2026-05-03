@@ -1,0 +1,24 @@
+{
+  "axiomID": "example",
+  "diagnosticEnvelope": {
+    "diagnosticID": "example",
+    "chainRootReference": "example",
+    "parentDiagnosticID": "example",
+    "diagnosticKind": "STATE_VALIDITY",
+    "severity": "INFO",
+    "message": "example",
+    "ruleReferences": [
+      {
+        "ruleID": "ASH-STATE-VALIDITY-001",
+        "sourceReference": "example",
+        "ruleFamily": "example"
+      }
+    ],
+    "sourceReferences": [
+      "example"
+    ],
+    "evidence": {}
+  },
+  "evaluationResult": "PASS",
+  "evidence": {}
+}

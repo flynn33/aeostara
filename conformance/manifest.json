@@ -1,0 +1,23 @@
+{
+  "manifestVersion": "1.0.0",
+  "aeostaraRole": "platform-agnostic-base-design",
+  "ashBaselineCommit": "e123f5d7fdbb381179971f721a3292c31eb1cbc2",
+  "requiredFixtureFiles": [
+    "ash_codeword_vectors.json",
+    "state_admissibility_vectors.json",
+    "semantic_projection_vectors.json",
+    "json_semantics_vectors.json",
+    "diagnostic_chain_vectors.json",
+    "recovery_escalation_vectors.json",
+    "policy_block_vectors.json",
+    "backup_rollback_vectors.json",
+    "safe_halt_terminal_vectors.json",
+    "end_to_end_healing_vectors.json"
+  ],
+  "requiredSchemaExampleDirectory": "fixtures/schema_examples",
+  "finalJudgments": [
+    "CONFORMANT",
+    "CONFORMANT WITH CAVEATS",
+    "NON-CONFORMANT"
+  ]
+}

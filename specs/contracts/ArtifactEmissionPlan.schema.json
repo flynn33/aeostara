@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ArtifactEmissionPlan",
+  "description": "Materialization input from a generation plan.",
+  "type": "object",
+  "properties": {
+    "emissionPlanID": {
+      "type": "string"
+    },
+    "generationPlanID": {
+      "type": "string"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "traceability": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "emissionPlanID",
+    "generationPlanID",
+    "artifacts",
+    "traceability"
+  ],
+  "additionalProperties": false
+}

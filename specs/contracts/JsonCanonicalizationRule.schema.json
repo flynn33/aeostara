@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JsonCanonicalizationRule",
+  "description": "Deterministic JSON serialization and hashing rule.",
+  "type": "object",
+  "properties": {
+    "ruleID": {
+      "type": "string"
+    },
+    "objectKeyOrdering": {
+      "type": "string",
+      "enum": [
+        "LEXICOGRAPHIC_UTF8"
+      ]
+    },
+    "arrayOrdering": {
+      "type": "string",
+      "enum": [
+        "PRESERVE_INPUT_ORDER"
+      ]
+    },
+    "numberEncoding": {
+      "type": "string",
+      "enum": [
+        "JSON_NUMBER_CANONICAL"
+      ]
+    },
+    "hashAlgorithm": {
+      "type": "string",
+      "enum": [
+        "SHA-256"
+      ]
+    }
+  },
+  "required": [
+    "ruleID",
+    "objectKeyOrdering",
+    "arrayOrdering",
+    "numberEncoding",
+    "hashAlgorithm"
+  ],
+  "additionalProperties": false
+}

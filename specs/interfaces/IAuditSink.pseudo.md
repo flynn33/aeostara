@@ -1,13 +1,13 @@
-# IAuditSink Interface
 
-Append-only audit sink for diagnosis/recovery/escalation lifecycle records.
+# IAuditSink
 
-## Methods
+## Purpose
 
-### record(event)
+Persists ordered AuditEvent and AuditChain records linked to diagnostics.
 
-Persist a single `AuditEvent`.
+## Contract Rules
 
-### getEvents(chainRootReference) -> List[AuditEvent]
-
-Return audit events linked to a specific diagnostic chain root.
+- The interface is platform-neutral and specifies boundary behavior only.
+- Downstream platform repos provide native implementations.
+- All decisions, failures, blocked actions, and safety transitions must emit diagnostic references and audit events.
+- Implementations must consume the schemas in `specs/contracts/` without changing base semantics.

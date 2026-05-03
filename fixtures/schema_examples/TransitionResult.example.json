@@ -1,0 +1,48 @@
+{
+  "resultID": "example",
+  "transitionID": "example",
+  "inputState": {
+    "stateID": "example",
+    "coordinates": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sourceReference": "example",
+    "canonicalHash": "example"
+  },
+  "outputState": {
+    "stateID": "example",
+    "coordinates": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sourceReference": "example",
+    "canonicalHash": "example"
+  },
+  "diagnosticReference": {
+    "diagnosticID": "example",
+    "chainRootReference": "example",
+    "diagnosticKind": "STATE_VALIDITY",
+    "ruleReferences": [
+      {
+        "ruleID": "ASH-STATE-VALIDITY-001",
+        "sourceReference": "example",
+        "ruleFamily": "example"
+      }
+    ]
+  }
+}

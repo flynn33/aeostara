@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExecutionContext",
+  "description": "Context for executing an approved plan.",
+  "type": "object",
+  "properties": {
+    "executionContextID": {
+      "type": "string"
+    },
+    "recoveryPlanID": {
+      "type": "string"
+    },
+    "policyDecision": {
+      "$ref": "PolicyDecision.schema.json"
+    },
+    "backupResult": {
+      "$ref": "BackupResult.schema.json"
+    },
+    "verificationPlan": {
+      "$ref": "VerificationPlan.schema.json"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "executionContextID",
+    "recoveryPlanID",
+    "policyDecision",
+    "backupResult",
+    "verificationPlan",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

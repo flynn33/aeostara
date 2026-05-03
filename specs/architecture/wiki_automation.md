@@ -25,7 +25,7 @@ Periodic cross-branch refresh agent:
 
 - Workflow: `.github/workflows/wiki-maintenance-sweep.yml`
 - Trigger: daily schedule + manual dispatch
-- Scope: `main`, `platform/windows`, `platform/macos`, `platform/ios`
+- Scope: `main` base-design documentation. Platform implementation repositories maintain their own downstream wiki/API references.
 
 Responsibilities:
 

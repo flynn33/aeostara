@@ -1,25 +1,13 @@
-# IFileSystem Interface
 
-Abstract filesystem operations used by adapters, backup, verification, and audit mechanics.
+# IFileSystem
 
-## Methods
+## Purpose
 
-### readFile(path) -> string
+Abstracts platform file mechanics without defining platform-specific source code.
 
-Read file content.
+## Contract Rules
 
-### writeFile(path, content)
-
-Write file content.
-
-### fileExists(path) -> Boolean
-
-Check file presence.
-
-### copyFile(fromPath, toPath) -> Boolean
-
-Copy file content.
-
-### appendFile(path, content)
-
-Append content to file.
+- The interface is platform-neutral and specifies boundary behavior only.
+- Downstream platform repos provide native implementations.
+- All decisions, failures, blocked actions, and safety transitions must emit diagnostic references and audit events.
+- Implementations must consume the schemas in `specs/contracts/` without changing base semantics.

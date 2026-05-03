@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DiagnosticEnvelope",
+  "description": "Canonical diagnostic envelope used across lifecycle decisions.",
+  "type": "object",
+  "properties": {
+    "diagnosticID": {
+      "type": "string"
+    },
+    "chainRootReference": {
+      "type": "string"
+    },
+    "parentDiagnosticID": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "diagnosticKind": {
+      "type": "string",
+      "enum": [
+        "STATE_VALIDITY",
+        "RECOVERY",
+        "POLICY",
+        "BACKUP",
+        "EXECUTION",
+        "VERIFICATION",
+        "ROLLBACK",
+        "FALLBACK",
+        "CONTAINMENT",
+        "SAFE_HALT",
+        "AUDIT",
+        "MAPPING",
+        "JSON_SEMANTICS"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "INFO",
+        "WARNING",
+        "ERROR",
+        "CRITICAL"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "ruleReferences": {
+      "type": "array",
+      "items": {
+        "$ref": "RuleReference.schema.json"
+      },
+      "minItems": 1
+    },
+    "sourceReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "diagnosticID",
+    "chainRootReference",
+    "parentDiagnosticID",
+    "diagnosticKind",
+    "severity",
+    "message",
+    "ruleReferences",
+    "sourceReferences",
+    "evidence"
+  ],
+  "additionalProperties": false
+}

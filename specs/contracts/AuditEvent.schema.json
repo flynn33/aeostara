@@ -1,56 +1,53 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "AuditEvent",
-  "description": "Audit trail event for ASH-aligned diagnosis, recovery, fallback, containment, safe-halt, and execution mechanics.",
+  "description": "Audit event tied to diagnostic chain.",
   "type": "object",
   "properties": {
-    "eventID": {
+    "auditEventID": {
       "type": "string"
+    },
+    "eventSequence": {
+      "type": "integer"
     },
     "eventType": {
       "type": "string",
       "enum": [
-        "ObservationCaptured",
-        "StateNormalized",
-        "StateMappedToAsh",
-        "DiagnosticEvaluated",
-        "StateClassified",
-        "RecoverabilityClassified",
-        "RecoveryPlanGenerated",
-        "PolicyGateBlocked",
-        "BackupCreated",
-        "ExecutionApplied",
-        "VerificationSucceeded",
-        "VerificationFailed",
-        "RollbackExecuted",
-        "FallbackSelected",
-        "ContainmentEntered",
-        "SafeHaltEntered",
-        "EscalationRaised"
+        "OBSERVE",
+        "NORMALIZE",
+        "PROJECT",
+        "DIAGNOSE",
+        "CLASSIFY",
+        "PLAN",
+        "POLICY_GATE",
+        "BACKUP",
+        "EXECUTE",
+        "VERIFY",
+        "ROLLBACK",
+        "FALLBACK",
+        "CONTAINMENT",
+        "SAFE_HALT",
+        "RESULT"
       ]
     },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     },
-    "subjectReference": {
+    "occurredAt": {
       "type": "string"
-    },
-    "diagnosticKind": {
-      "type": "string",
-      "enum": ["STATE_VALIDITY", "RECOVERY", "FALLBACK", "CONTAINMENT", "SAFE_HALT"]
-    },
-    "ruleIDs": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
     },
     "details": {
       "type": "object",
       "additionalProperties": true
     }
   },
-  "required": ["eventID", "eventType", "timestamp", "subjectReference", "details"],
+  "required": [
+    "auditEventID",
+    "eventSequence",
+    "eventType",
+    "diagnosticReference",
+    "occurredAt",
+    "details"
+  ],
   "additionalProperties": false
 }

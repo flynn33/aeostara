@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SurfaceDifference",
+  "description": "Evidence-only JSON surface difference record.",
+  "type": "object",
+  "properties": {
+    "differenceID": {
+      "type": "string"
+    },
+    "path": {
+      "$ref": "JsonPointer.schema.json"
+    },
+    "differenceKind": {
+      "type": "string",
+      "enum": [
+        "MISSING",
+        "ADDED",
+        "REMOVED",
+        "REPLACED",
+        "TYPE_CHANGED",
+        "ARRAY_CHANGED"
+      ]
+    },
+    "observedDocument": {
+      "$ref": "JsonDocumentReference.schema.json"
+    },
+    "desiredDocument": {
+      "$ref": "JsonDocumentReference.schema.json"
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
+    }
+  },
+  "required": [
+    "differenceID",
+    "path",
+    "differenceKind",
+    "observedDocument",
+    "desiredDocument",
+    "diagnosticReference"
+  ],
+  "additionalProperties": false
+}

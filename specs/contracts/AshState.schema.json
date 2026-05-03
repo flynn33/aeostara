@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AshState",
+  "description": "Full 9-bit ASH state in F2^9.",
+  "type": "object",
+  "properties": {
+    "stateID": {
+      "type": "string"
+    },
+    "coordinates": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "minItems": 9,
+      "maxItems": 9
+    },
+    "sourceReference": {
+      "type": "string"
+    },
+    "canonicalHash": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "stateID",
+    "coordinates",
+    "sourceReference",
+    "canonicalHash"
+  ],
+  "additionalProperties": false
+}

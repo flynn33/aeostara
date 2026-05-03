@@ -1,34 +1,27 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "RepairPlanActuatorProjection",
-  "description": "Authoritative downstream actuator projection of a RecoveryPlan into deterministic repair mutations built under the ASH Pattern System.",
-  "x-ash-role": "authoritative-downstream-actuator-plan",
-  "x-upstream-contract": "RecoveryPlan.schema.json",
+  "title": "RepairPlan",
+  "description": "Actuator projection subordinate to RecoveryPlan.",
   "type": "object",
   "properties": {
-    "planID": {
+    "repairPlanID": {
       "type": "string"
     },
-    "recoveryPlanID": {
-      "type": "string"
+    "recoveryPlan": {
+      "$ref": "RecoveryPlan.schema.json"
     },
-    "actions": {
+    "repairActions": {
       "type": "array",
       "items": {
         "$ref": "RepairAction.schema.json"
-      }
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "requiresBackup": {
-      "type": "boolean"
-    },
-    "policyGateID": {
-      "type": "string"
+      },
+      "minItems": 0
     }
   },
-  "required": ["planID", "recoveryPlanID", "actions", "timestamp", "requiresBackup", "policyGateID"],
+  "required": [
+    "repairPlanID",
+    "recoveryPlan",
+    "repairActions"
+  ],
   "additionalProperties": false
 }

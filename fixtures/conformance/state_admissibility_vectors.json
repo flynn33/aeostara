@@ -1,0 +1,185 @@
+{
+  "fixtureSetID": "state_admissibility_vectors",
+  "vectors": [
+    {
+      "fixtureID": "admissibility-valid",
+      "category": "valid",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "STABLE",
+        "recoveryCategory": "NO_ACTION",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "admissibility-compatible",
+      "category": "transformation-compatible",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "CORRECTABLE",
+        "recoveryCategory": "APPLY_CORRECTION",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "admissibility-incompatible",
+      "category": "transformation-incompatible",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "DEGRADED",
+        "recoveryCategory": "FALLBACK_REQUIRED",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    },
+    {
+      "fixtureID": "admissibility-unclassified",
+      "category": "malformed-unclassified",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "FAILED",
+        "recoveryCategory": "ESCALATION_REQUIRED",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "DiagnosticEnvelope.schema.json",
+            "instance": {
+              "diagnosticID": "example",
+              "chainRootReference": "example",
+              "parentDiagnosticID": "example",
+              "diagnosticKind": "STATE_VALIDITY",
+              "severity": "INFO",
+              "message": "example",
+              "ruleReferences": [
+                {
+                  "ruleID": "ASH-STATE-VALIDITY-001",
+                  "sourceReference": "example",
+                  "ruleFamily": "example"
+                }
+              ],
+              "sourceReferences": [
+                "example"
+              ],
+              "evidence": {}
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    }
+  ]
+}

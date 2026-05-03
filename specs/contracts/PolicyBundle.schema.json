@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PolicyBundle",
+  "description": "Policy source bundle consumed by gate evaluation.",
+  "type": "object",
+  "properties": {
+    "policyBundleID": {
+      "type": "string"
+    },
+    "sourceReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "minItems": 1
+    },
+    "bundleHash": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "policyBundleID",
+    "sourceReferences",
+    "rules",
+    "bundleHash"
+  ],
+  "additionalProperties": false
+}

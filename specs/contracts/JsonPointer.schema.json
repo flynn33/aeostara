@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JsonPointer",
+  "description": "JSON Pointer-compatible address model.",
+  "type": "object",
+  "properties": {
+    "pointer": {
+      "type": "string",
+      "pattern": "^($|/.*)"
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "pointsToMissing": {
+      "type": "boolean"
+    },
+    "pointsToNull": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "pointer",
+    "tokens",
+    "pointsToMissing",
+    "pointsToNull"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AxiomDiagnostic",
+  "description": "Explainable axiom evaluation.",
+  "type": "object",
+  "properties": {
+    "axiomID": {
+      "type": "string"
+    },
+    "diagnosticEnvelope": {
+      "$ref": "DiagnosticEnvelope.schema.json"
+    },
+    "evaluationResult": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL",
+        "BLOCKED"
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "axiomID",
+    "diagnosticEnvelope",
+    "evaluationResult",
+    "evidence"
+  ],
+  "additionalProperties": false
+}

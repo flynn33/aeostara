@@ -1,0 +1,10 @@
+{
+  "emissionPlanID": "example",
+  "generationPlanID": "example",
+  "artifacts": [
+    {}
+  ],
+  "traceability": [
+    {}
+  ]
+}

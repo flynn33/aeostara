@@ -1,0 +1,10 @@
+{
+  "policyBundleID": "example",
+  "sourceReferences": [
+    "example"
+  ],
+  "rules": [
+    {}
+  ],
+  "bundleHash": "example"
+}

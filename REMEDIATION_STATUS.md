@@ -1,78 +1,46 @@
+
 # Aeostara Remediation Status
 
 Last updated: 2026-05-03
-Status: Complete - downstream rebuild under the ASH Pattern System
+Status: Complete - base-design conformance gates passed
 
 ## Authority Statement
 
 - ASH is the immutable upstream semantic authority.
-- Aeostara is the downstream conformance and execution-spec repository.
+- Aeostara is the platform-agnostic base-design specification package that conforms to ASH.
+- Platform repos consume Aeostara; Aeostara does not depend on platform repositories, platform branches, or native platform source files.
 - If Aeostara conflicts with ASH, Aeostara changes.
 
-Aeostara defines authoritative downstream contracts, algorithms, fixtures, and execution mechanics built on the ASH Pattern System.
+## Corrected Completion Posture
 
-## Authoritative Decision Model
+Previous completion language based on branch/profile alignment has been superseded. Branch profiles and native source expectations are not active Aeostara base-design completion gates. Useful platform-specific requirements now belong in downstream handoff guidance and platform-repository conformance templates.
 
-Aeostara implements and documents this decision path:
+Aeostara may be marked complete only after these gates pass:
 
-`observe -> normalize -> map to ASH-aligned semantic state -> diagnose -> classify -> determine recoverability -> generate recovery plan -> gate -> backup -> execute -> verify -> rollback / fallback / containment / safe-halt`
+1. Existing retained CI gates.
+2. Schema and schema-example validation.
+3. Fixture conformance validation with expected outputs.
+4. ASH baseline traceability and invariant coverage.
+5. JSON Pointer and semantic projection checks.
+6. Diagnostic-chain integrity checks.
+7. Recovery, policy, backup, rollback, fallback, containment, and safe-halt consistency checks.
+8. Downstream platform handoff checks.
+9. Static audit confirming no active platform-branch dependency language remains.
 
-Surface-difference evidence and actuator projections are valid only inside this ASH-aligned flow.
+## Active Base-Design Surface
 
-## Active Contract Surface
+- ASH baseline binding layer.
+- JSON configuration semantic model.
+- Semantic projection and ASH state mapping layer.
+- Diagnosis-first healing lifecycle.
+- Recovery, fallback, containment, and safe-halt contracts.
+- Policy, backup, execution, verification, rollback, and audit contracts.
+- Downstream platform repository handoff requirements.
+- Fixture-based conformance validation.
+- Audit-ready traceability to ASH.
 
-- Observed system state
-- Desired system intent
-- ASH semantic state
-- State-validity diagnostic
-- System-state class
-- Recovery category
-- Recovery plan
-- Fallback decision
-- Containment decision
-- Safe-halt decision
-- Rollback, verification, audit, and module-manifest mechanics
-- Observation, intent, encoding, evidence, actuator, repair, and policy contracts built as downstream ASH artifacts
+## Current Judgment
 
-## Active Algorithm Surface
+`SELF_AUDIT_REPORT.md` records passing command outputs for the retained CI gates, new base-design conformance suite, and external static audit probe.
 
-- State normalization
-- State-to-ASH mapping
-- ASH diagnostic evaluation
-- State classification
-- Recovery-category selection
-- Recovery-plan generation
-- Surface-difference evidence
-- Actuator projection planning
-- Policy evaluation
-- Backup, execution, verification, rollback, and audit
-- Fallback, containment, and safe-halt handling
-
-## Branch Alignment
-
-Branch alignment remains part of conformance scope.
-
-- Profiles define required branch invariants: `branch_profiles/*.profile.json`
-- Contract authority: `specs/architecture/branch_alignment_contract.md`
-- Acceptance target: `specs/acceptance/branch_alignment_targets.md`
-- Automation enforcement: `ci/branch_alignment_checker.py` and `.github/workflows/*`
-
-## Completed Phases
-
-- Phase 0 Control/Freeze: complete
-- Phase 1 Architecture authority reset: complete
-- Phase 2-6 Contracts and algorithms: complete
-- Phase 7 Acceptance rebuild: complete
-- Phase 8 CI hardening: complete
-- Phase 9 Cleanup and ASH rebuild: complete
-
-## Acceptance Gate
-
-Remediation is complete because:
-
-1. ASH is explicit upstream authority in repo docs.
-2. Aeostara artifacts are rebuilt as current ASH Pattern System downstream specifications.
-3. Required ASH-aligned contracts and algorithms exist.
-4. Acceptance artifacts and traceability matrix cover ASH conformance scenarios.
-5. CI scripts enforce required downstream conformance artifacts.
-6. Branch profile checks pass for each active branch profile represented in this repository.
+Final judgment: `CONFORMANT`.

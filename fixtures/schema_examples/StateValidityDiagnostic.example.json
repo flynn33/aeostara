@@ -1,0 +1,25 @@
+{
+  "stateValidityDiagnosticID": "example",
+  "diagnosticEnvelope": {
+    "diagnosticID": "example",
+    "chainRootReference": "example",
+    "parentDiagnosticID": "example",
+    "diagnosticKind": "STATE_VALIDITY",
+    "severity": "INFO",
+    "message": "example",
+    "ruleReferences": [
+      {
+        "ruleID": "ASH-STATE-VALIDITY-001",
+        "sourceReference": "example",
+        "ruleFamily": "example"
+      }
+    ],
+    "sourceReferences": [
+      "example"
+    ],
+    "evidence": {}
+  },
+  "admissibilityStatus": "VALID",
+  "normalizationStatus": "ALREADY_VALID",
+  "recoverabilityRelevance": "NO_ACTION"
+}

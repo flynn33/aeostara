@@ -1,0 +1,11 @@
+name: Downstream Aeostara Conformance
+
+on: [push, pull_request]
+
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run downstream conformance
+        run: echo "Run Aeostara fixture and schema validation here"

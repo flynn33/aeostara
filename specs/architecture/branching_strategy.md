@@ -1,20 +1,18 @@
-# Branching Strategy
 
-## Branch Model
+# Branching Strategy - Base Repository
 
-| Branch | Purpose |
-|---|---|
-| `main` | Downstream conformance specs, contracts, algorithms, acceptance, CI checks |
-| `platform/windows` | Windows native realization |
-| `platform/macos` | macOS native realization |
-| `platform/ios` | iOS native realization |
+Aeostara's base repository uses normal source-control branches for specification work. Platform implementation branches are not required for Aeostara base-design completion.
 
-## Merge Direction
+## Base Branch Expectations
 
-`main -> platform/*`
+The base repository must keep these artifacts valid on its main integration branch:
 
-Platform branches do not define semantic authority back into `main`.
+- ASH baseline reference and bindings.
+- Contract schemas and examples.
+- Conformance fixtures with expected outputs.
+- CI validators.
+- Downstream handoff templates.
 
-## Conformance Rule
+## Platform Implementation Repositories
 
-All platform branches must satisfy acceptance targets and traceability obligations defined in `specs/acceptance/`.
+Windows, Mac, and iOS repositories manage their own implementation branches. They consume Aeostara by version pin and prove conformance with the downstream handoff templates.

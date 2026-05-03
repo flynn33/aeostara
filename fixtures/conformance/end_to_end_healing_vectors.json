@@ -1,0 +1,108 @@
+{
+  "fixtureSetID": "end_to_end_healing_vectors",
+  "vectors": [
+    {
+      "fixtureID": "e2e-full-healing-lifecycle",
+      "category": "observe-normalize-map-diagnose-classify-recoverability-plan-gate-backup-execute-verify-result",
+      "sourceReferences": [
+        "ASH_BASELINE_REFERENCE.md",
+        "specs/acceptance/base_design_completion_gates.md"
+      ],
+      "input": {
+        "observed": {},
+        "desired": {}
+      },
+      "expected": {
+        "diagnosticKind": "STATE_VALIDITY",
+        "stateClass": "STABLE",
+        "recoveryCategory": "NO_ACTION",
+        "mustEmitDiagnostics": true,
+        "mustEmitAuditEvents": true,
+        "mustMutate": false,
+        "requiredSchemaOutputs": [
+          {
+            "schema": "HealResult.schema.json",
+            "instance": {
+              "healResultID": "example",
+              "status": "NO_ACTION",
+              "recoveryPlan": {
+                "recoveryPlanID": "example",
+                "planDisposition": "NO_ACTION",
+                "diagnosticReference": {
+                  "diagnosticID": "example",
+                  "chainRootReference": "example",
+                  "diagnosticKind": "STATE_VALIDITY",
+                  "ruleReferences": [
+                    {
+                      "ruleID": "ASH-STATE-VALIDITY-001",
+                      "sourceReference": "example",
+                      "ruleFamily": "example"
+                    }
+                  ]
+                },
+                "stateClass": "STABLE",
+                "recoveryCategory": "NO_ACTION",
+                "requiresPolicyGate": true,
+                "requiresBackup": true,
+                "recoverySteps": [],
+                "planHash": "example",
+                "createdAt": "example"
+              },
+              "auditChain": {
+                "auditChainID": "example",
+                "diagnosticChainReference": "example",
+                "events": [
+                  {
+                    "auditEventID": "example",
+                    "eventSequence": 1,
+                    "eventType": "OBSERVE",
+                    "diagnosticReference": {
+                      "diagnosticID": "example",
+                      "chainRootReference": "example",
+                      "diagnosticKind": "STATE_VALIDITY",
+                      "ruleReferences": [
+                        {
+                          "ruleID": "ASH-STATE-VALIDITY-001",
+                          "sourceReference": "example",
+                          "ruleFamily": "example"
+                        }
+                      ]
+                    },
+                    "occurredAt": "example",
+                    "details": {}
+                  }
+                ]
+              },
+              "diagnosticChain": {
+                "chainID": "example",
+                "rootDiagnosticID": "example",
+                "diagnostics": [
+                  {
+                    "diagnosticID": "example",
+                    "chainRootReference": "example",
+                    "parentDiagnosticID": "example",
+                    "diagnosticKind": "STATE_VALIDITY",
+                    "severity": "INFO",
+                    "message": "example",
+                    "ruleReferences": [
+                      {
+                        "ruleID": "ASH-STATE-VALIDITY-001",
+                        "sourceReference": "example",
+                        "ruleFamily": "example"
+                      }
+                    ],
+                    "sourceReferences": [
+                      "example"
+                    ],
+                    "evidence": {}
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "negativeAssertions": []
+    }
+  ]
+}

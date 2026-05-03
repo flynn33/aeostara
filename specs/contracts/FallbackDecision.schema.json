@@ -1,34 +1,36 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "FallbackDecision",
-  "description": "Decision record for fallback policy selection in DEGRADED states.",
+  "description": "Fallback decision traceable to registry and diagnostics.",
   "type": "object",
   "properties": {
-    "decisionID": {
+    "fallbackDecisionID": {
       "type": "string"
     },
-    "required": {
-      "type": "boolean"
-    },
-    "policyID": {
-      "type": ["string", "null"],
-      "pattern": "^(FALLBACK-[A-Z]+-[0-9]{3}|null)$"
-    },
-    "candidateStateReference": {
-      "type": ["string", "null"]
-    },
-    "selectionOutcome": {
-      "type": "string",
-      "enum": ["SELECTED", "NO_CANDIDATE", "INVALID_CANDIDATE", "ESCALATE_TO_CONTAINMENT"]
-    },
-    "reason": {
+    "registryReference": {
       "type": "string"
     },
-    "selectedAt": {
+    "selectedCandidateID": {
+      "type": "string"
+    },
+    "status": {
       "type": "string",
-      "format": "date-time"
+      "enum": [
+        "SELECTED",
+        "UNAVAILABLE",
+        "BLOCKED"
+      ]
+    },
+    "diagnosticReference": {
+      "$ref": "DiagnosticReference.schema.json"
     }
   },
-  "required": ["decisionID", "required", "selectionOutcome", "reason", "selectedAt"],
+  "required": [
+    "fallbackDecisionID",
+    "registryReference",
+    "selectedCandidateID",
+    "status",
+    "diagnosticReference"
+  ],
   "additionalProperties": false
 }

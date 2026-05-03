@@ -1,20 +1,18 @@
 {
   "profile": "main",
-  "description": "Spec/conformance branch profile",
+  "description": "Aeostara platform-agnostic base-design profile",
   "required_files": [
     "README.md",
     "REMEDIATION_STATUS.md",
-    "specs/architecture/ash_authority_and_aeostara_conformance.md",
-    "specs/acceptance/acceptance_targets.md",
-    "specs/acceptance/traceability_matrix.md",
-    "ci/validate_schemas.py",
-    "ci/compliance_checker.py",
-    "ci/acceptance_runner.py"
+    "BASE_DESIGN_COMPLETION.md",
+    "ASH_BASELINE_REFERENCE.md",
+    "specs/architecture/repository_role_contract.md",
+    "ci/conformance_runner.py"
   ],
   "required_phrases": [
     {
       "file": "README.md",
-      "phrase": "downstream ASH-based"
+      "phrase": "Aeostara is platform-agnostic"
     },
     {
       "file": "REMEDIATION_STATUS.md",
@@ -23,21 +21,29 @@
   ],
   "forbidden_patterns": [
     {
-      "pattern": "Aeostara core defines ASH semantics",
-      "paths": ["README.md", "specs/architecture", "specs/acceptance"]
+      "pattern": "legacy branch alignment completion scope",
+      "paths": [
+        "README.md",
+        "REMEDIATION_STATUS.md",
+        "specs/architecture"
+      ]
     },
     {
-      "pattern": "ASH subsystem of Aeostara",
-      "paths": ["README.md", "specs/architecture", "specs/acceptance"]
+      "pattern": "requires native .* source",
+      "paths": [
+        "README.md",
+        "REMEDIATION_STATUS.md",
+        "specs/architecture"
+      ]
     }
   ],
   "required_globs": [
     {
       "pattern": "specs/contracts/*.schema.json",
-      "min_count": 21
+      "min_count": 50
     },
     {
-      "pattern": "specs/algorithms/*.pseudo.md",
+      "pattern": "fixtures/conformance/*.json",
       "min_count": 10
     }
   ],
@@ -47,15 +53,6 @@
     },
     {
       "pattern": "specs/architecture/repo_branch_drift_matrix.md"
-    },
-    {
-      "pattern": "**/*.swift"
-    },
-    {
-      "pattern": "**/*.cpp"
-    },
-    {
-      "pattern": "**/*.h"
     }
   ]
 }

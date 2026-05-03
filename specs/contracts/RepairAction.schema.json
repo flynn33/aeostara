@@ -1,27 +1,24 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "RepairActionActuatorStep",
-  "description": "Authoritative downstream actuator mutation contract built under the ASH Pattern System. It realizes actuator steps selected by a RecoveryPlan.",
-  "x-ash-role": "authoritative-downstream-actuator-step",
-  "x-upstream-contract": "RecoveryPlan.schema.json",
+  "title": "RepairAction",
+  "description": "Actuator projection subordinate to RecoveryStep.",
   "type": "object",
   "properties": {
-    "recoveryStepID": {
+    "repairActionID": {
       "type": "string"
     },
-    "keyPath": {
-      "type": "string"
+    "recoveryStep": {
+      "$ref": "RecoveryStep.schema.json"
     },
-    "actionType": {
-      "type": "string",
-      "enum": ["Set", "Add", "Remove"]
-    },
-    "fromValue": {},
-    "toValue": {},
-    "rationale": {
-      "type": "string"
+    "actuatorParameters": {
+      "type": "object",
+      "additionalProperties": true
     }
   },
-  "required": ["recoveryStepID", "keyPath", "actionType", "rationale"],
+  "required": [
+    "repairActionID",
+    "recoveryStep",
+    "actuatorParameters"
+  ],
   "additionalProperties": false
 }

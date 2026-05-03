@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MappingResult",
+  "description": "Projection output mapped, ambiguous, blocked, or failed.",
+  "type": "object",
+  "properties": {
+    "mappingResultID": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "MAPPED",
+        "AMBIGUOUS",
+        "BLOCKED",
+        "FAILED"
+      ]
+    },
+    "projectedState": {
+      "$ref": "AshState.schema.json"
+    },
+    "dimensionBindings": {
+      "type": "array",
+      "items": {
+        "$ref": "SemanticDimensionBinding.schema.json"
+      },
+      "minItems": 9,
+      "maxItems": 9
+    },
+    "ambiguities": {
+      "type": "array",
+      "items": {
+        "$ref": "MappingAmbiguity.schema.json"
+      },
+      "minItems": 0
+    },
+    "diagnosticReferences": {
+      "type": "array",
+      "items": {
+        "$ref": "DiagnosticReference.schema.json"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "mappingResultID",
+    "status",
+    "projectedState",
+    "dimensionBindings",
+    "ambiguities",
+    "diagnosticReferences"
+  ],
+  "additionalProperties": false
+}

@@ -1,36 +1,15 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "RecoveryCategory",
-  "description": "Deterministic recoverability category selected from ASH-aligned state class.",
-  "type": "object",
-  "properties": {
-    "categoryID": {
-      "type": "string"
-    },
-    "category": {
-      "type": "string",
-      "enum": [
-        "NO_ACTION",
-        "NORMALIZE_STATE",
-        "APPLY_CORRECTION",
-        "FALLBACK_REQUIRED",
-        "CONTAINMENT_REQUIRED",
-        "ESCALATION_REQUIRED",
-        "TERMINAL_NO_RECOVERY"
-      ]
-    },
-    "sourceStateClass": {
-      "type": "string",
-      "enum": ["STABLE", "UNSTABLE", "CORRECTABLE", "DEGRADED", "CONTAINED", "FAILED", "SAFE_HALT"]
-    },
-    "selectedAt": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "blockedReason": {
-      "type": ["string", "null"]
-    }
-  },
-  "required": ["categoryID", "category", "sourceStateClass", "selectedAt"],
-  "additionalProperties": false
+  "description": "ASH recovery category enum.",
+  "type": "string",
+  "enum": [
+    "NO_ACTION",
+    "NORMALIZE_STATE",
+    "APPLY_CORRECTION",
+    "FALLBACK_REQUIRED",
+    "CONTAINMENT_REQUIRED",
+    "ESCALATION_REQUIRED",
+    "TERMINAL_NO_RECOVERY"
+  ]
 }

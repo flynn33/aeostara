@@ -1,30 +1,18 @@
+
 # State Normalization
 
-Normalizes observed runtime/product state into deterministic, ASH-evaluable canonical input.
-
-## normalize_state(observed_system_state) -> normalized_state
+Normalization is deterministic on the full 9-bit ASH state.
 
 ```text
-FUNCTION normalize_state(observed_system_state):
-  ASSERT observed_system_state is present
-
-  normalized = {}
-  normalized.observation_id = observed_system_state.observationID
-  normalized.timestamp = observed_system_state.observedAt
-
-  -- Deterministic field extraction
-  normalized.runtime_signals = extract_runtime_signals(observed_system_state.rawState)
-  normalized.config_signals = extract_config_signals(observed_system_state.rawState)
-  normalized.integrity = observed_system_state.integrity
-
-  -- Canonical ordering for deterministic downstream mapping
-  normalized.runtime_signals = sort_keys_recursively(normalized.runtime_signals)
-  normalized.config_signals = sort_keys_recursively(normalized.config_signals)
-
-  RETURN normalized
+FUNCTION normalize_state(candidate_state, canonical_codeword_set) -> NormalizationResult
+  REQUIRE candidate_state has exactly 9 binary coordinates
+  diagnostic = diagnose_state_validity(candidate_state)
+  IF diagnostic.admissibilityStatus == VALID:
+    RETURN {status: ALREADY_VALID, normalizedState: candidate_state, diagnostic}
+  IF diagnostic.admissibilityStatus == TRANSFORMATION_COMPATIBLE:
+    path = deterministic_lowest_lexicographic_codeword_path(candidate_state, canonical_codeword_set)
+    IF path exists:
+      RETURN {status: NORMALIZED, normalizedState: apply(path), diagnostic}
+  RETURN {status: BLOCKED, diagnostic}
 END FUNCTION
 ```
-
-## blocked normalization
-
-If required source fields are missing or malformed, normalization returns blocked status with a diagnostic-ready reason. No guessing is allowed.

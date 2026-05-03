@@ -9,9 +9,15 @@ on:
     branches: [main]
     paths:
       - 'specs/contracts/**'
+      - 'fixtures/schema_examples/**'
+      - 'ci/schema_instance_validator.py'
+      - 'ci/validate_schemas.py'
   pull_request:
     paths:
       - 'specs/contracts/**'
+      - 'fixtures/schema_examples/**'
+      - 'ci/schema_instance_validator.py'
+      - 'ci/validate_schemas.py'
 
 jobs:
   validate-schemas:
@@ -26,3 +32,6 @@ jobs:
 
       - name: Validate contract schemas
         run: python ci/validate_schemas.py
+
+      - name: Validate schema examples
+        run: python ci/schema_instance_validator.py
