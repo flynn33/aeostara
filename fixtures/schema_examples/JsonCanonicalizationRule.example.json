@@ -1,5 +1,5 @@
 {
-  "ruleID": "example",
+  "ruleID": "ASH-STATE-VALIDITY-001",
   "objectKeyOrdering": "LEXICOGRAPHIC_UTF8",
   "arrayOrdering": "PRESERVE_INPUT_ORDER",
   "numberEncoding": "JSON_NUMBER_CANONICAL",

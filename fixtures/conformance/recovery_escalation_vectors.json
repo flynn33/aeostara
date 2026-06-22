@@ -23,26 +23,29 @@
           {
             "schema": "DiagnosticEnvelope.schema.json",
             "instance": {
-              "diagnosticID": "example",
-              "chainRootReference": "example",
-              "parentDiagnosticID": "example",
+              "diagnosticID": "diagnostic-state-validity-root",
+              "chainRootReference": "diagnostic-state-validity-root",
+              "parentDiagnosticID": null,
               "diagnosticKind": "STATE_VALIDITY",
               "severity": "INFO",
-              "message": "example",
+              "message": "Deterministic state-validity diagnostic for Aeostara schema examples.",
               "ruleReferences": [
                 {
                   "ruleID": "ASH-STATE-VALIDITY-001",
-                  "sourceReference": "example",
-                  "ruleFamily": "example"
+                  "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
+                  "ruleFamily": "state-validity"
                 }
               ],
               "sourceReferences": [
-                "example"
+                "specs/ash_baseline/state_validity_diagnostic_binding.md"
               ],
-              "evidence": {}
+              "evidence": {
+                "exampleSet": "schema_examples"
+              }
             }
           }
-        ]
+        ],
+        "negativeAssertionsExecuted": []
       },
       "negativeAssertions": []
     },
@@ -68,26 +71,29 @@
           {
             "schema": "DiagnosticEnvelope.schema.json",
             "instance": {
-              "diagnosticID": "example",
-              "chainRootReference": "example",
-              "parentDiagnosticID": "example",
+              "diagnosticID": "diagnostic-state-validity-root",
+              "chainRootReference": "diagnostic-state-validity-root",
+              "parentDiagnosticID": null,
               "diagnosticKind": "STATE_VALIDITY",
               "severity": "INFO",
-              "message": "example",
+              "message": "Deterministic state-validity diagnostic for Aeostara schema examples.",
               "ruleReferences": [
                 {
                   "ruleID": "ASH-STATE-VALIDITY-001",
-                  "sourceReference": "example",
-                  "ruleFamily": "example"
+                  "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
+                  "ruleFamily": "state-validity"
                 }
               ],
               "sourceReferences": [
-                "example"
+                "specs/ash_baseline/state_validity_diagnostic_binding.md"
               ],
-              "evidence": {}
+              "evidence": {
+                "exampleSet": "schema_examples"
+              }
             }
           }
-        ]
+        ],
+        "negativeAssertionsExecuted": []
       },
       "negativeAssertions": []
     },
@@ -113,26 +119,29 @@
           {
             "schema": "DiagnosticEnvelope.schema.json",
             "instance": {
-              "diagnosticID": "example",
-              "chainRootReference": "example",
-              "parentDiagnosticID": "example",
+              "diagnosticID": "diagnostic-state-validity-root",
+              "chainRootReference": "diagnostic-state-validity-root",
+              "parentDiagnosticID": null,
               "diagnosticKind": "STATE_VALIDITY",
               "severity": "INFO",
-              "message": "example",
+              "message": "Deterministic state-validity diagnostic for Aeostara schema examples.",
               "ruleReferences": [
                 {
                   "ruleID": "ASH-STATE-VALIDITY-001",
-                  "sourceReference": "example",
-                  "ruleFamily": "example"
+                  "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
+                  "ruleFamily": "state-validity"
                 }
               ],
               "sourceReferences": [
-                "example"
+                "specs/ash_baseline/state_validity_diagnostic_binding.md"
               ],
-              "evidence": {}
+              "evidence": {
+                "exampleSet": "schema_examples"
+              }
             }
           }
-        ]
+        ],
+        "negativeAssertionsExecuted": []
       },
       "negativeAssertions": []
     },
@@ -158,26 +167,29 @@
           {
             "schema": "DiagnosticEnvelope.schema.json",
             "instance": {
-              "diagnosticID": "example",
-              "chainRootReference": "example",
-              "parentDiagnosticID": "example",
+              "diagnosticID": "diagnostic-state-validity-root",
+              "chainRootReference": "diagnostic-state-validity-root",
+              "parentDiagnosticID": null,
               "diagnosticKind": "STATE_VALIDITY",
               "severity": "INFO",
-              "message": "example",
+              "message": "Deterministic state-validity diagnostic for Aeostara schema examples.",
               "ruleReferences": [
                 {
                   "ruleID": "ASH-STATE-VALIDITY-001",
-                  "sourceReference": "example",
-                  "ruleFamily": "example"
+                  "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
+                  "ruleFamily": "state-validity"
                 }
               ],
               "sourceReferences": [
-                "example"
+                "specs/ash_baseline/state_validity_diagnostic_binding.md"
               ],
-              "evidence": {}
+              "evidence": {
+                "exampleSet": "schema_examples"
+              }
             }
           }
-        ]
+        ],
+        "negativeAssertionsExecuted": []
       },
       "negativeAssertions": []
     },
@@ -203,26 +215,29 @@
           {
             "schema": "DiagnosticEnvelope.schema.json",
             "instance": {
-              "diagnosticID": "example",
-              "chainRootReference": "example",
-              "parentDiagnosticID": "example",
+              "diagnosticID": "diagnostic-state-validity-root",
+              "chainRootReference": "diagnostic-state-validity-root",
+              "parentDiagnosticID": null,
               "diagnosticKind": "STATE_VALIDITY",
               "severity": "INFO",
-              "message": "example",
+              "message": "Deterministic state-validity diagnostic for Aeostara schema examples.",
               "ruleReferences": [
                 {
                   "ruleID": "ASH-STATE-VALIDITY-001",
-                  "sourceReference": "example",
-                  "ruleFamily": "example"
+                  "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
+                  "ruleFamily": "state-validity"
                 }
               ],
               "sourceReferences": [
-                "example"
+                "specs/ash_baseline/state_validity_diagnostic_binding.md"
               ],
-              "evidence": {}
+              "evidence": {
+                "exampleSet": "schema_examples"
+              }
             }
           }
-        ]
+        ],
+        "negativeAssertionsExecuted": []
       },
       "negativeAssertions": []
     },
@@ -248,26 +263,29 @@
           {
             "schema": "DiagnosticEnvelope.schema.json",
             "instance": {
-              "diagnosticID": "example",
-              "chainRootReference": "example",
-              "parentDiagnosticID": "example",
+              "diagnosticID": "diagnostic-state-validity-root",
+              "chainRootReference": "diagnostic-state-validity-root",
+              "parentDiagnosticID": null,
               "diagnosticKind": "STATE_VALIDITY",
               "severity": "INFO",
-              "message": "example",
+              "message": "Deterministic state-validity diagnostic for Aeostara schema examples.",
               "ruleReferences": [
                 {
                   "ruleID": "ASH-STATE-VALIDITY-001",
-                  "sourceReference": "example",
-                  "ruleFamily": "example"
+                  "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
+                  "ruleFamily": "state-validity"
                 }
               ],
               "sourceReferences": [
-                "example"
+                "specs/ash_baseline/state_validity_diagnostic_binding.md"
               ],
-              "evidence": {}
+              "evidence": {
+                "exampleSet": "schema_examples"
+              }
             }
           }
-        ]
+        ],
+        "negativeAssertionsExecuted": []
       },
       "negativeAssertions": []
     },
@@ -293,26 +311,29 @@
           {
             "schema": "DiagnosticEnvelope.schema.json",
             "instance": {
-              "diagnosticID": "example",
-              "chainRootReference": "example",
-              "parentDiagnosticID": "example",
+              "diagnosticID": "diagnostic-state-validity-root",
+              "chainRootReference": "diagnostic-state-validity-root",
+              "parentDiagnosticID": null,
               "diagnosticKind": "STATE_VALIDITY",
               "severity": "INFO",
-              "message": "example",
+              "message": "Deterministic state-validity diagnostic for Aeostara schema examples.",
               "ruleReferences": [
                 {
                   "ruleID": "ASH-STATE-VALIDITY-001",
-                  "sourceReference": "example",
-                  "ruleFamily": "example"
+                  "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
+                  "ruleFamily": "state-validity"
                 }
               ],
               "sourceReferences": [
-                "example"
+                "specs/ash_baseline/state_validity_diagnostic_binding.md"
               ],
-              "evidence": {}
+              "evidence": {
+                "exampleSet": "schema_examples"
+              }
             }
           }
-        ]
+        ],
+        "negativeAssertionsExecuted": []
       },
       "negativeAssertions": []
     }

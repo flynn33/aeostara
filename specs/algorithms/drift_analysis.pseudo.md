@@ -1,4 +1,9 @@
+# Drift Analysis
 
-# Drift Analysis - Evidence Only
+## Superseded Algorithm Notice
 
-Drift analysis produces `SurfaceDifference` evidence. It is not semantic authority and must not choose recovery directly.
+This file is retained only as historical traceability. It is not an active algorithm and must not be referenced by interfaces, acceptance gates, conformance fixtures, handoff documents, or release claims.
+
+Active replacement: `surface_difference_generation.pseudo.md`.
+
+Downstream implementations must use the active replacement and its DiagnosticEnvelope, AuditEvent, failure, and side-effect rules. This superseded notice introduces no contract fields, enum values, lifecycle phases, ASH coordinates, or execution behavior.

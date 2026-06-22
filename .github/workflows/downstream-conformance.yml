@@ -18,7 +18,7 @@ on:
       - 'templates/platform_repo/**'
       - 'ci/**'
       - 'branch_profiles/**'
-      - 'agentic-coding-policy.json'
+      - 'aeostara-conformance-policy.json'
   pull_request:
     paths:
       - 'README.md'
@@ -33,7 +33,7 @@ on:
       - 'templates/platform_repo/**'
       - 'ci/**'
       - 'branch_profiles/**'
-      - 'agentic-coding-policy.json'
+      - 'aeostara-conformance-policy.json'
 
 jobs:
   base-design-conformance:

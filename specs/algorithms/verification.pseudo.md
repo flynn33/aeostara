@@ -1,4 +1,9 @@
-
 # Verification
 
-Verification compares expected semantic state against actual semantic state and emits a `VerificationResult`. Failure triggers rollback, fallback, containment, or safe halt according to the recovery lifecycle.
+## Superseded Algorithm Notice
+
+This file is retained only as historical traceability. It is not an active algorithm and must not be referenced by interfaces, acceptance gates, conformance fixtures, handoff documents, or release claims.
+
+Active replacement: `verification_plan_generation.pseudo.md`.
+
+Downstream implementations must use the active replacement and its DiagnosticEnvelope, AuditEvent, failure, and side-effect rules. This superseded notice introduces no contract fields, enum values, lifecycle phases, ASH coordinates, or execution behavior.

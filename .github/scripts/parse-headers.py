@@ -93,7 +93,7 @@ def generate_markdown(include_dir, output_path):
         "# API Reference",
         "",
         "> Auto-generated from public header files in `include/AeostaraCore/`.",
-        "> Do not edit manually — this page is updated by the Wiki Sync agent.",
+        "> Do not edit manually; this page is updated by Wiki Sync.",
         "",
     ]
 

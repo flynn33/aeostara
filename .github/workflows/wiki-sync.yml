@@ -72,10 +72,14 @@ jobs:
           git ls-remote --heads origin master >/dev/null 2>&1 && WIKI_BRANCH="master"
 
           for attempt in 1 2 3; do
-            git fetch origin "$WIKI_BRANCH" 2>/dev/null || true
-            git rebase "origin/${WIKI_BRANCH}" 2>/dev/null || {
-              git rebase --abort 2>/dev/null || true
-            }
+            if ! git fetch origin "$WIKI_BRANCH" 2>/dev/null; then
+              echo "No existing wiki branch fetched on attempt ${attempt}"
+            fi
+            if ! git rebase "origin/${WIKI_BRANCH}" 2>/dev/null; then
+              if git rebase --abort 2>/dev/null; then
+                echo "Rebase aborted after wiki branch conflict on attempt ${attempt}"
+              fi
+            fi
 
             if git push origin "HEAD:${WIKI_BRANCH}"; then
               exit 0

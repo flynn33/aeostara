@@ -1,5 +1,5 @@
 {
-  "stateID": "example",
+  "stateID": "ash-state-stable",
   "coordinates": [
     0,
     0,
@@ -11,6 +11,6 @@
     0,
     0
   ],
-  "sourceReference": "example",
-  "canonicalHash": "example"
+  "sourceReference": "specs/ash_baseline/ash_state_space_binding.md",
+  "canonicalHash": "ff784047beb4e8645d7fb6484b65579af3b6fb4c49459eabe9b047298321f714"
 }

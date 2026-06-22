@@ -1,8 +1,8 @@
 
 # Aeostara Remediation Status
 
-Last updated: 2026-05-03
-Status: Complete - base-design conformance gates passed
+Last updated: 2026-06-22
+Status: Complete - base-design conformance, release, and repository-separation gates passed
 
 ## Authority Statement
 
@@ -41,6 +41,6 @@ Aeostara may be marked complete only after these gates pass:
 
 ## Current Judgment
 
-`SELF_AUDIT_REPORT.md` records passing command outputs for the retained CI gates, new base-design conformance suite, and external static audit probe.
+`SELF_AUDIT_REPORT.md`, `FINAL_CLOSEOUT_REPORT.md`, and `REPOSITORY_MIGRATION_CLOSEOUT.md` record the final gate set for the base design and repository split.
 
 Final judgment: `CONFORMANT`.

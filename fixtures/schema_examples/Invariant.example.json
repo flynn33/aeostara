@@ -1,10 +1,10 @@
 {
-  "invariantID": "example",
-  "conformanceCategory": "example",
-  "sourceReference": "example",
+  "invariantID": "invariant-invariantid",
+  "conformanceCategory": "invariant-conformancecategory",
+  "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
   "diagnosticRule": {
     "ruleID": "ASH-STATE-VALIDITY-001",
-    "sourceReference": "example",
-    "ruleFamily": "example"
+    "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
+    "ruleFamily": "state-validity"
   }
 }

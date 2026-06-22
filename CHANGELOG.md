@@ -2,6 +2,14 @@
 
 All notable changes to Aeostara will be documented in this file.
 
+## [1.0.0] - 2026-06-22
+
+### Changed - Final Base Closeout
+
+- Completed the platform-agnostic base design release gate set with semantic schema examples, executable fixture validation, interface implementability checks, algorithm completeness checks, lifecycle execution checks, workflow integrity checks, deterministic release packaging, and release readiness validation.
+- Split native platform realizations into `flynn33/Aeostara-Windows` and `flynn33/Aeostara-Mac-iOS` with source archive tags, verified Git bundles, destination import tags, base pins, migration provenance, and repository-separation evidence.
+- Relocated reusable platform branch profile material into `templates/platform_repo/branch_profiles/` so the agnostic source repository treats only `main` as its active base-design branch.
+
 ## [0.5.1] - 2026-05-03
 
 ### Changed - ASH Pattern System Rebuild
@@ -22,7 +30,7 @@ All notable changes to Aeostara will be documented in this file.
 ### Changed - Branch Alignment Enforcement
 
 - Added branch alignment contract and targets.
-- Added branch profile contracts for `main`, `platform_windows`, `platform_macos`, and `platform_ios`.
+- Added branch profile contracts for the base branch and legacy platform-specific branches.
 - Added branch-level invariant validation through `ci/branch_alignment_checker.py`.
 - Updated conformance workflows for main and platform branches.
 

@@ -416,12 +416,6 @@ def maybe_generate_api_reference(src_dir: Path, temp_dir: Path, branch_name: str
 def branch_profile_description(branch_name: str) -> str:
     if branch_name == "main":
         return "Platform-agnostic Aeostara base-design authority"
-    if branch_name == "platform/windows":
-        return "Windows downstream implementation repository"
-    if branch_name == "platform/macos":
-        return "Mac downstream implementation repository"
-    if branch_name == "platform/ios":
-        return "iOS downstream implementation repository"
     return "Feature/custom branch"
 
 
@@ -763,46 +757,6 @@ def generate_for_branch(src_dir: Path, wiki_dir: Path, branch_name: str, commit_
             overview_page=overview_page,
         )
         category_pages["Status"].append(ref)
-
-    # Platform docs
-    for rel, title in [
-        ("platform/windows/README.md", "Windows Platform README"),
-        ("platform/macos/README.md", "macOS Platform README"),
-        ("platform/ios/README.md", "iOS Platform README"),
-        ("platform/ios/docs/platform_policy_apple.md", "Apple Platform Policy"),
-    ]:
-        if (src_dir / rel).exists():
-            ref = write_wrapped_markdown(
-                src_dir=src_dir,
-                wiki_dir=wiki_dir,
-                prefix=prefix,
-                section="Platform",
-                source_rel=rel,
-                title=title,
-                branch_name=branch_name,
-                commit_sha=commit_sha,
-                overview_page=overview_page,
-            )
-            category_pages["Platform"].append(ref)
-
-    for rel, title in [
-        ("platform/windows/PLATFORM_MANIFEST.json", "Windows Platform Manifest"),
-        ("platform/macos/PLATFORM_MANIFEST.json", "macOS Platform Manifest"),
-        ("platform/ios/PLATFORM_MANIFEST.json", "iOS Platform Manifest"),
-    ]:
-        if (src_dir / rel).exists():
-            ref = write_wrapped_json(
-                src_dir=src_dir,
-                wiki_dir=wiki_dir,
-                prefix=prefix,
-                section="Platform",
-                source_rel=rel,
-                title=title,
-                branch_name=branch_name,
-                commit_sha=commit_sha,
-                overview_page=overview_page,
-            )
-            category_pages["Platform"].append(ref)
 
     # Architecture
     for file in collect_paths(src_dir, "specs/architecture/*.md"):

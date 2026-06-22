@@ -74,9 +74,13 @@ jobs:
           WIKI_BRANCH="main"
           git ls-remote --heads origin master >/dev/null 2>&1 && WIKI_BRANCH="master"
 
-          git fetch origin "$WIKI_BRANCH" 2>/dev/null || true
-          git rebase "origin/${WIKI_BRANCH}" 2>/dev/null || {
-            git rebase --abort 2>/dev/null || true
-          }
+          if ! git fetch origin "$WIKI_BRANCH" 2>/dev/null; then
+            echo "No existing wiki branch fetched; continuing with generated pages"
+          fi
+          if ! git rebase "origin/${WIKI_BRANCH}" 2>/dev/null; then
+            if git rebase --abort 2>/dev/null; then
+              echo "Rebase aborted after wiki branch conflict"
+            fi
+          fi
 
           git push origin "HEAD:${WIKI_BRANCH}"

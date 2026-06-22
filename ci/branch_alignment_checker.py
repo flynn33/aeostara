@@ -28,9 +28,6 @@ def detect_profile(explicit_profile: str) -> str:
     ref = os.environ.get("GITHUB_REF_NAME", "")
     mapping = {
         "main": "main",
-        "platform/windows": "platform_windows",
-        "platform/macos": "platform_macos",
-        "platform/ios": "platform_ios",
     }
     if ref in mapping:
         return mapping[ref]
@@ -163,7 +160,7 @@ def run(repo_root: str, profile_name: str) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate Aeostara branch alignment profile")
     parser.add_argument("repo_root", nargs="?", default=os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-    parser.add_argument("--profile", default="", help="Profile name (e.g. main, platform_windows)")
+    parser.add_argument("--profile", default="", help="Profile name (e.g. main)")
     args = parser.parse_args()
 
     repo_root = os.path.abspath(args.repo_root)

@@ -1,6 +1,9 @@
 {
   "pointer": "/system/state",
-  "tokens": [],
-  "pointsToMissing": true,
-  "pointsToNull": true
+  "tokens": [
+    "system",
+    "state"
+  ],
+  "pointsToMissing": false,
+  "pointsToNull": false
 }

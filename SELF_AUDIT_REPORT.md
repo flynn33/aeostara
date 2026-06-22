@@ -1,6 +1,6 @@
 # Self Audit Report
 
-Date: 2026-05-03
+Date: 2026-06-22
 
 ## Implemented Phases
 
@@ -16,6 +16,7 @@ All phases from the handoff package were implemented in Aeostara:
 8. Downstream platform handoff package.
 9. Fixture-based conformance and CI hardening.
 10. Cleanup, audit report, and completion declaration.
+11. Platform repository extraction, destination bootstrap, cutover, rollback reconstruction, and final release packaging.
 
 ## Changed and Created Files
 
@@ -31,7 +32,7 @@ Created or revised platform-neutral pseudocode under `specs/algorithms/`, includ
 
 Reworked CI under `ci/` and `.github/workflows/` so active Aeostara validation checks base-design conformance and does not require native platform implementation source.
 
-No files were removed. Legacy branch/profile concepts were demoted to downstream reference/template use.
+Reusable platform branch profile concepts were relocated into downstream templates. The agnostic source repository retains only the active `main` profile.
 
 ## Command Outputs
 
@@ -97,6 +98,12 @@ Handoff package static audit probe:
 PASS: post-implementation static audit probe passed.
 ```
 
+Final closeout gate set:
+
+```text
+PASS: schema, semantic fixture, interface, algorithm, lifecycle, workflow, acceptance, compliance, release readiness, repository separation, and program closeout gates passed.
+```
+
 ## Caveats
 
 The new CI validates platform-neutral specification artifacts, schema examples, and expected-output fixtures. It does not execute downstream Windows, Mac, or iOS implementation repositories; those repos must consume Aeostara and run their own downstream conformance reports using the templates provided here.
@@ -109,4 +116,4 @@ Platform-specific source code was not added to the base repo.
 
 ## Final Acceptance Judgment
 
-`CONFORMANT`
+Final judgment: `CONFORMANT`.

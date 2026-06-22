@@ -8,6 +8,10 @@ from pathlib import Path
 CHECKS = [
     "base_design_completion_checker.py",
     "validate_schemas.py",
+    "schema_instance_validator.py",
+    "semantic_instance_checker.py",
+    "interface_contract_checker.py",
+    "algorithm_completeness_checker.py",
     "fixture_validator.py",
     "traceability_checker.py",
     "ash_invariant_checker.py",
@@ -15,7 +19,9 @@ CHECKS = [
     "diagnostic_chain_checker.py",
     "json_semantics_checker.py",
     "recovery_consistency_checker.py",
+    "lifecycle_execution_checker.py",
     "downstream_handoff_checker.py",
+    "workflow_integrity_checker.py",
     "compliance_checker.py",
     "branch_alignment_checker.py",
 ]

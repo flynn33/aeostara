@@ -47,3 +47,6 @@ jobs:
 
       - name: Run completion checker
         run: python ci/base_design_completion_checker.py .
+
+      - name: Run workflow integrity checker
+        run: python ci/workflow_integrity_checker.py .

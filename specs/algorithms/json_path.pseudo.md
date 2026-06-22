@@ -1,6 +1,9 @@
+# Json Path
 
-# JSON Path - Superseded
+## Superseded Algorithm Notice
 
-This legacy dot-path helper is superseded by `json_pointer_operations.pseudo.md`.
+This file is retained only as historical traceability. It is not an active algorithm and must not be referenced by interfaces, acceptance gates, conformance fixtures, handoff documents, or release claims.
 
-Normative Aeostara JSON addressing uses JSON Pointer-compatible operations, preserves missing versus `null`, supports object keys containing dots, supports arrays, and requires mutation preconditions.
+Active replacement: `json_pointer_operations.pseudo.md`.
+
+Downstream implementations must use the active replacement and its DiagnosticEnvelope, AuditEvent, failure, and side-effect rules. This superseded notice introduces no contract fields, enum values, lifecycle phases, ASH coordinates, or execution behavior.

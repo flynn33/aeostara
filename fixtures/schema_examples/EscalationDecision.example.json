@@ -1,17 +1,17 @@
 {
-  "decisionID": "example",
+  "decisionID": "escalationdecision-decisionid",
   "fromCategory": "NO_ACTION",
   "toCategory": "NO_ACTION",
-  "reason": "example",
+  "reason": "escalationdecision-reason",
   "diagnosticReference": {
-    "diagnosticID": "example",
-    "chainRootReference": "example",
+    "diagnosticID": "diagnostic-state-validity-root",
+    "chainRootReference": "diagnostic-state-validity-root",
     "diagnosticKind": "STATE_VALIDITY",
     "ruleReferences": [
       {
         "ruleID": "ASH-STATE-VALIDITY-001",
-        "sourceReference": "example",
-        "ruleFamily": "example"
+        "sourceReference": "specs/ash_baseline/state_validity_diagnostic_binding.md",
+        "ruleFamily": "state-validity"
       }
     ]
   }

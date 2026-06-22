@@ -1,7 +1,7 @@
 
 # Aeostara
 
-Aeostara is a platform-agnostic base-design specification package for a self-healing JSON configuration engine. It conforms to the ASH Pattern System and instructs downstream Windows, Mac, and iOS implementation repositories.
+Aeostara is a platform-agnostic base-design specification package for a self-healing JSON configuration engine. It conforms to the ASH Pattern System and instructs downstream Windows, macOS, and iOS implementation repositories.
 
 ## Repository Role
 
@@ -12,14 +12,13 @@ ASH Pattern System
         ↓
 Aeostara platform-agnostic base design
         ↓
-Windows implementation repo
-Mac implementation repo
-iOS implementation repo
+flynn33/Aeostara-Windows
+flynn33/Aeostara-Mac-iOS
 ```
 
 Conflict rule: ASH wins, Aeostara changes. This repository must not modify ASH, propose ASH changes, or add native Windows, Mac, or iOS implementation source.
 
-See [BASE_DESIGN_COMPLETION.md](BASE_DESIGN_COMPLETION.md), [ASH_BASELINE_REFERENCE.md](ASH_BASELINE_REFERENCE.md), and [Repository Role Contract](specs/architecture/repository_role_contract.md).
+See [BASE_DESIGN_COMPLETION.md](BASE_DESIGN_COMPLETION.md), [ASH_BASELINE_REFERENCE.md](ASH_BASELINE_REFERENCE.md), [Repository Role Contract](specs/architecture/repository_role_contract.md), and [Repository Separation Status](REPOSITORY_SEPARATION_STATUS.md).
 
 ## What This Repository Contains
 
@@ -34,7 +33,16 @@ See [BASE_DESIGN_COMPLETION.md](BASE_DESIGN_COMPLETION.md), [ASH_BASELINE_REFERE
 | Conformance | `conformance/` | Module mapping, invariant coverage, diagnostics, materialization boundary, deviations, and judgment artifacts |
 | Fixtures | `fixtures/conformance/` and `fixtures/schema_examples/` | Expected-output vectors and valid schema instances |
 | CI | `ci/` | Schema, fixture, traceability, JSON semantics, diagnostic-chain, recovery, and handoff validators |
-| Downstream handoff | `implementation_handoff/` and `templates/platform_repo/` | Requirements and templates for Windows, Mac, and iOS repos |
+| Downstream handoff | `implementation_handoff/` and `templates/platform_repo/` | Requirements and templates for Windows, macOS, and iOS repos |
+
+## Downstream Repositories
+
+| Product surface | Repository | Permanent branch |
+|---|---|---|
+| Windows realization | `flynn33/Aeostara-Windows` | `main` |
+| macOS realization | `flynn33/Aeostara-Mac-iOS` | `platform/macos` |
+| iOS realization | `flynn33/Aeostara-Mac-iOS` | `platform/ios` |
+| Apple repository coordination | `flynn33/Aeostara-Mac-iOS` | `main` |
 
 ## Required Decision Path
 
@@ -46,7 +54,7 @@ Surface differences are evidence only. Generic JSON diffing is not semantic trut
 
 ## Completion Meaning
 
-Aeostara base design is complete only when a Windows, Mac, or iOS implementation team can implement Aeostara faithfully from this repository without inventing base semantics, recovery logic, JSON semantics, diagnostics, audit requirements, or conformance expectations.
+Aeostara base design is complete only when a Windows, macOS, or iOS implementation team can implement Aeostara faithfully from this repository without inventing base semantics, recovery logic, JSON semantics, diagnostics, audit requirements, or conformance expectations.
 
 Base-design completion does not require platform-native source files. Platform-specific implementation work belongs in downstream repositories.
 
@@ -55,6 +63,7 @@ Base-design completion does not require platform-native source files. Platform-s
 Run the full base-design gate locally:
 
 ```text
+python3 -m pip install -r ci/requirements.txt
 python3 ci/conformance_runner.py .
 ```
 
@@ -62,7 +71,11 @@ Key component gates are also runnable individually:
 
 ```text
 python3 ci/validate_schemas.py .
+python3 ci/schema_instance_validator.py .
 python3 ci/fixture_validator.py .
+python3 ci/interface_contract_checker.py .
+python3 ci/algorithm_completeness_checker.py .
+python3 ci/lifecycle_execution_checker.py .
 python3 ci/traceability_checker.py .
 python3 ci/ash_invariant_checker.py .
 python3 ci/json_semantics_checker.py .
@@ -70,6 +83,12 @@ python3 ci/diagnostic_chain_checker.py .
 python3 ci/recovery_consistency_checker.py .
 python3 ci/downstream_handoff_checker.py .
 python3 ci/base_design_completion_checker.py .
+python3 ci/workflow_integrity_checker.py .
+python3 ci/acceptance_runner.py .
+python3 ci/compliance_checker.py .
+python3 ci/release_readiness_checker.py .
+python3 ci/repository_separation_checker.py . --read-only --online
+python3 ci/program_closeout_runner.py . --online
 ```
 
 ## License

@@ -10,16 +10,15 @@ ASH Pattern System
         ↓
 Aeostara platform-agnostic base design
         ↓
-Windows implementation repository
-Mac implementation repository
-iOS implementation repository
+flynn33/Aeostara-Windows
+flynn33/Aeostara-Mac-iOS
 ```
 
 ASH is upstream semantic authority. Aeostara conforms to ASH. Platform repos consume and implement Aeostara. Aeostara does not depend on platform repos, platform branches, or native platform source files.
 
 ## Completion Standard
 
-Aeostara base design is complete when a Windows, Mac, or iOS implementation team can implement Aeostara faithfully from the base repository without needing to make semantic design decisions that belong in Aeostara.
+Aeostara base design is complete when a Windows, macOS, or iOS implementation team can implement Aeostara faithfully from the base repository without needing to make semantic design decisions that belong in Aeostara.
 
 Completion requires platform-neutral definitions for JSON configuration semantics, ASH binding, diagnostic chains, recovery, policy, backup, execution, verification, rollback, fallback, containment, safe halt, audit, conformance fixtures, and downstream handoff expectations.
 
@@ -36,6 +35,10 @@ Aeostara is not base-design complete if any of these remain true:
 - Diagnostic chain integrity is not enforceable.
 - Policy, backup, verification, rollback, fallback, containment, safe halt, and audit objects are incomplete.
 - Acceptance checks are keyword-only rather than expected-output based.
+
+## Release Closeout
+
+Version `1.0.0` completes the platform-agnostic base design and separates platform realizations into independent destination repositories. The source platform histories are preserved by archive tags, verified Git bundles, and immutable import tags recorded in `REPOSITORY_SEPARATION_STATUS.md` and `REPOSITORY_MIGRATION_CLOSEOUT.md`.
 
 ## Required Lifecycle
 

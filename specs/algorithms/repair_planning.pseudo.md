@@ -1,4 +1,9 @@
+# Repair Planning
 
-# Repair Planning - Actuator Projection Only
+## Superseded Algorithm Notice
 
-Repair planning is a subordinate projection from `RecoveryPlan` into adapter-specific actuator actions. It must not replace diagnosis-first recovery planning.
+This file is retained only as historical traceability. It is not an active algorithm and must not be referenced by interfaces, acceptance gates, conformance fixtures, handoff documents, or release claims.
+
+Active replacement: `recovery_plan_generation.pseudo.md`.
+
+Downstream implementations must use the active replacement and its DiagnosticEnvelope, AuditEvent, failure, and side-effect rules. This superseded notice introduces no contract fields, enum values, lifecycle phases, ASH coordinates, or execution behavior.
