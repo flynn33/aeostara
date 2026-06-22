@@ -14,9 +14,9 @@ Aeostara platform realizations are moving from source platform branches in `flyn
 
 | Branch | Source archive tag | Bundle path | Bundle SHA-256 |
 |---|---|---|---|
-| `platform/windows` | `archive/platform-windows-0b50721` | `/Volumes/NVME/Codex/Aeostara/closeout-evidence/bundles/aeostara-platform-windows-0b50721.bundle` | `de43e37717bb5eef6493018fcdd0b34e92ea534e14c9b8962d31d013f0fff8e9` |
-| `platform/macos` | `archive/platform-macos-b992a4b` | `/Volumes/NVME/Codex/Aeostara/closeout-evidence/bundles/aeostara-platform-macos-b992a4b.bundle` | `408c553b8a2e1536898b46d3438c69111236dee6502d02ca3a9c6f1b4afe6c5f` |
-| `platform/ios` | `archive/platform-ios-0c931a7` | `/Volumes/NVME/Codex/Aeostara/closeout-evidence/bundles/aeostara-platform-ios-0c931a7.bundle` | `ae2ff2d422359919b11a7374ce7b6a90bd779e73c7692e7329f77808b604a680` |
+| `platform/windows` | `archive/platform-windows-0b50721` | `/Volumes/NVME/GitHub/Aeostara-closeout-evidence/bundles/aeostara-platform-windows-0b50721.bundle` | `de43e37717bb5eef6493018fcdd0b34e92ea534e14c9b8962d31d013f0fff8e9` |
+| `platform/macos` | `archive/platform-macos-b992a4b` | `/Volumes/NVME/GitHub/Aeostara-closeout-evidence/bundles/aeostara-platform-macos-b992a4b.bundle` | `408c553b8a2e1536898b46d3438c69111236dee6502d02ca3a9c6f1b4afe6c5f` |
+| `platform/ios` | `archive/platform-ios-0c931a7` | `/Volumes/NVME/GitHub/Aeostara-closeout-evidence/bundles/aeostara-platform-ios-0c931a7.bundle` | `ae2ff2d422359919b11a7374ce7b6a90bd779e73c7692e7329f77808b604a680` |
 
 ## Destination Import Tags
 

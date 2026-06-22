@@ -1,7 +1,7 @@
-# Aeostara Wiki Agent
+# Aeostara Wiki Sync
 # Maintains comprehensive, branch-scoped wiki pages with visual dashboards.
 
-name: Wiki Agent
+name: Wiki Sync
 
 on:
   push:
