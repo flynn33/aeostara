@@ -7,6 +7,7 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import quote
 
 from common_checks import print_result, repo_root_from_arg
 
@@ -198,7 +199,7 @@ class RepositorySeparationChecker:
 
     def _validate_branch_protection(self, repo: str, branch: str) -> list[str]:
         failures: list[str] = []
-        protection = self._gh_api_json(["repos", repo, "branches", branch, "protection"])
+        protection = self._gh_api_json(f"repos/{repo}/branches/{quote(branch, safe='')}/protection")
         if protection is None:
             failures.append(f"{repo}:{branch}: missing branch protection")
             return failures
@@ -297,9 +298,9 @@ class RepositorySeparationChecker:
         except Exception:
             return None
 
-    def _gh_api_json(self, args: list[str]) -> dict[str, object] | None:
+    def _gh_api_json(self, endpoint: str) -> dict[str, object] | None:
         try:
-            raw = subprocess.check_output(["gh", "api", *args], cwd=self.root, text=True, stderr=subprocess.DEVNULL)
+            raw = subprocess.check_output(["gh", "api", endpoint], cwd=self.root, text=True, stderr=subprocess.DEVNULL)
             return json.loads(raw)
         except Exception:
             return None
