@@ -4,53 +4,12 @@ All notable changes to Aeostara will be documented in this file.
 
 ## [1.0.0] - 2026-06-22
 
-### Features
-
-- complete base closeout and repository split
-
-### Bug Fixes
-
-- read branch protection during repository audit
-
-### Documentation
-
-- update changelog and readme for v1.0.0
-- update changelog and readme for v1.0.0
-
-### Other
-
-- normalize closeout evidence paths
-
-
-## [1.0.0] - 2026-06-22
-
-### Features
-
-- complete base closeout and repository split
-
-### Documentation
-
-- update changelog and readme for v1.0.0
-
-### Other
-
-- normalize closeout evidence paths
-
-
-## [1.0.0] - 2026-06-22
-
-### Features
-
-- complete base closeout and repository split
-
-
-## [1.0.0] - 2026-06-22
-
 ### Changed - Final Base Closeout
 
 - Completed the platform-agnostic base design release gate set with semantic schema examples, executable fixture validation, interface implementability checks, algorithm completeness checks, lifecycle execution checks, workflow integrity checks, deterministic release packaging, and release readiness validation.
 - Split native platform realizations into `flynn33/Aeostara-Windows` and `flynn33/Aeostara-Mac-iOS` with source archive tags, verified Git bundles, destination import tags, base pins, migration provenance, and repository-separation evidence.
 - Relocated reusable platform branch profile material into `templates/platform_repo/branch_profiles/` so the agnostic source repository treats only `main` as its active base-design branch.
+- Normalized closeout evidence paths, repository audit protection checks, and release automation so `v1.0.0` remains the sole final base release tag for this closeout.
 
 ## [0.5.1] - 2026-05-03
 
