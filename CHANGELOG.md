@@ -8,6 +8,21 @@ All notable changes to Aeostara will be documented in this file.
 
 - complete base closeout and repository split
 
+### Documentation
+
+- update changelog and readme for v1.0.0
+
+### Other
+
+- normalize closeout evidence paths
+
+
+## [1.0.0] - 2026-06-22
+
+### Features
+
+- complete base closeout and repository split
+
 
 ## [1.0.0] - 2026-06-22
 
