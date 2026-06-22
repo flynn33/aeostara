@@ -4,6 +4,13 @@ All notable changes to Aeostara will be documented in this file.
 
 ## [1.0.0] - 2026-06-22
 
+### Features
+
+- complete base closeout and repository split
+
+
+## [1.0.0] - 2026-06-22
+
 ### Changed - Final Base Closeout
 
 - Completed the platform-agnostic base design release gate set with semantic schema examples, executable fixture validation, interface implementability checks, algorithm completeness checks, lifecycle execution checks, workflow integrity checks, deterministic release packaging, and release readiness validation.
