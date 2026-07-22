@@ -93,4 +93,7 @@ python3 ci/program_closeout_runner.py . --online
 
 ## License
 
-Copyright (c) 2026 James Daley. All Rights Reserved. Proprietary. See [LICENSE.md](LICENSE.md).
+Copyright 2026 James Daley
+
+This project is licensed under the Apache License, Version 2.0.
+See the [LICENSE](LICENSE) file for the full terms.
