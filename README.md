@@ -91,6 +91,12 @@ python3 ci/repository_separation_checker.py . --read-only --online
 python3 ci/program_closeout_runner.py . --online
 ```
 
+## Contributing
+
+This project is open source under Apache License, Version 2.0. You are welcome to use, modify, and redistribute the code under that license.
+
+Outside contributions to this repository are not accepted. Pull requests and collaboration requests will not be reviewed or merged. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## License
 
 Copyright 2026 James Daley
