@@ -2,7 +2,7 @@
 """
 Aeostara Wiki API Reference Generator
 Parses C++ header files and generates a Markdown API reference.
-Copyright (c) 2026 James Daley. All Rights Reserved.
+Copyright (c) 2026 James Daley, Raven Forge Software.
 
 Usage: python parse-headers.py <include_dir> <output_file>
 

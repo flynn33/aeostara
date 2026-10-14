@@ -1,6 +1,6 @@
 # Aeostara Attribution Integrity
 # Blocks commits and pushes containing generated-work attribution markers.
-# Copyright (c) 2026 James Daley. All Rights Reserved.
+# Copyright (c) 2026 James Daley, Raven Forge Software.
 
 name: Attribution Integrity
 
